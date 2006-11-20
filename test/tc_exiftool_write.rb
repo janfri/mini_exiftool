@@ -1,10 +1,11 @@
 require 'exiftool'
-require 'test/unit'
-require 'rubygems'
-require 'turn'
-
-require 'tempfile'
 require 'fileutils'
+require 'tempfile'
+require 'test/unit'
+begin
+  require 'turn'
+rescue LoadError
+end
 
 class TestExiftoolWrite < Test::Unit::TestCase
 

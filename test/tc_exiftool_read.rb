@@ -1,7 +1,9 @@
 require 'exiftool'
 require 'test/unit'
-require 'rubygems'
-require 'turn'
+begin
+  require 'turn'
+rescue LoadError
+end
 
 class TestExiftoolRead < Test::Unit::TestCase
 
