@@ -1,3 +1,6 @@
+require 'fileutils'
+require 'tempfile'
+
 class Exiftool
 
   class Exiftool::Error < RuntimeError
@@ -5,14 +8,19 @@ class Exiftool
 
   ProgramName = 'exiftool'
 
-  attr_reader :filename, :hash
+  attr_reader :filename
 
   def initialize filename
     @prog = ProgramName
-    @tags = {}
-    @changed_tags = {}
     @filename = filename
-    cmd = "#@prog -n -s -t \"#{filename}\"" 
+    load
+  end
+
+  def load
+    @tags = {}
+    @tag_names = {}
+    @changed_tags = {}
+    cmd = %Q(#@prog -n -s -t "#{filename}")
     if run(cmd)
       parse_output
     else
@@ -20,34 +28,65 @@ class Exiftool
     end
   end
 
-  def [] key
-    @changed_tags[key] || 
-      @changed_tags[to_camel key] || 
-      @changed_tags[key.upcase] ||
+  alias reload load
 
-      @tags[key] || 
-      @tags[to_camel key] || 
-      @tags[key.upcase]
+  def [] tag
+    unified_tag = unify tag
+    @changed_tags[unified_tag] || @tags[unified_tag]
   end
 
-  def []= key, val
-    @changed_tags[key] = val
+  def []=(tag, val)
+    unified_tag = unify tag
+    cmd = %Q(#@prog -n -q -P -overwrite_original -#{unified_tag}="#{val}" "#{temp_filename}" 2>/dev/null)
+    if run(cmd)
+      @changed_tags[unified_tag] = val
+    end
   end
 
+  def temp_filename
+    unless @temp_filename
+      temp_file = Tempfile.new('exiftool')
+      FileUtils.cp(@filename, temp_file.path)
+      @temp_filename = temp_file.path
+    end
+    @temp_filename
+  end
+
+  def tags
+    @tags.keys.map { |key| @tag_names[key] }
+  end
+
+  def changed_tags
+    @changed_tags.keys.map { |key| @tag_names[key] }
+  end
+
+  def save
+    @changed_tags.each do |tag,val|
+      cmd = %Q(#@prog -n -q -P -overwrite_original -#{tag}="#{val}" "#{filename}" 2>/dev/null)
+      run(cmd)
+    end
+    reload
+  end
+  
   private
 
   def run cmd
     @output = `#{cmd}`
     @status = $?
-    $?.exitstatus == 0
+    @status.exitstatus == 0
   end
 
-  def to_camel name
-    (name.split(/_/).map { |e| e.capitalize! }).join ''
+  def unify name
+    name.gsub(/_/, '').downcase
   end
 
-  def method_missing method_id
-    self[method_id.id2name]
+  def method_missing symbol, *args
+    tag_name = symbol.id2name
+    if tag_name =~ /=$/
+      self[tag_name.gsub(/=$/, '')] = args.first
+    else
+      self[tag_name]
+    end
   end
 
   def parse_output
@@ -68,7 +107,9 @@ class Exiftool
         when /^[\d ]+$/
           value = value.split(/ /)
         end
-        @tags[tag] = value
+        unified_tag = unify tag
+        @tag_names[unified_tag] = tag
+        @tags[unified_tag] = value
       else
         raise Exiftool::Error
       end

@@ -25,6 +25,10 @@ class TestExiftoolRead < Test::Unit::TestCase
     assert_equal 400, @et.iso
   end
 
+  def test_tags
+    assert @et.tags.include?('FileSize')
+  end
+
   def test_conversion
     assert_kind_of String, @et.model
     assert_kind_of Time, @et['DateTimeOriginal']
