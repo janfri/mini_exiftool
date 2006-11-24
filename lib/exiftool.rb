@@ -1,10 +1,10 @@
 require 'fileutils'
 require 'tempfile'
+require 'breakpoint'
 
 class Exiftool
 
-  class Exiftool::Error < RuntimeError
-  end
+  class Exiftool::Error < RuntimeError; end
 
   ProgramName = 'exiftool'
 
@@ -17,10 +17,10 @@ class Exiftool
   end
 
   def load
-    @tags = {}
+    @values = {}
     @tag_names = {}
-    @changed_tags = {}
-    cmd = %Q(#@prog -n -s -t "#{filename}")
+    @changed_values = {}
+    cmd = %Q(#@prog -n -q -q -s -t "#{filename}")
     if run(cmd)
       parse_output
     else
@@ -32,14 +32,14 @@ class Exiftool
 
   def [] tag
     unified_tag = unify tag
-    @changed_tags[unified_tag] || @tags[unified_tag]
+    @changed_values[unified_tag] || @values[unified_tag]
   end
 
   def []=(tag, val)
     unified_tag = unify tag
-    cmd = %Q(#@prog -n -q -P -overwrite_original -#{unified_tag}="#{val}" "#{temp_filename}" 2>/dev/null)
+    cmd = %Q(#@prog -n -q -q -P -overwrite_original -#{unified_tag}="#{val}" "#{temp_filename}")
     if run(cmd)
-      @changed_tags[unified_tag] = val
+      @changed_values[unified_tag] = val
     end
   end
 
@@ -53,16 +53,16 @@ class Exiftool
   end
 
   def tags
-    @tags.keys.map { |key| @tag_names[key] }
+    @values.keys.map { |key| @tag_names[key] }
   end
 
   def changed_tags
-    @changed_tags.keys.map { |key| @tag_names[key] }
+    @changed_values.keys.map { |key| @tag_names[key] }
   end
 
   def save
-    @changed_tags.each do |tag,val|
-      cmd = %Q(#@prog -n -q -P -overwrite_original -#{tag}="#{val}" "#{filename}" 2>/dev/null)
+    @changed_values.each do |tag,val|
+      cmd = %Q(#@prog -n -q -q -P -overwrite_original -#{tag}="#{val}" "#{filename}")
       run(cmd)
     end
     reload
@@ -109,11 +109,11 @@ class Exiftool
         end
         unified_tag = unify tag
         @tag_names[unified_tag] = tag
-        @tags[unified_tag] = value
+        @values[unified_tag] = value
       else
         raise Exiftool::Error
       end
     end
   end
-  
+
 end
