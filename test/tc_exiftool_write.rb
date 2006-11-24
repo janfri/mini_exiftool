@@ -52,13 +52,22 @@ class TestExiftoolWrite < Test::Unit::TestCase
 
   def test_float_conversion
     assert_kind_of Float, @et['ExposureTime']
-    time = @et['ExposureTime'] * 2.0
-    @et['ExposureTime'] = time
-    assert_equal time, @et['ExposureTime']
+    new_time = @et['ExposureTime'] * 2.0
+    @et['ExposureTime'] = new_time
+    assert_equal new_time, @et['ExposureTime']
     assert true, @et.changed_tags.include?('ExposureTime')
     @et.save
     assert_kind_of Float, @et['ExposureTime']
-    assert_equal time, @et['ExposureTime']
+    assert_equal new_time, @et['ExposureTime']
+  end
+
+  def test_integer_conversion
+    assert__kind_of Integer, @et['MeteringMode']
+    new_mode = @et['MeteringMode'] - 1
+    assert_equal new_mode, @et['MeteringMode']
+    assert @et.changed_tags.include?('MeteringMode')
+    @et.save
+    assert_equal new_mode, @et['MeteringMode']
   end
 
   def test_save
