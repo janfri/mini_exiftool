@@ -12,5 +12,6 @@ parameters and parsing the result.
 END
   spec.author = 'Jan Friedrich'
   spec.email = 'janfri@web.de'
-  spec.files = Dir['lib/*.rb'] + Dir['test/*.rb']
+  spec.test_files = Dir['test/*.rb']
+  spec.files = Dir['lib/*.rb'] + Dir['test/data/test.jpg']
 end
