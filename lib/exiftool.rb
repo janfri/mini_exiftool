@@ -19,7 +19,7 @@ class Exiftool
     @values = {}
     @tag_names = {}
     @changed_values = {}
-    cmd = %Q(#@prog -n -q -q -s -t "#{filename}")
+    cmd = %Q(#@prog -e -n -q -q -s -t "#{filename}")
     if run(cmd)
       parse_output
     else
@@ -86,6 +86,8 @@ class Exiftool
     case val
     when Time
       val = val.strftime('%Y:%m:%d %H:%M:%S')
+    when Float
+      val = val.to_s
     end
     val
   end

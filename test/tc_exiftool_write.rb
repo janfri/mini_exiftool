@@ -34,6 +34,8 @@ class TestExiftoolWrite < Test::Unit::TestCase
   def test_write_access_2
     @et['FileSize'] = 1
     assert @et.changed_tags.empty?
+    @et['ShutterSpeed'] = 0.8
+    assert @et.changed_tags.empty?
     @et['Orientation'] = 2
     assert true, @et.changed_tags.include?('Orientation')
   end
@@ -47,6 +49,17 @@ class TestExiftoolWrite < Test::Unit::TestCase
     assert @et.changed_tags.empty?
     assert_kind_of Time, @et['DateTimeOriginal']
     assert_equal t.to_s, @et['DateTimeOriginal'].to_s
+  end
+
+  def test_float_conversion
+    assert_kind_of Float, @et['ShutterSpeedValue']
+    speed = @et['ShutterSpeedValue'] * 2
+    @et['ShutterSpeedValue'] = speed
+#    assert_equal speed, @et['ShutterSpeedValue']
+    assert true, @et.changed_tags.include?('ShutterSpeedValue')
+    @et.save
+    assert_kind_of Float, @et['ShutterSpeedValue']
+    assert_equal speed, @et['ShutterSpeedValue']
   end
 
   def test_save
