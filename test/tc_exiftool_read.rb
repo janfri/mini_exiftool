@@ -36,7 +36,6 @@ class TestExiftoolRead < Test::Unit::TestCase
     assert_kind_of Fixnum, @et.flash
     assert_kind_of String, @et.exif_version
     assert_kind_of Fixnum, @et['ExposureCompensation']
-    assert_kind_of Array, @et.image_size
     assert_kind_of Array, @et['SubjectLocation']
   end
 
