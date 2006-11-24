@@ -38,6 +38,16 @@ class TestExiftoolWrite < Test::Unit::TestCase
     assert true, @et.changed_tags.include?('Orientation')
   end
 
+  def test_time_conversion
+    t = Time.now
+    @et['DateTimeOriginal'] = t
+    assert_kind_of Time, @et['DateTimeOriginal']
+    assert true, @et.changed_tags.include?('DateTimeOriginal')
+    @et.save
+    assert @et.changed_tags.empty?
+    assert_kind_of Time, @et['DateTimeOriginal']
+    assert_equal t.to_s, @et['DateTimeOriginal'].to_s
+  end
 
   def test_save
     org_md5 = Digest::MD5.hexdigest(File.read(@org_filename))

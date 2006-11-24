@@ -1,6 +1,5 @@
 require 'fileutils'
 require 'tempfile'
-require 'breakpoint'
 
 class Exiftool
 
@@ -37,7 +36,8 @@ class Exiftool
 
   def []=(tag, val)
     unified_tag = unify tag
-    cmd = %Q(#@prog -n -q -q -P -overwrite_original -#{unified_tag}="#{val}" "#{temp_filename}")
+    converted_val = convert val
+    cmd = %Q(#@prog -n -q -q -P -overwrite_original -#{unified_tag}="#{converted_val}" "#{temp_filename}")
     if run(cmd)
       @changed_values[unified_tag] = val
     end
@@ -61,8 +61,10 @@ class Exiftool
   end
 
   def save
-    @changed_values.each do |tag,val|
-      cmd = %Q(#@prog -n -q -q -P -overwrite_original -#{tag}="#{val}" "#{filename}")
+    @changed_values.each do |tag, val|
+      unified_tag = unify tag
+      converted_val = convert val
+      cmd = %Q(#@prog -n -q -q -P -overwrite_original -#{unified_tag}="#{converted_val}" "#{filename}")
       run(cmd)
     end
     reload
@@ -80,6 +82,14 @@ class Exiftool
     name.gsub(/_/, '').downcase
   end
 
+  def convert val
+    case val
+    when Time
+      val = val.strftime('%Y:%m:%d %H:%M:%S')
+    end
+    val
+  end
+
   def method_missing symbol, *args
     tag_name = symbol.id2name
     if tag_name =~ /=$/
@@ -95,7 +105,7 @@ class Exiftool
         tag, value = $1, $2
         case value
         when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d$/
-          value = Time.local(* (value.split /: /))
+          value = Time.local(* (value.split /[: ]/))
         when /^\d+\.\d+$/
           value = value.to_f
         when /^0+[1-9]+$/
