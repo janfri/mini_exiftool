@@ -114,8 +114,6 @@ class Exiftool
           # nothing => String
         when /^-?\d+$/
           value = value.to_i
-        when /^(\d+)x(\d+)$/
-          value = [$1, $2]
         when /^[\d ]+$/
           value = value.split(/ /)
         end

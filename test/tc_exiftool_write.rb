@@ -62,8 +62,9 @@ class TestExiftoolWrite < Test::Unit::TestCase
   end
 
   def test_integer_conversion
-    assert__kind_of Integer, @et['MeteringMode']
+    assert_kind_of Integer, @et['MeteringMode']
     new_mode = @et['MeteringMode'] - 1
+    @et['MeteringMode'] = new_mode
     assert_equal new_mode, @et['MeteringMode']
     assert @et.changed_tags.include?('MeteringMode')
     @et.save
