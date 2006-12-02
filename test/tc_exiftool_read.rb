@@ -9,7 +9,8 @@ class TestExiftoolRead < Test::Unit::TestCase
 
   def setup
     @data_dir = File.dirname(__FILE__) + '/data'
-    @et = Exiftool.new  @data_dir + '/test.jpg'
+    @exiftool = Exiftool.new  @data_dir + '/test.jpg'
+    @exiftool_num = Exiftool.new  @data_dir + '/test.jpg', true
   end
 
   def test_initialize
@@ -19,24 +20,40 @@ class TestExiftoolRead < Test::Unit::TestCase
   end
 
   def test_access
-    assert_equal 'DYNAX 7D', @et['Model']
-    assert_equal 'MLT0', @et['maker_note_version']
-    assert_equal 'MLT0', @et.maker_note_version
-    assert_equal 400, @et.iso
+    assert_equal 'DYNAX 7D', @exiftool['Model']
+    assert_equal 'MLT0', @exiftool['maker_note_version']
+    assert_equal 'MLT0', @exiftool.maker_note_version
+    assert_equal 400, @exiftool.iso
+  end
+
+  def test_access_numerical
+    assert_equal 'DYNAX 7D', @exiftool_num['Model']
+    assert_equal 'MLT0', @exiftool_num['maker_note_version']
+    assert_equal 'MLT0', @exiftool_num.maker_note_version
+    assert_equal 400, @exiftool_num.iso
   end
 
   def test_tags
-    assert @et.tags.include?('FileSize')
+    assert @exiftool_num.tags.include?('FileSize')
   end
 
   def test_conversion
-    assert_kind_of String, @et.model
-    assert_kind_of Time, @et['DateTimeOriginal']
-    assert_kind_of Float, @et['MaxApertureValue']
-    assert_kind_of Fixnum, @et.flash
-    assert_kind_of String, @et.exif_version
-    assert_kind_of Fixnum, @et['ExposureCompensation']
-    assert_kind_of Array, @et['SubjectLocation']
+    assert_kind_of String, @exiftool.model
+    assert_kind_of Time, @exiftool['DateTimeOriginal']
+    assert_kind_of Float, @exiftool['MaxApertureValue']
+    assert_kind_of String, @exiftool.flash
+    assert_kind_of Fixnum, @exiftool['ExposureCompensation']
+    assert_kind_of Array, @exiftool['SubjectLocation']
+  end
+
+  def test_conversion_numerical
+    assert_kind_of String, @exiftool_num.model
+    assert_kind_of Time, @exiftool_num['DateTimeOriginal']
+    assert_kind_of Float, @exiftool_num['MaxApertureValue']
+    assert_kind_of Fixnum, @exiftool_num.flash
+    assert_kind_of String, @exiftool_num.exif_version
+    assert_kind_of Fixnum, @exiftool_num['ExposureCompensation']
+    assert_kind_of Array, @exiftool_num['SubjectLocation']
   end
 
 end

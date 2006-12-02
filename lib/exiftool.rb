@@ -8,10 +8,12 @@ class Exiftool
   ProgramName = 'exiftool'
 
   attr_reader :filename
+  attr_accessor :numerical
 
-  def initialize filename
+  def initialize filename, numerical=false
     @prog = ProgramName
     @filename = filename
+    @numerical = numerical
     load
   end
 
@@ -19,7 +21,8 @@ class Exiftool
     @values = {}
     @tag_names = {}
     @changed_values = {}
-    cmd = %Q(#@prog -e -n -q -q -s -t "#{filename}")
+    opt_params = @numerical ? '-n' : ''
+    cmd = %Q(#@prog -e -q -q -s -t #{opt_params} "#{filename}")
     if run(cmd)
       parse_output
     else
@@ -37,9 +40,18 @@ class Exiftool
   def []=(tag, val)
     unified_tag = unify tag
     converted_val = convert val
-    cmd = %Q(#@prog -n -q -q -P -overwrite_original -#{unified_tag}="#{converted_val}" "#{temp_filename}")
+    opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
+    cmd = %Q(#@prog -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{temp_filename}")
     if run(cmd)
       @changed_values[unified_tag] = val
+    end
+  end
+
+  def changed? tag=false
+    if tag
+      @changed_values.include? tag
+    else
+      !@changed_values.empty?
     end
   end
 
@@ -64,7 +76,8 @@ class Exiftool
     @changed_values.each do |tag, val|
       unified_tag = unify tag
       converted_val = convert val
-      cmd = %Q(#@prog -n -q -q -P -overwrite_original -#{unified_tag}="#{converted_val}" "#{filename}")
+      opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
+      cmd = %Q(#@prog -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{filename}")
       run(cmd)
     end
     reload
@@ -86,8 +99,6 @@ class Exiftool
     case val
     when Time
       val = val.strftime('%Y:%m:%d %H:%M:%S')
-    when Float
-      val = val.to_s
     end
     val
   end
