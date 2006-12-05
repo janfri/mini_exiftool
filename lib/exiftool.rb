@@ -12,12 +12,13 @@ class Exiftool
 
   def initialize filename, numerical=false
     @prog = ProgramName
-    @filename = filename
     @numerical = numerical
-    load
+    load filename
   end
 
-  def load
+  def load filename
+    raise Exiftool::Error unless File.exists? filename
+    @filename = filename
     @values = {}
     @tag_names = {}
     @changed_values = {}
@@ -30,7 +31,9 @@ class Exiftool
     end
   end
 
-  alias reload load
+  def reload
+    load @filename
+  end
 
   def [] tag
     unified_tag = unify tag

@@ -19,6 +19,12 @@ class TestExiftoolRead < Test::Unit::TestCase
     end
   end
 
+  def test_initialize
+    assert_raises Exiftool::Error do
+      Exiftool.new 'not_existing_file'
+    end
+  end
+
   def test_access
     assert_equal 'DYNAX 7D', @exiftool['Model']
     assert_equal 'MLT0', @exiftool['maker_note_version']
