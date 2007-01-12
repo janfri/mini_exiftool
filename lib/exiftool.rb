@@ -94,8 +94,12 @@ class Exiftool
     @status.exitstatus == 0
   end
 
-  def unify name
+  def self.unify name
     name.gsub(/_/, '').downcase
+  end
+
+  def unify name
+    Exiftool.unify name
   end
 
   def convert val
@@ -144,7 +148,8 @@ class Exiftool
 
   def self.method_missing symbol, *args
     prog = ProgramName
-    cmd = %Q(#{prog} -e -q -q -s -t -#{symbol} "#{args.first}")
+    tag = unify symbol.to_s
+    cmd = %Q(#{prog} -e -q -q -s -t -#{tag} "#{args.first}")
     output = `#{cmd}`
     status = $?
     return nil unless status.exitstatus == 0
