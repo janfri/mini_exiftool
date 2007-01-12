@@ -3,7 +3,7 @@ require 'tempfile'
 
 class Exiftool
 
-  class Exiftool::Error < RuntimeError; end
+  class Exiftool::Error < Exception; end
 
   ProgramName = 'exiftool'
 
