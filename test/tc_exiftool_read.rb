@@ -9,8 +9,9 @@ class TestExiftoolRead < Test::Unit::TestCase
 
   def setup
     @data_dir = File.dirname(__FILE__) + '/data'
-    @exiftool = Exiftool.new  @data_dir + '/test.jpg'
-    @exiftool_num = Exiftool.new  @data_dir + '/test.jpg', true
+    @filename_test = @data_dir + '/test.jpg'
+    @exiftool = Exiftool.new @filename_test
+    @exiftool_num = Exiftool.new @filename_test, true
   end
 
   def test_initialize
@@ -60,6 +61,10 @@ class TestExiftoolRead < Test::Unit::TestCase
     assert_kind_of String, @exiftool_num.exif_version
     assert_kind_of Fixnum, @exiftool_num['ExposureCompensation']
     assert_kind_of Array, @exiftool_num['SubjectLocation']
+  end
+
+  def test_class_methods
+    assert_equal 'DYNAX 7D', Exiftool.model(@filename_test)
   end
 
 end

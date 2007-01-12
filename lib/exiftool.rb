@@ -140,4 +140,15 @@ class Exiftool
     end
   end
 
+  # Access via class methods
+
+  def self.method_missing symbol, *args
+    prog = ProgramName
+    cmd = %Q(#{prog} -e -q -q -s -t -#{symbol} "#{args.first}")
+    output = `#{cmd}`
+    status = $?
+    return nil unless status.exitstatus == 0
+    output.split(/\t/).last.chomp
+  end
+
 end
