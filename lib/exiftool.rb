@@ -121,27 +121,32 @@ class Exiftool
 
   def parse_output
     @output.each_line do |line|
-      if line =~ /^(\w+?)\t(.*)$/
-        tag, value = $1, $2
-        case value
-        when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d$/
-          value = Time.local(* (value.split /[: ]/))
-        when /^\d+\.\d+$/
-          value = value.to_f
-        when /^0+[1-9]+$/
-          # nothing => String
-        when /^-?\d+$/
-          value = value.to_i
-        when /^[\d ]+$/
-          value = value.split(/ /)
-        end
-        unified_tag = unify tag
-        @tag_names[unified_tag] = tag
-        @values[unified_tag] = value
-      else
-        raise Exiftool::Error
-      end
+      tag, value = Exiftool.parse_line line
+      unified_tag = unify tag
+      @tag_names[unified_tag] = tag
+      @values[unified_tag] = value
     end
+  end
+
+  def self.parse_line line
+    if line =~ /^(\w+?)\t(.*)$/
+      tag, value = $1, $2
+      case value
+      when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d$/
+        value = Time.local(* (value.split /[: ]/))
+      when /^\d+\.\d+$/
+        value = value.to_f
+      when /^0+[1-9]+$/
+        # nothing => String
+      when /^-?\d+$/
+        value = value.to_i
+      when /^[\d ]+$/
+        value = value.split(/ /)
+      end
+    else
+      raise Exiftool::Error
+    end
+    return [tag, value]
   end
 
   # Access via class methods
@@ -153,7 +158,7 @@ class Exiftool
     output = `#{cmd}`
     status = $?
     return nil unless status.exitstatus == 0
-    output.split(/\t/).last.chomp
+    parse_line(output).last
   end
 
 end

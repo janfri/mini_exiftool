@@ -66,6 +66,7 @@ class TestExiftoolRead < Test::Unit::TestCase
   def test_class_methods
     assert_equal 'DYNAX 7D', Exiftool.model(@filename_test)
     assert_equal 'MLT0', Exiftool.maker_note_version(@filename_test)
+    assert_kind_of Time, Exiftool.date_time_original(@filename_test)
   end
 
 end
