@@ -8,7 +8,7 @@ begin
 rescue LoadError
 end
 
-class TestExiftoolWrite < Test::Unit::TestCase
+class TestWrite < Test::Unit::TestCase
 
   def setup
     @temp_file = Tempfile.new('test')

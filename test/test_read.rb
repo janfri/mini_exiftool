@@ -5,7 +5,7 @@ begin
 rescue LoadError
 end
 
-class TestExiftoolRead < Test::Unit::TestCase
+class TestRead < Test::Unit::TestCase
 
   def setup
     @data_dir = File.dirname(__FILE__) + '/data'
