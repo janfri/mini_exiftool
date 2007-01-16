@@ -16,7 +16,7 @@ class TestWrite < Test::Unit::TestCase
     @org_filename = File.dirname(__FILE__) + '/data/test.jpg'
     FileUtils.cp(@org_filename, @temp_filename)
     @exiftool = Exiftool.new @temp_filename
-    @exiftool_num = Exiftool.new @temp_filename, true
+    @exiftool_num = Exiftool.new @temp_filename, :numerical
   end
 
   def teardown

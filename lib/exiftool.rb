@@ -10,9 +10,9 @@ class Exiftool
   attr_reader :filename
   attr_accessor :numerical
 
-  def initialize filename, numerical=false
+  def initialize filename, *args
     @prog = ProgramName
-    @numerical = numerical
+    @numerical = args.include? :numerical
     load filename
   end
 

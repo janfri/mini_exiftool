@@ -2,7 +2,7 @@ require 'rubygems'
 
 spec = Gem::Specification.new do |spec|
   spec.name = 'exiftool'
-  spec.version = '0.1.2'
+  spec.version = '0.2.0'
   spec.summary = 'A library for nice OO access to the Exiftool program written by Phil Harvey.'
   spec.description = <<END
 This library is a binding to the Exiftool program
