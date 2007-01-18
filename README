@@ -22,7 +22,7 @@ Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1, February 1999
  require 'fileutils'
  FileUtils.cp('test/data/test.jpg', './test.jpg')
  
- exiftool = MiniExiftool.new 'test.jpg'
+ mini_exiftool = MiniExiftool.new 'test.jpg'
  
  # different methods to read information
  
