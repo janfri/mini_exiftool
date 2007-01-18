@@ -32,6 +32,7 @@ class MiniExiftool
     else
       raise MiniExiftool::Error
     end
+    self
   end
 
   def reload
@@ -79,14 +80,17 @@ class MiniExiftool
   end
 
   def save
+    result = false
     @changed_values.each do |tag, val|
       unified_tag = unify tag
       converted_val = convert val
       opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
       cmd = %Q(#@prog -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{filename}")
       run(cmd)
+      result = true
     end
     reload
+    result
   end
   
   private

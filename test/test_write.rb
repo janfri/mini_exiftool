@@ -95,12 +95,15 @@ class TestWrite < Test::Unit::TestCase
     temp_md5 = Digest::MD5.hexdigest(File.read(@temp_filename))
     assert_equal org_md5, temp_md5
     @mini_exiftool_num['Orientation'] = 2
-    @mini_exiftool_num.save
+    result = @mini_exiftool_num.save
+    assert_equal true, result
     org_md5_2 = Digest::MD5.hexdigest(File.read(@org_filename))
     assert_equal org_md5, org_md5_2
     temp_md5_2 = Digest::MD5.hexdigest(File.read(@temp_filename))
     assert_not_equal temp_md5, temp_md5_2
     assert_equal false, @mini_exiftool_num.changed?
+    result = @mini_exiftool_num.save
+    assert_equal false, result
   end
 
 end
