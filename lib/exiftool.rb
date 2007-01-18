@@ -5,14 +5,17 @@ class Exiftool
 
   class Exiftool::Error < Exception; end
 
+  # Name of the exiftool command
   ProgramName = 'exiftool'
 
   attr_reader :filename
   attr_accessor :numerical
 
-  def initialize filename, *args
+  # opts at the moment only support :numerical for numerical values
+  # (the -n parameter in the command line)
+  def initialize filename, *opts
     @prog = ProgramName
-    @numerical = args.include? :numerical
+    @numerical = opts.include? :numerical
     load filename
   end
 
@@ -147,18 +150,6 @@ class Exiftool
       raise Exiftool::Error
     end
     return [tag, value]
-  end
-
-  # Access via class methods
-
-  def self.method_missing symbol, *args
-    prog = ProgramName
-    tag = unify symbol.to_s
-    cmd = %Q(#{prog} -e -q -q -s -t -#{tag} "#{args.first}")
-    output = `#{cmd}`
-    status = $?
-    return nil unless status.exitstatus == 0
-    parse_line(output).last
   end
 
 end
