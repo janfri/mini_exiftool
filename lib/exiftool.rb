@@ -3,13 +3,13 @@ require 'tempfile'
 
 class Exiftool
 
-  class Exiftool::Error < Exception; end
-
   # Name of the exiftool command
   ProgramName = 'exiftool'
 
   attr_reader :filename
   attr_accessor :numerical
+
+  Version = '0.0.1'
 
   # opts at the moment only support :numerical for numerical values
   # (the -n parameter in the command line)
@@ -151,5 +151,7 @@ class Exiftool
     end
     return [tag, value]
   end
+
+  class Exiftool::Error < Exception; end
 
 end

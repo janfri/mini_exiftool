@@ -1,8 +1,11 @@
 require 'rubygems'
 
+$:.unshift File.join(File.dirname(__FILE__), 'lib')
+require 'exiftool'
+
 spec = Gem::Specification.new do |spec|
   spec.name = 'exiftool'
-  spec.version = '0.2.0'
+  spec.version = Exiftool::Version
   spec.summary = 'A library for nice OO access to the Exiftool program written by Phil Harvey.'
   spec.description = <<END
 This library is a binding to the Exiftool program
