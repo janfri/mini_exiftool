@@ -1,11 +1,11 @@
 require 'rubygems'
 
 $:.unshift File.join(File.dirname(__FILE__), 'lib')
-require 'mini-exiftool'
+require 'mini_exiftool'
 
 spec = Gem::Specification.new do |spec|
   spec.name = 'mini_exiftool'
-  spec.version = Exiftool::Version
+  spec.version = MiniExiftool::Version
   spec.summary = 'A library for nice OO access to the Exiftool commandline program written by Phil Harvey.'
   spec.description = <<END
 This library is wrapper for the Exiftool commandline application (http://www.sno.phy.queensu.ca/~phil/exiftool/) written by Phil Harvay.
