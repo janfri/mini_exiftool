@@ -11,5 +11,5 @@ end
 
 Rake::RDocTask.new do |rd|
   rd.rdoc_dir = 'doc'
-  rd.rdoc_files.include('lib/**/*.rb')
+  rd.rdoc_files.include('README', 'lib/**/*.rb')
 end

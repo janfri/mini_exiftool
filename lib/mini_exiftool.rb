@@ -1,7 +1,7 @@
 require 'fileutils'
 require 'tempfile'
 
-class Exiftool
+class MiniExiftool
 
   # Name of the exiftool command
   ProgramName = 'exiftool'
@@ -20,7 +20,7 @@ class Exiftool
   end
 
   def load filename
-    raise Exiftool::Error unless File.exists? filename
+    raise MiniExiftool::Error unless File.exists? filename
     @filename = filename
     @values = {}
     @tag_names = {}
@@ -30,7 +30,7 @@ class Exiftool
     if run(cmd)
       parse_output
     else
-      raise Exiftool::Error
+      raise MiniExiftool::Error
     end
   end
 
@@ -63,7 +63,7 @@ class Exiftool
 
   def temp_filename
     unless @temp_filename
-      temp_file = Tempfile.new('exiftool')
+      temp_file = Tempfile.new('mini-exiftool')
       FileUtils.cp(@filename, temp_file.path)
       @temp_filename = temp_file.path
     end
@@ -97,12 +97,8 @@ class Exiftool
     @status.exitstatus == 0
   end
 
-  def self.unify name
-    name.gsub(/_/, '').downcase
-  end
-
   def unify name
-    Exiftool.unify name
+    name.gsub(/_/, '').downcase
   end
 
   def convert val
@@ -124,14 +120,14 @@ class Exiftool
 
   def parse_output
     @output.each_line do |line|
-      tag, value = Exiftool.parse_line line
+      tag, value = parse_line line
       unified_tag = unify tag
       @tag_names[unified_tag] = tag
       @values[unified_tag] = value
     end
   end
 
-  def self.parse_line line
+  def parse_line line
     if line =~ /^(\w+?)\t(.*)$/
       tag, value = $1, $2
       case value
@@ -147,11 +143,11 @@ class Exiftool
         value = value.split(/ /)
       end
     else
-      raise Exiftool::Error
+      raise MiniExiftool::Error
     end
     return [tag, value]
   end
 
-  class Exiftool::Error < Exception; end
+  class MiniExiftool::Error < Exception; end
 
 end

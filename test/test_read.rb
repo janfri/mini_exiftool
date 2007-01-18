@@ -1,4 +1,4 @@
-require 'exiftool'
+require 'mini_exiftool'
 require 'test/unit'
 begin
   require 'turn'
@@ -10,57 +10,57 @@ class TestRead < Test::Unit::TestCase
   def setup
     @data_dir = File.dirname(__FILE__) + '/data'
     @filename_test = @data_dir + '/test.jpg'
-    @exiftool = Exiftool.new @filename_test
-    @exiftool_num = Exiftool.new @filename_test, :numerical
+    @mini_exiftool = MiniExiftool.new @filename_test
+    @mini_exiftool_num = MiniExiftool.new @filename_test, :numerical
   end
 
   def test_initialize
-    assert_raises Exiftool::Error do
-      Exiftool.new ''
+    assert_raises MiniExiftool::Error do
+      MiniExiftool.new ''
     end
   end
 
   def test_initialize
-    assert_raises Exiftool::Error do
-      Exiftool.new 'not_existing_file'
+    assert_raises MiniExiftool::Error do
+      MiniExiftool.new 'not_existing_file'
     end
   end
 
   def test_access
-    assert_equal 'DYNAX 7D', @exiftool['Model']
-    assert_equal 'MLT0', @exiftool['maker_note_version']
-    assert_equal 'MLT0', @exiftool.maker_note_version
-    assert_equal 400, @exiftool.iso
+    assert_equal 'DYNAX 7D', @mini_exiftool['Model']
+    assert_equal 'MLT0', @mini_exiftool['maker_note_version']
+    assert_equal 'MLT0', @mini_exiftool.maker_note_version
+    assert_equal 400, @mini_exiftool.iso
   end
 
   def test_access_numerical
-    assert_equal 'DYNAX 7D', @exiftool_num['Model']
-    assert_equal 'MLT0', @exiftool_num['maker_note_version']
-    assert_equal 'MLT0', @exiftool_num.maker_note_version
-    assert_equal 400, @exiftool_num.iso
+    assert_equal 'DYNAX 7D', @mini_exiftool_num['Model']
+    assert_equal 'MLT0', @mini_exiftool_num['maker_note_version']
+    assert_equal 'MLT0', @mini_exiftool_num.maker_note_version
+    assert_equal 400, @mini_exiftool_num.iso
   end
 
   def test_tags
-    assert @exiftool_num.tags.include?('FileSize')
+    assert @mini_exiftool_num.tags.include?('FileSize')
   end
 
   def test_conversion
-    assert_kind_of String, @exiftool.model
-    assert_kind_of Time, @exiftool['DateTimeOriginal']
-    assert_kind_of Float, @exiftool['MaxApertureValue']
-    assert_kind_of String, @exiftool.flash
-    assert_kind_of Fixnum, @exiftool['ExposureCompensation']
-    assert_kind_of Array, @exiftool['SubjectLocation']
+    assert_kind_of String, @mini_exiftool.model
+    assert_kind_of Time, @mini_exiftool['DateTimeOriginal']
+    assert_kind_of Float, @mini_exiftool['MaxApertureValue']
+    assert_kind_of String, @mini_exiftool.flash
+    assert_kind_of Fixnum, @mini_exiftool['ExposureCompensation']
+    assert_kind_of Array, @mini_exiftool['SubjectLocation']
   end
 
   def test_conversion_numerical
-    assert_kind_of String, @exiftool_num.model
-    assert_kind_of Time, @exiftool_num['DateTimeOriginal']
-    assert_kind_of Float, @exiftool_num['MaxApertureValue']
-    assert_kind_of Fixnum, @exiftool_num.flash
-    assert_kind_of String, @exiftool_num.exif_version
-    assert_kind_of Fixnum, @exiftool_num['ExposureCompensation']
-    assert_kind_of Array, @exiftool_num['SubjectLocation']
+    assert_kind_of String, @mini_exiftool_num.model
+    assert_kind_of Time, @mini_exiftool_num['DateTimeOriginal']
+    assert_kind_of Float, @mini_exiftool_num['MaxApertureValue']
+    assert_kind_of Fixnum, @mini_exiftool_num.flash
+    assert_kind_of String, @mini_exiftool_num.exif_version
+    assert_kind_of Fixnum, @mini_exiftool_num['ExposureCompensation']
+    assert_kind_of Array, @mini_exiftool_num['SubjectLocation']
   end
 
 end
