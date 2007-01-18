@@ -4,7 +4,7 @@ $:.unshift File.join(File.dirname(__FILE__), 'lib')
 require 'mini-exiftool'
 
 spec = Gem::Specification.new do |spec|
-  spec.name = 'exiftool'
+  spec.name = 'mini_exiftool'
   spec.version = Exiftool::Version
   spec.summary = 'A library for nice OO access to the Exiftool commandline program written by Phil Harvey.'
   spec.description = <<END
