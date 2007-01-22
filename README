@@ -1,15 +1,23 @@
 = MiniExiftool
 
-This library is wrapper for the Exiftool commandline application (http://www.sno.phy.queensu.ca/~phil/exiftool/) written by Phil Harvay.
+This library is wrapper for the Exiftool command-line application
+(http://www.sno.phy.queensu.ca/~phil/exiftool/) written by Phil Harvay.
 Read and write access is done in a clean OO manner.
+
+== Requirements
+
+An installation of the Exiftool command-line application.
+Instructions for installation you can find under
+http://www.sno.phy.queensu.ca/~phil/exiftool/install.html .
 
 == Author
 Jan Friedrich
 
 == Copyright / License
-Copyright (c) 2007 by Jan friedrich
+Copyright (c) 2007 by Jan Friedrich
 
-Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1, February 1999
+Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1, 
+February 1999
 
 == Examples (for further information and use cases see tests):
 
@@ -27,12 +35,12 @@ Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1, February 1999
  mini_exiftool['Orientation'] # ==> 'Horizontal (normal)'
  mini_exiftool['ISO'] # ==> 400
  mini_exiftool['iso'] # ==> 400
- mini_exiftool['DateTimeOriginal'] # ==> Tue Sep 13 20:08:50 +0200 2005 (Time object)
+ mini_exiftool['DateTimeOriginal'].class # ==> Time
  
  mini_exiftool.orientation # ==> 'Horizontal (normal)'
  mini_exiftool.iso # ==> 400
- mini_exiftool.datetimeoriginal # ==> Tue Sep 13 20:08:50 +0200 2005 (Time object)
- mini_exiftool.date_time_original # ==> Tue Sep 13 20:08:50 +0200 2005 (Time object)
+ mini_exiftool.datetimeoriginal.class # ==> Time
+ mini_exiftool.date_time_original.class # ==> Time
  
  # numerical access
  

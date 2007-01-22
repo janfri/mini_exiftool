@@ -1,6 +1,21 @@
+#
+# MiniExiftool
+#
+# This library is wrapper for the Exiftool command-line
+# application (http://www.sno.phy.queensu.ca/~phil/exiftool/)
+# written by Phil Harvay.
+# Read and write access is done in a clean OO manner.
+#
+# Author: Jan Friedrich
+# Copyright (c) 2007 by Jan Friedrich
+# Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, 
+# Version 2.1, February 1999
+#
+
 require 'fileutils'
 require 'tempfile'
 
+# Simple OO access to the Exiftool command-line application.
 class MiniExiftool
 
   # Name of the exiftool command
