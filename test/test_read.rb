@@ -18,9 +18,6 @@ class TestRead < Test::Unit::TestCase
     assert_raises MiniExiftool::Error do
       MiniExiftool.new ''
     end
-  end
-
-  def test_initialize
     assert_raises MiniExiftool::Error do
       MiniExiftool.new 'not_existing_file'
     end
