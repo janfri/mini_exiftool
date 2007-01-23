@@ -77,7 +77,7 @@ BIN_FILES = FileList["bin/*"]
 # This filelist is used to create source packages.
 # Include all Ruby and RDoc files.
 DIST_FILES = FileList["**/*.rb", "**/*.rdoc"]
-DIST_FILES.include("Rakefile", "COPYING")
+DIST_FILES.include("Rakefile", "COPYING", 'Changelog')
 DIST_FILES.include(BIN_FILES)
 DIST_FILES.include("data/**/*", "test/data/**/*")
 DIST_FILES.include("#{WEBSITE_DIR}/**/*.{html,css}", "man/*.[0-9]")
