@@ -14,7 +14,7 @@ MY_NAME = "Jan Friedrich"
 MY_EMAIL = "miniexiftool@googlemail.com"
 
 # Short summary of your project, used in packaging.
-PROJECT_SUMMARY = 'A library for nice OO access to the Exiftool commandline application written by Phil Harvey.'
+PROJECT_SUMMARY = 'A library for nice OO access to the Exiftool command-line application written by Phil Harvey.'
 
 # The project's package name (as opposed to its display name). Used for
 # RubyForge connectivity and packaging.
