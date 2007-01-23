@@ -90,6 +90,28 @@ class TestWrite < Test::Unit::TestCase
     assert_equal new_mode, @mini_exiftool_num['MeteringMode']
   end
 
+  def test_revert_one
+    @mini_exiftool_num['Orientation'] = 2
+    @mini_exiftool_num['ISO'] = 200
+    res = @mini_exiftool_num.revert 'Orientation'
+    assert_equal 1, @mini_exiftool_num['Orientation']
+    assert_equal 200, @mini_exiftool_num['ISO']
+    assert_equal true, res
+    res = @mini_exiftool_num.revert 'Orientation'
+    assert_equal false, res
+  end
+
+  def test_revert_all
+    @mini_exiftool_num['Orientation'] = 2
+    @mini_exiftool_num['ISO'] = 200
+    res = @mini_exiftool_num.revert
+    assert_equal 1, @mini_exiftool_num['Orientation']
+    assert_equal 400, @mini_exiftool_num['ISO']
+    assert_equal true, res
+    res = @mini_exiftool_num.revert
+    assert_equal false, res
+  end
+
   def test_save
     org_md5 = Digest::MD5.hexdigest(File.read(@org_filename))
     temp_md5 = Digest::MD5.hexdigest(File.read(@temp_filename))

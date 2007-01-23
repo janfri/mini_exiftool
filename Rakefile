@@ -11,7 +11,7 @@ PROJECT = "MiniExiftool"
 MY_NAME = "Jan Friedrich"
 
 # Your email address, used in packaging.
-MY_EMAIL = "janfri@web.de"
+MY_EMAIL = "miniexiftool@googlemail.com"
 
 # Short summary of your project, used in packaging.
 PROJECT_SUMMARY = 'A library for nice OO access to the Exiftool commandline application written by Phil Harvey.'

@@ -12,7 +12,7 @@ This library is wrapper for the Exiftool commandline application (http://www.sno
 Read and write access is done in a clean OO manner.
 END
   spec.author = 'Jan Friedrich'
-  spec.email = 'janfri@web.de'
+  spec.email = 'miniexiftool@googlemail.com'
   spec.test_files = Dir['test/*.rb']
   spec.files = Dir['lib/*.rb'] + Dir['test/data/test.jpg']
 end

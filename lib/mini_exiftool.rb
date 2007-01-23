@@ -13,6 +13,7 @@
 #
 
 require 'fileutils'
+require 'open3'
 require 'tempfile'
 
 # Simple OO access to the Exiftool command-line application.
@@ -24,7 +25,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical
 
-  Version = '0.0.1'
+  Version = '0.1.0'
 
   # opts at the moment only support :numerical for numerical values
   # (the -n parameter in the command line)
@@ -77,13 +78,16 @@ class MiniExiftool
     end
   end
 
-  def temp_filename
-    unless @temp_filename
-      temp_file = Tempfile.new('mini-exiftool')
-      FileUtils.cp(@filename, temp_file.path)
-      @temp_filename = temp_file.path
+  def revert tag=nil
+    if tag
+      unified_tag = unify tag
+      val = @changed_values.delete(unified_tag)
+      res = val != nil
+    else
+      res = @changed_values.size > 0
+      @changed_values.clear
     end
-    @temp_filename
+    res
   end
 
   def tags
@@ -165,6 +169,15 @@ class MiniExiftool
       raise MiniExiftool::Error
     end
     return [tag, value]
+  end
+
+  def temp_filename
+    unless @temp_filename
+      temp_file = Tempfile.new('mini-exiftool')
+      FileUtils.cp(@filename, temp_file.path)
+      @temp_filename = temp_file.path
+    end
+    @temp_filename
   end
 
   class MiniExiftool::Error < Exception; end

@@ -23,6 +23,12 @@ class TestRead < Test::Unit::TestCase
     end
   end
 
+  def test_wrong_file
+    assert_raises MiniExiftool::Error do
+      MiniExiftool.new __FILE__ # file type wich Exiftool can not handle
+    end
+  end
+
   def test_access
     assert_equal 'DYNAX 7D', @mini_exiftool['Model']
     assert_equal 'MLT0', @mini_exiftool['maker_note_version']
