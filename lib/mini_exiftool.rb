@@ -25,7 +25,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical
 
-  Version = '0.1.0'
+  VERSION = '0.1.1'
 
   # opts at the moment only support :numerical for numerical values
   # (the -n parameter in the command line)
@@ -121,7 +121,7 @@ class MiniExiftool
   end
 
   def unify name
-    name.gsub(/_/, '').downcase
+    name.gsub(/[_\-]/, '').downcase
   end
 
   def convert val
@@ -151,7 +151,7 @@ class MiniExiftool
   end
 
   def parse_line line
-    if line =~ /^(\w+?)\t(.*)$/
+    if line =~ /^([^\t]+?)\t(.*)$/
       tag, value = $1, $2
       case value
       when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d$/
