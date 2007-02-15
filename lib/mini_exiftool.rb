@@ -13,7 +13,6 @@
 #
 
 require 'fileutils'
-require 'open3'
 require 'tempfile'
 
 # Simple OO access to the Exiftool command-line application.
