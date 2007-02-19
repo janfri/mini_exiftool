@@ -1,6 +1,7 @@
 Version 0.1.2
 - Bugfix for Windows (Tempfile)
 - Regexes optimized (a little bit)
+- New class-method MiniExiftool.writable_tags
 
 Version 0.1.1
 - Fixing bug [#8073]
