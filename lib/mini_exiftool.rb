@@ -133,8 +133,8 @@ class MiniExiftool
 
   def method_missing symbol, *args
     tag_name = symbol.id2name
-    if tag_name =~ /=$/
-      self[tag_name.gsub(/=$/, '')] = args.first
+    if tag_name.sub!(/=$/, '')
+      self[tag_name] = args.first
     else
       self[tag_name]
     end
@@ -150,7 +150,7 @@ class MiniExiftool
   end
 
   def parse_line line
-    if line =~ /^([^\t]+?)\t(.*)$/
+    if line =~ /^([^\t]+)\t(.*)$/
       tag, value = $1, $2
       case value
       when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d$/
