@@ -14,6 +14,7 @@
 
 require 'fileutils'
 require 'tempfile'
+require 'set'
 
 # Simple OO access to the Exiftool command-line application.
 class MiniExiftool
@@ -116,6 +117,21 @@ class MiniExiftool
 
   def self.command= cmd
     @@cmd = cmd
+  end
+
+  @@writable_tags = Set.new
+
+  # Returns a set of all possible writable tags of Exiftool
+  def self.writable_tags
+    return @@writable_tags unless @@writable_tags.empty?
+
+    lines = `exiftool -listw`
+    @@writable_tags = Set.new
+    lines.each do |line|
+      next unless line =~ /^\s/
+      @@writable_tags |= line.chomp.split
+    end
+    @@writable_tags
   end
 
   private
