@@ -1,3 +1,6 @@
+- Tests added
+- Documentation completed
+
 Version 0.1.2
 - Bugfix for Windows (Tempfile)
 - Regexes optimized (a little bit)

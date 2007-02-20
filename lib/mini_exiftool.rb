@@ -34,6 +34,7 @@ class MiniExiftool
     load filename
   end
 
+  # Load the tags of filename
   def load filename
     raise MiniExiftool::Error unless File.exists? filename
     @filename = filename
@@ -50,15 +51,18 @@ class MiniExiftool
     self
   end
 
+  # Reload the tags of an already readed file
   def reload
     load @filename
   end
 
+  # Returns the value of a tag
   def [] tag
     unified_tag = unify tag
     @changed_values[unified_tag] || @values[unified_tag]
   end
 
+  # Set the value of a tag
   def []=(tag, val)
     unified_tag = unify tag
     converted_val = convert val
@@ -69,6 +73,8 @@ class MiniExiftool
     end
   end
 
+  # Return true if any tag value is changed or if the value of a
+  # given tag is changed
   def changed? tag=false
     if tag
       @changed_values.include? tag
@@ -77,6 +83,7 @@ class MiniExiftool
     end
   end
 
+  # Revert all changes or the change of a given tag
   def revert tag=nil
     if tag
       unified_tag = unify tag
@@ -89,14 +96,17 @@ class MiniExiftool
     res
   end
 
+  # Returns an array of the tags (original tag names) of the readed file
   def tags
     @values.keys.map { |key| @tag_names[key] }
   end
 
+  # Returns an array of all changed tags
   def changed_tags
     @changed_values.keys.map { |key| @tag_names[key] }
   end
 
+  # Save the changes to the file
   def save
     result = false
     @changed_values.each do |tag, val|
@@ -111,10 +121,12 @@ class MiniExiftool
     result
   end
   
+  # Returns the command name of the called Exiftool application
   def self.command
     @@cmd
   end
 
+  # Setting the command name of the called Exiftool application
   def self.command= cmd
     @@cmd = cmd
   end
