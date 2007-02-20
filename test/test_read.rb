@@ -32,6 +32,7 @@ class TestRead < Test::Unit::TestCase
     assert_raises MiniExiftool::Error do
       MiniExiftool.new __FILE__ # file type wich Exiftool can not handle
     end
+
     begin
       MiniExiftool.new __FILE__ # file type wich Exiftool can not handle
     rescue MiniExiftool::Error => e
