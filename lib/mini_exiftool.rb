@@ -123,13 +123,13 @@ class MiniExiftool
 
   # Returns a set of all possible writable tags of Exiftool
   def self.writable_tags
-    return @@writable_tags unless @@writable_tags.empty?
-
-    lines = `exiftool -listw`
-    @@writable_tags = Set.new
-    lines.each do |line|
-      next unless line =~ /^\s/
-      @@writable_tags |= line.chomp.split
+    if @@writable_tags.empty?
+      lines = `#{ProgramName} -listw`
+      @@writable_tags = Set.new
+      lines.each do |line|
+        next unless line =~ /^\s/
+        @@writable_tags |= line.chomp.split
+      end
     end
     @@writable_tags
   end
