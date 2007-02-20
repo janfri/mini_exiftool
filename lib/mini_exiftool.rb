@@ -36,7 +36,9 @@ class MiniExiftool
 
   # Load the tags of filename
   def load filename
-    raise MiniExiftool::Error unless File.exists? filename
+    unless File.exists? filename
+      raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
+    end
     @filename = filename
     @values = {}
     @tag_names = {}
@@ -46,7 +48,7 @@ class MiniExiftool
     if run(cmd)
       parse_output
     else
-      raise MiniExiftool::Error
+      raise MiniExiftool::Error.new(@error_text)
     end
     self
   end
@@ -158,10 +160,19 @@ class MiniExiftool
 
   private
 
+  @@error_file = Tempfile.new 'errors'
+  @@error_file.close
+
   def run cmd
-    @output = `#{cmd}`
+    @output = `#{cmd} 2>#{@@error_file.path}`
     @status = $?
-    @status.exitstatus == 0
+    unless @status.exitstatus == 0
+      @error_text = File.readlines(@@error_file.path).join
+      return false
+    else
+      @error_text = ''
+      return true
+    end
   end
 
   def unify name
