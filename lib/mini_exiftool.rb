@@ -124,7 +124,7 @@ class MiniExiftool
   # Returns a set of all possible writable tags of Exiftool
   def self.writable_tags
     if @@writable_tags.empty?
-      lines = `#{ProgramName} -listw`
+      lines = `#{@@cmd} -listw`
       @@writable_tags = Set.new
       lines.each do |line|
         next unless line =~ /^\s/
