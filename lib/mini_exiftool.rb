@@ -19,7 +19,7 @@ require 'tempfile'
 class MiniExiftool
 
   # Name of the exiftool command
-  ProgramName = 'exiftool'
+  @@cmd = 'exiftool'
 
   attr_reader :filename
   attr_accessor :numerical
@@ -29,7 +29,6 @@ class MiniExiftool
   # opts at the moment only support :numerical for numerical values
   # (the -n parameter in the command line)
   def initialize filename, *opts
-    @prog = ProgramName
     @numerical = opts.include? :numerical
     load filename
   end
@@ -41,7 +40,7 @@ class MiniExiftool
     @tag_names = {}
     @changed_values = {}
     opt_params = @numerical ? '-n' : ''
-    cmd = %Q(#@prog -e -q -q -s -t #{opt_params} "#{filename}")
+    cmd = %Q(#@@cmd -e -q -q -s -t #{opt_params} "#{filename}")
     if run(cmd)
       parse_output
     else
@@ -63,7 +62,7 @@ class MiniExiftool
     unified_tag = unify tag
     converted_val = convert val
     opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
-    cmd = %Q(#@prog -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{temp_filename}")
+    cmd = %Q(#@@cmd -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{temp_filename}")
     if run(cmd)
       @changed_values[unified_tag] = val
     end
@@ -103,7 +102,7 @@ class MiniExiftool
       unified_tag = unify tag
       converted_val = convert val
       opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
-      cmd = %Q(#@prog -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{filename}")
+      cmd = %Q(#@@cmd -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{filename}")
       run(cmd)
       result = true
     end
@@ -111,6 +110,14 @@ class MiniExiftool
     result
   end
   
+  def self.command
+    @@cmd
+  end
+
+  def self.command= cmd
+    @@cmd = cmd
+  end
+
   private
 
   def run cmd
