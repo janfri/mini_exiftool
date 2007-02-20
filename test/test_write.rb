@@ -12,6 +12,7 @@ class TestWrite < Test::Unit::TestCase
 
   def setup
     @temp_file = Tempfile.new('test')
+    @temp_file.close
     @temp_filename = @temp_file.path
     @org_filename = File.dirname(__FILE__) + '/data/test.jpg'
     FileUtils.cp(@org_filename, @temp_filename)
@@ -20,7 +21,7 @@ class TestWrite < Test::Unit::TestCase
   end
 
   def teardown
-    @temp_file.close
+    @temp_file.delete
   end
 
   def test_access_existing_tags

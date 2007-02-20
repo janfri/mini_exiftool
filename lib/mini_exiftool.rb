@@ -24,7 +24,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical
 
-  VERSION = '0.1.1'
+  VERSION = '0.1.2'
 
   # opts at the moment only support :numerical for numerical values
   # (the -n parameter in the command line)
@@ -173,6 +173,7 @@ class MiniExiftool
   def temp_filename
     unless @temp_filename
       temp_file = Tempfile.new('mini-exiftool')
+      temp_file.close
       FileUtils.cp(@filename, temp_file.path)
       @temp_filename = temp_file.path
     end
