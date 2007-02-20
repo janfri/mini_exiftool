@@ -1,3 +1,7 @@
+- Interface change:
+  parameter opts of MiniExiftool.initialize is now a Hash
+- Tests added
+
 Version 0.2.0
 - Better error handling (i.e. error messages)
 - Checking if the exiftool command can be executed at loading the lib
