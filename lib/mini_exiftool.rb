@@ -29,8 +29,8 @@ class MiniExiftool
 
   # opts at the moment only support :numerical for numerical values
   # (the -n parameter in the command line)
-  def initialize filename, *opts
-    @numerical = opts.include? :numerical
+  def initialize filename, opts={:numerical => false}
+    @numerical = opts[:numerical]
     load filename
   end
 

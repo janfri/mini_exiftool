@@ -11,7 +11,7 @@ class TestRead < Test::Unit::TestCase
     @data_dir = File.dirname(__FILE__) + '/data'
     @filename_test = @data_dir + '/test.jpg'
     @mini_exiftool = MiniExiftool.new @filename_test
-    @mini_exiftool_num = MiniExiftool.new @filename_test, :numerical
+    @mini_exiftool_num = MiniExiftool.new @filename_test, :numerical => true
   end
 
   def test_initialize
