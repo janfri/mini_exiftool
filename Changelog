@@ -1,8 +1,11 @@
-- Tests added
+- Checking if the exiftool command can be executed at loading the lib
+- New class method exiftool_version
+- Added tests
 - Documentation completed
 
 Version 0.1.2
 - Bugfix for Windows (Tempfile)
+  Thans to Jérome Soika
 - Regexes optimized (a little bit)
 - New class-method MiniExiftool.writable_tags
 

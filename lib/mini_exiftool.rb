@@ -146,6 +146,16 @@ class MiniExiftool
     @@writable_tags
   end
 
+  # Returns the version of the Exiftool command-line application
+  def self.exiftool_version
+    output = `#{MiniExiftool.command} -ver 2>&1`
+    if $?.exitstatus == 0
+      return output
+    else
+      raise MiniExiftool::Error.new("Command '#{MiniExiftool.command}' not found")
+    end
+  end
+
   private
 
   def run cmd
@@ -218,3 +228,6 @@ class MiniExiftool
   class MiniExiftool::Error < Exception; end
 
 end
+
+# Test if we can run the Exiftool command
+MiniExiftool.exiftool_version
