@@ -5,7 +5,7 @@
 
 Version 0.1.2
 - Bugfix for Windows (Tempfile)
-  Thans to Jérome Soika
+  Thanks to Jérome Soika for testing
 - Regexes optimized (a little bit)
 - New class-method MiniExiftool.writable_tags
 
