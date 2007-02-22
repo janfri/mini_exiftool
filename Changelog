@@ -1,3 +1,4 @@
+Version 0.2.0
 - Better error handling (i.e. error messages)
 - Checking if the exiftool command can be executed at loading the lib
 - New class method exiftool_version
