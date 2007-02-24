@@ -5,7 +5,7 @@ begin
 rescue LoadError
 end
 
-class TestOther < Test::Unit::TestCase
+class TestClassMethods < Test::Unit::TestCase
 
   def test_command
     cmd = MiniExiftool.command
@@ -23,6 +23,11 @@ class TestOther < Test::Unit::TestCase
     w_tags = MiniExiftool.writable_tags
     assert w_tags.include?('ISO')
     assert_equal false, w_tags.include?('xxxxxx')
+  end
+
+  def test_exiftool_version
+    v = MiniExiftool.exiftool_version
+    assert_match /\A\d+\.\d+\z/, v
   end
 
 end

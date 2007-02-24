@@ -151,11 +151,10 @@ class MiniExiftool
   # Returns the version of the Exiftool command-line application
   def self.exiftool_version
     output = `#{MiniExiftool.command} -ver 2>&1`
-    if $?.exitstatus == 0
-      return output
-    else
+    unless $?.exitstatus == 0
       raise MiniExiftool::Error.new("Command '#{MiniExiftool.command}' not found")
     end
+    output.chomp!
   end
 
   private

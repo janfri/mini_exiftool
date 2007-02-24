@@ -35,7 +35,7 @@ class TestRead < Test::Unit::TestCase
     begin
       MiniExiftool.new __FILE__ # file type wich Exiftool can not handle
     rescue MiniExiftool::Error => e
-      assert_match /Error: Unknown image type/, e.message
+      assert_match /Error: Unknown (?:image|file) type/, e.message
     end
   end
 
