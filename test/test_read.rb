@@ -14,31 +14,6 @@ class TestRead < Test::Unit::TestCase
     @mini_exiftool_num = MiniExiftool.new @filename_test, :numerical => true
   end
 
-  def test_initialize
-    assert_raises MiniExiftool::Error do
-      MiniExiftool.new ''
-    end
-    assert_raises MiniExiftool::Error do
-      MiniExiftool.new 'not_existing_file'
-    end
-    begin
-      MiniExiftool.new 'not_existing_file'
-    rescue MiniExiftool::Error => e
-      assert_match /File 'not_existing_file' does not exist/, e.message
-    end
-  end
-
-  def test_wrong_file
-    assert_raises MiniExiftool::Error do
-      MiniExiftool.new __FILE__ # file type wich Exiftool can not handle
-    end
-    begin
-      MiniExiftool.new __FILE__ # file type wich Exiftool can not handle
-    rescue MiniExiftool::Error => e
-      assert_match /Error: Unknown (?:image|file) type/, e.message
-    end
-  end
-
   def test_access
     assert_equal 'DYNAX 7D', @mini_exiftool['Model']
     assert_equal 'MLT0', @mini_exiftool['maker_note_version']

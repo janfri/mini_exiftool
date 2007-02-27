@@ -7,6 +7,31 @@ end
 
 class TestClassMethods < Test::Unit::TestCase
 
+  def test_initialize
+    assert_raises MiniExiftool::Error do
+      MiniExiftool.new ''
+    end
+    assert_raises MiniExiftool::Error do
+      MiniExiftool.new 'not_existing_file'
+    end
+    begin
+      MiniExiftool.new 'not_existing_file'
+    rescue MiniExiftool::Error => e
+      assert_match /File 'not_existing_file' does not exist/, e.message
+    end
+  end
+
+  def test_wrong_file
+    assert_raises MiniExiftool::Error do
+      MiniExiftool.new __FILE__ # file type wich Exiftool can not handle
+    end
+    begin
+      MiniExiftool.new __FILE__ # file type wich Exiftool can not handle
+    rescue MiniExiftool::Error => e
+      assert_match /Error: Unknown (?:image|file) type/, e.message
+    end
+  end
+
   def test_command
     cmd = MiniExiftool.command
     assert_equal 'exiftool', cmd
