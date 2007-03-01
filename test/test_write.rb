@@ -27,7 +27,7 @@ class TestWrite < Test::Unit::TestCase
   def test_access_existing_tags
     assert_equal 'Horizontal (normal)', @mini_exiftool['Orientation']
     @mini_exiftool['Orientation'] = 'some string'
-    assert_equal 'Horizontal (normal)', @mini_exiftool['Orientation']
+    assert_equal 'some string', @mini_exiftool['Orientation']
     assert_equal false, @mini_exiftool.changed?('Orientation')
     @mini_exiftool['Orientation'] = 2
     assert_equal 2, @mini_exiftool['Orientation']
@@ -52,10 +52,10 @@ class TestWrite < Test::Unit::TestCase
     assert_equal 'Rotate 180', @mini_exiftool['Orientation']
   end
 
-  def test_access_not_existing_tags
+  def test_access_non_writable_tags
     @mini_exiftool_num['FileSize'] = 1
     assert_equal false, @mini_exiftool_num.changed?
-    @mini_exiftool_num['SomeNotExitingName'] = 'test'
+    @mini_exiftool_num['SomeNonWritableName'] = 'test'
     assert_equal false, @mini_exiftool_num.changed?
   end
 
@@ -111,22 +111,6 @@ class TestWrite < Test::Unit::TestCase
     assert_equal true, res
     res = @mini_exiftool_num.revert
     assert_equal false, res
-  end
-
-  def test_save
-    org_md5 = Digest::MD5.hexdigest(File.read(@org_filename))
-    temp_md5 = Digest::MD5.hexdigest(File.read(@temp_filename))
-    assert_equal org_md5, temp_md5
-    @mini_exiftool_num['Orientation'] = 2
-    result = @mini_exiftool_num.save
-    assert_equal true, result
-    org_md5_2 = Digest::MD5.hexdigest(File.read(@org_filename))
-    assert_equal org_md5, org_md5_2
-    temp_md5_2 = Digest::MD5.hexdigest(File.read(@temp_filename))
-    assert_not_equal temp_md5, temp_md5_2
-    assert_equal false, @mini_exiftool_num.changed?
-    result = @mini_exiftool_num.save
-    assert_equal false, result
   end
 
 end

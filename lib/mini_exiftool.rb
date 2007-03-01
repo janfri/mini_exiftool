@@ -23,7 +23,7 @@ class MiniExiftool
   @@cmd = 'exiftool'
 
   attr_reader :filename
-  attr_accessor :numerical
+  attr_accessor :numerical, :errors
 
   VERSION = '0.2.0'
 
@@ -31,6 +31,7 @@ class MiniExiftool
   # (the -n parameter in the command line)
   def initialize filename, opts={:numerical => false}
     @numerical = opts[:numerical]
+    @errors = []
     load filename
   end
 
@@ -68,9 +69,7 @@ class MiniExiftool
   def []=(tag, val)
     unified_tag = unify tag
     converted_val = convert val
-    opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
-    cmd = %Q(#@@cmd -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{temp_filename}")
-    if run(cmd)
+    if MiniExiftool.writable_tags.include? @tag_names[unified_tag]
       @changed_values[unified_tag] = val
     end
   end
@@ -110,17 +109,30 @@ class MiniExiftool
 
   # Save the changes to the file
   def save
-    result = false
+    return false if @changed_values.empty?
+    @errors.clear
+    temp_file = Tempfile.new('mini_exiftool')
+    temp_file.close
+    temp_filename = temp_file.path
+    FileUtils.cp filename, temp_filename
+    all_ok = true
     @changed_values.each do |tag, val|
       unified_tag = unify tag
       converted_val = convert val
       opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
-      cmd = %Q(#@@cmd -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{filename}")
-      run(cmd)
-      result = true
+      cmd = %Q(#@@cmd -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{temp_filename}")
+      result = run(cmd)
+      unless result
+        all_ok = false
+        @errors << "Can't write '#{val}' to tag #{tag}."
+      end
     end
+    if all_ok
+      FileUtils.cp temp_filename, filename
+    end
+    temp_file.delete
     reload
-    result
+    all_ok
   end
   
   # Returns the command name of the called Exiftool application
