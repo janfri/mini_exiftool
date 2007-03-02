@@ -41,9 +41,9 @@ class MiniExiftool
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
     end
     @filename = filename
-    @values = {}
-    @tag_names = {}
-    @changed_values = {}
+    @values = TagHash.new
+    @tag_names = TagHash.new
+    @changed_values = TagHash.new
     opt_params = @numerical ? '-n' : ''
     cmd = %Q(#@@cmd -e -q -q -s -t #{opt_params} "#{filename}")
     if run(cmd)
@@ -61,16 +61,14 @@ class MiniExiftool
 
   # Returns the value of a tag
   def [] tag
-    unified_tag = unify tag
-    @changed_values[unified_tag] || @values[unified_tag]
+    @changed_values[tag] || @values[tag]
   end
 
   # Set the value of a tag
   def []=(tag, val)
-    unified_tag = unify tag
     converted_val = convert val
-    if MiniExiftool.writable_tags.include? @tag_names[unified_tag]
-      @changed_values[unified_tag] = val
+    if MiniExiftool.writable_tags.include? @tag_names[tag]
+      @changed_values[tag] = val
     end
   end
 
@@ -87,8 +85,7 @@ class MiniExiftool
   # Revert all changes or the change of a given tag
   def revert tag=nil
     if tag
-      unified_tag = unify tag
-      val = @changed_values.delete(unified_tag)
+      val = @changed_values.delete(tag)
       res = val != nil
     else
       res = @changed_values.size > 0
@@ -117,10 +114,9 @@ class MiniExiftool
     FileUtils.cp filename, temp_filename
     all_ok = true
     @changed_values.each do |tag, val|
-      unified_tag = unify tag
       converted_val = convert val
       opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
-      cmd = %Q(#@@cmd -q -q -P -overwrite_original #{opt_params} -#{unified_tag}="#{converted_val}" "#{temp_filename}")
+      cmd = %Q(#@@cmd -q -q -P -overwrite_original #{opt_params} -#{tag}="#{converted_val}" "#{temp_filename}")
       result = run(cmd)
       unless result
         all_ok = false
@@ -186,10 +182,6 @@ class MiniExiftool
     end
   end
 
-  def unify name
-    name.gsub(/[_\-]/, '').downcase
-  end
-
   def convert val
     case val
     when Time
@@ -210,9 +202,8 @@ class MiniExiftool
   def parse_output
     @output.each_line do |line|
       tag, value = parse_line line
-      unified_tag = unify tag
-      @tag_names[unified_tag] = tag
-      @values[unified_tag] = value
+      @tag_names[tag] = tag
+      @values[tag] = value
     end
   end
 
@@ -247,6 +238,25 @@ class MiniExiftool
     @temp_filename
   end
 
+  # Hash with indifferent access: 
+  # DateTimeOriginal == datetimeoriginal == date_time_original
+  class TagHash < Hash
+    def unify tag
+      tag.gsub(/[-_]/,'').downcase
+    end
+    def[] k
+      super(unify(k))
+    end
+    def []= k, v
+      super(unify(k), v)
+    end
+    def delete k
+      super(unify(k))
+    end
+  end
+  
+
+  # Exception class
   class MiniExiftool::Error < Exception; end
 
 end
