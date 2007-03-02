@@ -66,7 +66,6 @@ class MiniExiftool
 
   # Set the value of a tag
   def []=(tag, val)
-    converted_val = convert val
     if MiniExiftool.writable_tags.include? @tag_names[tag]
       @changed_values[tag] = val
     end
@@ -241,9 +240,6 @@ class MiniExiftool
   # Hash with indifferent access: 
   # DateTimeOriginal == datetimeoriginal == date_time_original
   class TagHash < Hash
-    def unify tag
-      tag.gsub(/[-_]/,'').downcase
-    end
     def[] k
       super(unify(k))
     end
@@ -252,6 +248,11 @@ class MiniExiftool
     end
     def delete k
       super(unify(k))
+    end
+
+    private
+    def unify tag
+      tag.gsub(/[-_]/,'').downcase
     end
   end
   
