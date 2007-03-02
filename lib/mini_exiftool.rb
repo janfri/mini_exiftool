@@ -31,7 +31,10 @@ class MiniExiftool
   # (the -n parameter in the command line)
   def initialize filename, opts={:numerical => false}
     @numerical = opts[:numerical]
-    @errors = []
+    @values = TagHash.new
+    @tag_names = TagHash.new
+    @changed_values = TagHash.new
+    @errors = TagHash.new
     load filename
   end
 
@@ -41,9 +44,9 @@ class MiniExiftool
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
     end
     @filename = filename
-    @values = TagHash.new
-    @tag_names = TagHash.new
-    @changed_values = TagHash.new
+    @values.clear
+    @tag_names.clear
+    @changed_values.clear
     opt_params = @numerical ? '-n' : ''
     cmd = %Q(#@@cmd -e -q -q -s -t #{opt_params} "#{filename}")
     if run(cmd)
@@ -115,11 +118,11 @@ class MiniExiftool
     @changed_values.each do |tag, val|
       converted_val = convert val
       opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
-      cmd = %Q(#@@cmd -q -q -P -overwrite_original #{opt_params} -#{tag}="#{converted_val}" "#{temp_filename}")
+      cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} -#{tag}="#{converted_val}" "#{temp_filename}")
       result = run(cmd)
       unless result
         all_ok = false
-        @errors << "Can't write '#{val}' to tag #{tag}."
+        @errors[tag] = @error_text.gsub(/Nothing to do.\n\z/, '').chomp
       end
     end
     if all_ok

@@ -40,7 +40,8 @@ class TestSave < Test::Unit::TestCase
     assert_equal org_orientation, @mini_exiftool['Orientation']
     assert_equal false, result
     assert_equal 1, @mini_exiftool.errors.size
-    assert_match /^Can.t write.*to tag/, @mini_exiftool.errors.first
+    assert_equal("Can't convert IFD0:Orientation (not in PrintConv)",
+                 @mini_exiftool.errors['Orientation'])
   end
 
   def test_no_changing_of_file_when_error
