@@ -127,9 +127,9 @@ class MiniExiftool
     end
     if all_ok
       FileUtils.cp temp_filename, filename
+      reload
     end
     temp_file.delete
-    reload
     all_ok
   end
   
