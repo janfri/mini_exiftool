@@ -69,9 +69,7 @@ class MiniExiftool
 
   # Set the value of a tag
   def []=(tag, val)
-    if MiniExiftool.writable_tags.include? @tag_names[tag]
-      @changed_values[tag] = val
-    end
+    @changed_values[tag] = val
   end
 
   # Return true if any tag value is changed or if the value of a

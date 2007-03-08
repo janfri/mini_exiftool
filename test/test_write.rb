@@ -54,9 +54,9 @@ class TestWrite < Test::Unit::TestCase
 
   def test_access_non_writable_tags
     @mini_exiftool_num['FileSize'] = 1
-    assert_equal false, @mini_exiftool_num.changed?
+    assert_equal true, @mini_exiftool_num.changed?
     @mini_exiftool_num['SomeNonWritableName'] = 'test'
-    assert_equal false, @mini_exiftool_num.changed?
+    assert_equal true, @mini_exiftool_num.changed?
   end
 
   def test_time_conversion
