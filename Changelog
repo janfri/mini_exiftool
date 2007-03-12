@@ -1,5 +1,12 @@
-- Interface change:
-  parameter opts of MiniExiftool.initialize is now a Hash
+- Interface changes:
+  - Test if a value for a tag can be saved is now done in
+    MiniExiftool#save
+    => There is no check at the moment you set a value:
+       the tag occurs in MiniExiftool#changed_values
+    => While calling MiniExiftool#save errors can occur (see next point)
+  - MiniExiftool#save is a transaction: if one or more error occurs th file is
+    not changed! In such a case the errors can be found in MiniExiftool#errors
+  - Parameter opts of MiniExiftool.initialize is now a Hash
 - Tests added
 
 Version 0.2.0
