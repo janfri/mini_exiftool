@@ -6,7 +6,9 @@
     => While calling MiniExiftool#save errors can occur (see next point)
   - MiniExiftool#save is a transaction: if one or more error occurs th file is
     not changed! In such a case the errors can be found in MiniExiftool#errors
-  - Parameter opts of MiniExiftool.initialize is now a Hash
+  - Parameter opts of MiniExiftool.initialize is now a Hash with two options:
+    - :numerical => read metadata as numerical values
+    - :composite => read also composite tags
 - Tests added
 
 Version 0.2.0

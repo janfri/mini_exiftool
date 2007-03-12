@@ -23,14 +23,15 @@ class MiniExiftool
   @@cmd = 'exiftool'
 
   attr_reader :filename
-  attr_accessor :numerical, :errors
+  attr_accessor :numerical, :composite, :errors
 
   VERSION = '0.2.0'
 
   # opts at the moment only support :numerical for numerical values
   # (the -n parameter in the command line)
-  def initialize filename, opts={:numerical => false}
+  def initialize filename, opts={:numerical => false, :composite=>false}
     @numerical = opts[:numerical]
+    @composite = opts[:composite]
     @values = TagHash.new
     @tag_names = TagHash.new
     @changed_values = TagHash.new
@@ -47,8 +48,10 @@ class MiniExiftool
     @values.clear
     @tag_names.clear
     @changed_values.clear
-    opt_params = @numerical ? '-n' : ''
-    cmd = %Q(#@@cmd -e -q -q -s -t #{opt_params} "#{filename}")
+    opt_params = ''
+    opt_params << (@numerical ? '-n ' : '')
+    opt_params << (@composite ? '' : '-e ')
+    cmd = %Q(#@@cmd -q -q -s -t #{opt_params} "#{filename}")
     if run(cmd)
       parse_output
     else
