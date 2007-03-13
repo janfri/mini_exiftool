@@ -7,7 +7,7 @@ end
 
 class TestClassMethods < Test::Unit::TestCase
 
-  def test_initialize
+  def test_new
     assert_raises MiniExiftool::Error do
       MiniExiftool.new ''
     end
@@ -21,7 +21,10 @@ class TestClassMethods < Test::Unit::TestCase
     end
   end
 
-  def test_wrong_file
+  def test_new_wrong_file
+    assert_raises MiniExiftool::Error do
+      MiniExiftool.new nil
+    end
     assert_raises MiniExiftool::Error do
       MiniExiftool.new __FILE__ # file type wich Exiftool can not handle
     end
