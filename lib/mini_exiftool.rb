@@ -43,6 +43,8 @@ class MiniExiftool
   def load filename
     if filename.nil? || !File.exists?(filename)
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
+    elsif File.directory?(filename)
+      raise MiniExiftool::Error.new("'#{filename}' is a directory.")
     end
     @filename = filename
     @values.clear
