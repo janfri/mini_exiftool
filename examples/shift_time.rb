@@ -17,7 +17,7 @@ ARGV.each do |filename|
     exit -1
   end
   time = photo.date_time_original
-  # time is now a Time object, so we can use the methodos of it :)
+  # time is a Time object, so we can use the methods of it :)
   time += delta
   photo.date_time_original = time
   save_ok = photo.save
