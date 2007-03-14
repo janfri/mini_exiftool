@@ -19,51 +19,7 @@ Copyright (c) 2007 by Jan Friedrich
 Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1, 
 February 1999
 
-== Examples (for further information and use cases see tests):
+== Usage
 
- require 'mini_exiftool'
- 
- # copy the original test file therewith the original isn't changed
- # and the tests work
- require 'fileutils'
- FileUtils.cp('test/data/test.jpg', './test.jpg')
- 
- mini_exiftool = MiniExiftool.new 'test.jpg'
- 
- # different methods to read information
- 
- mini_exiftool['Orientation'] # ==> 'Horizontal (normal)'
- mini_exiftool['ISO'] # ==> 400
- mini_exiftool['iso'] # ==> 400
- mini_exiftool['DateTimeOriginal'].class # ==> Time
- 
- mini_exiftool.orientation # ==> 'Horizontal (normal)'
- mini_exiftool.iso # ==> 400
- mini_exiftool.datetimeoriginal.class # ==> Time
- mini_exiftool.date_time_original.class # ==> Time
- 
- # numerical access
- 
- mini_exiftool_num = MiniExiftool.new 'test.jpg', :numerical
- mini_exiftool_num['Orientation'] # ==> 1
- 
- 
- # write access
- 
- mini_exiftool_num['Orientation'] = 2
- mini_exiftool_num['ISO'] = 200
- mini_exiftool_num['Orientation'] # ==> 2
- mini_exiftool_num['ISO'] # ==> 200
- mini_exiftool_num.reload
- mini_exiftool_num['Orientation'] # ==> 1
- mini_exiftool_num['ISO'] # ==> 400
- 
- mini_exiftool_num['Orientation'] = 2
- mini_exiftool_num['ISO'] = 200
- mini_exiftool_num.changed? # ==> true
- mini_exiftool_num.changed_tags # ==> ["ISO", "Orientation"]
- mini_exiftool_num.save
- mini_exiftool_num.changed? # ==> false
- mini_exiftool_num.changed_tags # ==> []
- mini_exiftool_num['Orientation'] # ==> 2
- mini_exiftool_num['ISO'] # ==> 200
+For informations about using MiniExiftool read the Tutorial and have a
+look at the examples in directory examples.

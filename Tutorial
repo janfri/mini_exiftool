@@ -1,0 +1,39 @@
+= Tutorial
+
+Here you learn the basics for using MiniExiftool.
+
+
+== Installation
+
+* Installing the Exiftool command-line application from Phil Harvay
+  (see http://www.sno.phy.queensu.ca/~phil/exiftool/install.html)
+* Installing the Ruby library (<code>gem install mini_exiftool</code>)
+
+
+== First step: Reading metadata
+
+=== A simple example
+
+ require 'rubygems'
+ require 'mini_exiftool'
+
+ photo = MiniExiftool.new 'photo.jpg'
+ puts photo['DateTimeOriginal']
+
+
+=== Smart tag names
+In the example above we use <code>photo['DateTimeOriginal']</code> to
+get the value for the time the photo was taken. But tag names are not
+case sensitiv and additional underlines are also irrelevant. So
+following expressions are equivalent:
+ photo['DateTimeOriginal']
+ photo['datetimeoriginal']
+ photo['date_time_original']
+
+
+=== Nicer access via dynamic methods
+Using the []-method is the safest way to access to values of tags
+(i. e. Self-timer you can only access this way) but the smarter way is
+using dynamic method access. You can write:
+ photo.datetimeoriginal
+ photo.date_time_original

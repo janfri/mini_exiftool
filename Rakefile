@@ -60,7 +60,7 @@ GENERAL_RDOC_OPTS = {
 }
 
 # Additional RDoc formatted files, besides the Ruby source files.
-RDOC_FILES = FileList["README"]
+RDOC_FILES = FileList["README", 'Tutorial']
 # Remove the following line if you don't want to extract RDoc from
 # the extension C sources.
 RDOC_FILES.include(EXT_SOURCES)
