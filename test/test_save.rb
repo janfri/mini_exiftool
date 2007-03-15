@@ -22,7 +22,6 @@ class TestSave < Test::Unit::TestCase
   end
 
   def test_allowed_value
-    assert_equal @org_md5, @org_md5
     @mini_exiftool_num['Orientation'] = 2
     result = @mini_exiftool_num.save
     assert_equal true, result
