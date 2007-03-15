@@ -18,11 +18,11 @@ ARGV.each do |filename|
   end
   time = photo.date_time_original
   # time is a Time object, so we can use the methods of it :)
-  time += delta
-  photo.date_time_original = time
+  photo.date_time_original = time + delta
   save_ok = photo.save
   if save_ok
-    puts "#{filename} changed"
+    fmt = '%Y-%m-%d %H:%M:%S'
+    puts "#{filename} changed: #{time.strftime(fmt)} -> #{(time + delta).strftime(fmt)}"
   else
     puts "#{filename} could not be changed"
   end
