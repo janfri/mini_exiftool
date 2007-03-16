@@ -10,7 +10,7 @@ Here you learn the basics for using MiniExiftool.
 * Installing the Ruby library (<code>gem install mini_exiftool</code>)
 
 
-== First step: Reading metadata
+== Lesson 1: Reading meta data
 
 === A simple example
 
@@ -24,7 +24,7 @@ Here you learn the basics for using MiniExiftool.
 === Smart tag names
 In the example above we use <code>photo['DateTimeOriginal']</code> to
 get the value for the time the photo was taken. But tag names are not
-case sensitiv and additional underlines are also irrelevant. So
+case sensitive and additional underlines are also irrelevant. So
 following expressions are equivalent:
  photo['DateTimeOriginal']
  photo['datetimeoriginal']
@@ -32,8 +32,27 @@ following expressions are equivalent:
 
 
 === Nicer access via dynamic methods
+
 Using the []-method is the safest way to access to values of tags
 (i. e. Self-timer you can only access this way) but the smarter way is
 using dynamic method access. You can write:
  photo.datetimeoriginal
  photo.date_time_original
+
+
+=== Value types
+
+Following types of values are at the moment supported:
+* Array (e. g. SubjectLocation => 1504 1000 256 304)
+* Fixnum (e. g. ISO => 400)
+* Float (e. g. FNumber => 9.5) 
+* String (e. g. Model => DYNAX 7D)
+* Time (e. g. DateTimeOriginal => 2005:09:13 20:08:50)
+
+The Exiftool command-line application has an option (-n) to get values
+as numbers if possible, in MiniExiftool you can do this with setting
+the :numerical option to true while generating a new instance with new
+or with using the setter method MiniExiftool#numerical=. In this case
+you have to call reload to take the effekt.
+
+== Lesson 2: Changing and writing meta data
