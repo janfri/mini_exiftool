@@ -19,7 +19,7 @@ require 'set'
 # Simple OO access to the Exiftool command-line application.
 class MiniExiftool
 
-  # Name of the exiftool command
+  # Name of the Exiftool command-line application
   @@cmd = 'exiftool'
 
   attr_reader :filename
@@ -27,9 +27,13 @@ class MiniExiftool
 
   VERSION = '0.2.0'
 
-  # opts at the moment only support :numerical for numerical values
-  # (the -n parameter in the command line)
-  def initialize filename, opts={:numerical => false, :composite=>false}
+  # opts support at the moment
+  # * <code>:numerical</code> for numerical values, default is +false+
+  # * <code>:composite</code> for including composite tags while loading,
+  #   default is +false+
+  def initialize filename, opts={}
+    std_opts = {:numerical => false, :composite => false}
+    opts = std_opts.update opts
     @numerical = opts[:numerical]
     @composite = opts[:composite]
     @values = TagHash.new
