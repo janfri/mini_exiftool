@@ -1,3 +1,5 @@
+Version 0.3.0
+- Documentation completed and a Mini Tutorial added
 - Interface changes:
   - Test if a value for a tag can be saved is now done in
     MiniExiftool#save
