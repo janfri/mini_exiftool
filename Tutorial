@@ -1,6 +1,4 @@
-= Tutorial
-
-Here you learn the basics for using MiniExiftool.
+= MiniTutorial
 
 
 == Installation
@@ -10,9 +8,9 @@ Here you learn the basics for using MiniExiftool.
 * Installing the Ruby library (<code>gem install mini_exiftool</code>)
 
 
-== Lesson 1: Reading meta data
+== Lesson 1: Reading Meta Data
 
-=== A simple example
+=== A Simple Example
 
  require 'rubygems'
  require 'mini_exiftool'
@@ -21,7 +19,7 @@ Here you learn the basics for using MiniExiftool.
  puts photo['DateTimeOriginal']
 
 
-=== Smart tag names
+=== Smart Tag Names
 In the example above we use <code>photo['DateTimeOriginal']</code> to
 get the value for the time the photo was taken. But tag names are not
 case sensitive and additional underlines are also irrelevant. So
@@ -31,16 +29,17 @@ following expressions are equivalent:
  photo['date_time_original']
 
 
-=== Nicer access via dynamic methods
+=== Nicer Access Via Dynamic Methods
 
 Using the []-method is the safest way to access to values of tags
-(i. e. Self-timer you can only access this way) but the smarter way is
+(e. g. Self-timer you can only access this way) but the smarter way is
 using dynamic method access. You can write:
  photo.datetimeoriginal
+or also
  photo.date_time_original
 
 
-=== Value types
+=== Value Types
 
 Following types of values are at the moment supported:
 * Array (e. g. SubjectLocation => 1504 1000 256 304)
@@ -51,8 +50,61 @@ Following types of values are at the moment supported:
 
 The Exiftool command-line application has an option (-n) to get values
 as numbers if possible, in MiniExiftool you can do this with setting
-the :numerical option to true while generating a new instance with new
-or with using the setter method MiniExiftool#numerical=. In this case
-you have to call reload to take the effekt.
+the <code>:numerical</code> option to +true+ while generating a new
+instance with new or using the <code>numerical=</code>-method
+combining with calling <code>reload</code>.
 
-== Lesson 2: Changing and writing meta data
+Let's make an example:
+ # standard: numerical is false
+ photo = MiniExiftool.new 'photo.jpg'
+ photo.exposure_time # => '1/16' (String)
+ # now with numerical is true
+ photo.numerical = true
+ photo.reload
+ photo.exposure_time # => 0.01666667 (Float)
+This behaviour can be useful if you want to do calculations on the
+value, if you only want to show the value the standard behaviour is
+maybe better.
+
+
+=== Further Example
+
+For understanding reading access to meta data also have a look at the
+example file <code>print_portraits.rb</code> in the +examples+
+directory.
+
+
+== Lesson 2: Writing Meta Data
+
+
+=== Also A Very Simple Example
+
+ require 'rubygems'
+ require 'mini_exiftool'
+
+ photo = MiniExiftool.new 'photo.jpg'
+ photo.comment = 'hello world'
+ photo.save
+
+
+=== Save Is Atomar
+
+If you have changed serval values and call the +save+-method either
+all changes will be written to the file or nothing. The return value
+of the +save+-method is +true+ if all values are written to the file
+otherwise save returns +false+. In the last case you can use the
++errors+-method which returns a hash of the tags which values couldn't
+be writed with an error message for each of them.
+
+
+=== Interesting Methods
+
+Have a look at the <code>changed?</code>-method for checking if the
+value of a specific tag is changed or a changing in general is
+done. In the same way the +revert+-method reverts the value of a
+specific tag or in general all changes.
+
+
+=== Further Example
+
+See <code>shift_time.rb</code> in the +examples+ directory.
