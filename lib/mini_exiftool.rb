@@ -3,7 +3,7 @@
 #
 # This library is wrapper for the Exiftool command-line
 # application (http://www.sno.phy.queensu.ca/~phil/exiftool/)
-# written by Phil Harvay.
+# written by Phil Harvey.
 # Read and write access is done in a clean OO manner.
 #
 # Author: Jan Friedrich
@@ -25,7 +25,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical, :composite, :errors
 
-  VERSION = '0.3.0'
+  VERSION = '0.3.1'
 
   # opts support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
@@ -43,7 +43,7 @@ class MiniExiftool
     load filename
   end
 
-  # Load the tags of filename
+  # Load the tags of filename.
   def load filename
     if filename.nil? || !File.exists?(filename)
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
@@ -66,23 +66,23 @@ class MiniExiftool
     self
   end
 
-  # Reload the tags of an already readed file
+  # Reload the tags of an already readed file.
   def reload
     load @filename
   end
 
-  # Returns the value of a tag
+  # Returns the value of a tag.
   def [] tag
     @changed_values[tag] || @values[tag]
   end
 
-  # Set the value of a tag
+  # Set the value of a tag.
   def []=(tag, val)
     @changed_values[tag] = val
   end
 
-  # Return true if any tag value is changed or if the value of a
-  # given tag is changed
+  # Returns true if any tag value is changed or if the value of a
+  # given tag is changed.
   def changed? tag=false
     if tag
       @changed_values.include? tag
@@ -91,7 +91,7 @@ class MiniExiftool
     end
   end
 
-  # Revert all changes or the change of a given tag
+  # Revert all changes or the change of a given tag.
   def revert tag=nil
     if tag
       val = @changed_values.delete(tag)
@@ -103,17 +103,17 @@ class MiniExiftool
     res
   end
 
-  # Returns an array of the tags (original tag names) of the readed file
+  # Returns an array of the tags (original tag names) of the readed file.
   def tags
     @values.keys.map { |key| @tag_names[key] }
   end
 
-  # Returns an array of all changed tags
+  # Returns an array of all changed tags.
   def changed_tags
     @changed_values.keys.map { |key| @tag_names[key] }
   end
 
-  # Save the changes to the file
+  # Save the changes to the file.
   def save
     return false if @changed_values.empty?
     @errors.clear
@@ -140,19 +140,19 @@ class MiniExiftool
     all_ok
   end
   
-  # Returns the command name of the called Exiftool application
+  # Returns the command name of the called Exiftool application.
   def self.command
     @@cmd
   end
 
-  # Setting the command name of the called Exiftool application
+  # Setting the command name of the called Exiftool application.
   def self.command= cmd
     @@cmd = cmd
   end
 
   @@writable_tags = Set.new
 
-  # Returns a set of all possible writable tags of Exiftool
+  # Returns a set of all possible writable tags of Exiftool.
   def self.writable_tags
     if @@writable_tags.empty?
       lines = `#{@@cmd} -listw`
@@ -165,7 +165,7 @@ class MiniExiftool
     @@writable_tags
   end
 
-  # Returns the version of the Exiftool command-line application
+  # Returns the version of the Exiftool command-line application.
   def self.exiftool_version
     output = `#{MiniExiftool.command} -ver 2>&1`
     unless $?.exitstatus == 0
@@ -249,7 +249,7 @@ class MiniExiftool
 
   # Hash with indifferent access: 
   # DateTimeOriginal == datetimeoriginal == date_time_original
-  class TagHash < Hash
+  class TagHash < Hash # :nodoc:
     def[] k
       super(unify(k))
     end

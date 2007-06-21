@@ -3,7 +3,7 @@
 
 == Installation
 
-* Installing the Exiftool command-line application from Phil Harvay
+* Installing the Exiftool command-line application from Phil Harvey
   (see http://www.sno.phy.queensu.ca/~phil/exiftool/install.html)
 * Installing the Ruby library (<code>gem install mini_exiftool</code>)
 
@@ -57,7 +57,7 @@ combining with calling <code>reload</code>.
 Let's make an example:
  # standard: numerical is false
  photo = MiniExiftool.new 'photo.jpg'
- photo.exposure_time # => '1/16' (String)
+ photo.exposure_time # => '1/60' (String)
  # now with numerical is true
  photo.numerical = true
  photo.reload

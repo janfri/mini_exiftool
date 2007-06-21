@@ -1,7 +1,7 @@
 = MiniExiftool
 
 This library is wrapper for the Exiftool command-line application
-(http://www.sno.phy.queensu.ca/~phil/exiftool/) written by Phil Harvay.
+(http://www.sno.phy.queensu.ca/~phil/exiftool/) written by Phil Harvey.
 Read and write access is done in a clean OO manner.
 
 == Requirements
