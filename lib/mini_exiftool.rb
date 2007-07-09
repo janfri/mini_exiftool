@@ -25,7 +25,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical, :composite, :errors
 
-  VERSION = '0.3.1'
+  VERSION = '0.4.0'
 
   # opts support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
@@ -268,7 +268,7 @@ class MiniExiftool
   
 
   # Exception class
-  class MiniExiftool::Error < Exception; end
+  class MiniExiftool::Error < StandardError; end
 
 end
 

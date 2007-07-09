@@ -1,3 +1,10 @@
+Version 0.4.0
+- MiniExiftool::Error inherits now from StandardError
+- New possibility for installation via setup.rb
+
+Version 0.3.1
+- Typos fixed
+
 Version 0.3.0
 - Documentation completed and a Mini Tutorial added
 - Interface changes:
@@ -6,7 +13,7 @@ Version 0.3.0
     => There is no check at the moment you set a value:
        the tag occurs in MiniExiftool#changed_values
     => While calling MiniExiftool#save errors can occur (see next point)
-  - MiniExiftool#save is a transaction: if one or more error occurs th file is
+  - MiniExiftool#save is a transaction: if one or more error occurs the file is
     not changed! In such a case the errors can be found in MiniExiftool#errors
   - Parameter opts of MiniExiftool.initialize is now a Hash with two options:
     - :numerical => read metadata as numerical values
