@@ -7,6 +7,8 @@ end
 
 class TestSpecial < Test::Unit::TestCase
 
+  CAPTION_ABSTRACT =  'Some text for caption abstract'
+
   def setup
     @data_dir = File.dirname(__FILE__) + '/data'
     @filename_canon = @data_dir + '/Canon.jpg'
@@ -23,6 +25,12 @@ class TestSpecial < Test::Unit::TestCase
     assert !@canon.tags.include?('self_timer')
   end
 
-
+  # Catching bug with writing caption-abstract
+  # Thanks to Robin Romahn
+  def test_caption_abstract
+    @canon['caption-abstract'] = CAPTION_ABSTRACT
+    @canon.save
+    puts @canon.errors
+  end
 
 end

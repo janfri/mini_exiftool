@@ -124,9 +124,10 @@ class MiniExiftool
     FileUtils.cp filename, temp_filename
     all_ok = true
     @changed_values.each do |tag, val|
+      original_tag = @tag_names[tag]
       converted_val = convert val
       opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
-      cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} -#{tag}="#{converted_val}" "#{temp_filename}")
+      cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} -#{original_tag}="#{converted_val}" "#{temp_filename}")
       result = run(cmd)
       unless result
         all_ok = false
