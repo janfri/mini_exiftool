@@ -29,8 +29,7 @@ class TestSpecial < Test::Unit::TestCase
   # Thanks to Robin Romahn
   def test_caption_abstract
     @canon['caption-abstract'] = CAPTION_ABSTRACT
-    @canon.save
-    puts @canon.errors
+    assert @canon.save
   end
 
 end
