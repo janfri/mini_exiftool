@@ -1,4 +1,6 @@
+require 'fileutils'
 require 'mini_exiftool'
+require 'tempfile'
 require 'test/unit'
 begin
   require 'turn'
@@ -10,9 +12,13 @@ class TestSpecial < Test::Unit::TestCase
   CAPTION_ABSTRACT =  'Some text for caption abstract'
 
   def setup
-    @data_dir = File.dirname(__FILE__) + '/data'
-    @filename_canon = @data_dir + '/Canon.jpg'
-    @canon = MiniExiftool.new @filename_canon
+    data_dir = File.dirname(__FILE__) + '/data'
+    temp_file = Tempfile.new('test')
+    temp_file.close
+    @temp_filename = temp_file.path
+    org_filename = data_dir + '/Canon.jpg'
+    FileUtils.cp org_filename, @temp_filename
+    @canon = MiniExiftool.new @temp_filename
   end
 
   # Catching bug [#8073]
@@ -27,9 +33,19 @@ class TestSpecial < Test::Unit::TestCase
 
   # Catching bug with writing caption-abstract
   # Thanks to Robin Romahn
-  def test_caption_abstract
+  def test_caption_abstract_sensitive
     @canon['caption-abstract'] = CAPTION_ABSTRACT
+    assert @canon.changed_tags.include?('caption-abstract')
     assert @canon.save
+#    @canon.reload
+    assert_equal CAPTION_ABSTRACT, @canon.caption_abstract
+  end
+
+  def test_caption_abstract_non_sesitive
+    @canon.caption_abstract = CAPTION_ABSTRACT.reverse
+    assert @canon.save
+#    @canon.reload
+    assert_equal CAPTION_ABSTRACT.reverse, @canon.caption_abstract
   end
 
 end
