@@ -14,6 +14,7 @@
 
 require 'fileutils'
 require 'tempfile'
+require 'tmpdir'
 require 'pstore'
 require 'set'
 
@@ -111,7 +112,7 @@ class MiniExiftool
 
   # Returns an array of all changed tags.
   def changed_tags
-    @changed_values.keys.map { |key| @tag_names[key] }
+    @changed_values.keys.map { |key| MiniExiftool.original_tag(key) }
   end
 
   # Save the changes to the file.
@@ -124,7 +125,7 @@ class MiniExiftool
     FileUtils.cp filename, temp_filename
     all_ok = true
     @changed_values.each do |tag, val|
-      original_tag = @tag_names[tag]
+      original_tag = MiniExiftool.original_tag(tag)
       converted_val = convert val
       opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
       cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} -#{original_tag}="#{converted_val}" "#{temp_filename}")
@@ -168,7 +169,12 @@ class MiniExiftool
     @@writable_tags
   end
 
-  def self.original_tagname tag
+  # Returns the original Exiftool name of the given tag
+  def self.original_tag tag
+    unless defined? @@all_tags_map
+      @@all_tags_map = pstore_get :all_tags_map
+    end
+    @@all_tags_map[tag]
   end
 
   # Returns the version of the Exiftool command-line application.
@@ -186,6 +192,9 @@ class MiniExiftool
   @@error_file.close
 
   def run cmd
+    if $DEBUG
+      $stderr.puts cmd
+    end
     @output = `#{cmd} 2>#{@@error_file.path}`
     @status = $?
     unless @status.exitstatus == 0

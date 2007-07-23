@@ -35,7 +35,7 @@ class TestSpecial < Test::Unit::TestCase
   # Thanks to Robin Romahn
   def test_caption_abstract_sensitive
     @canon['caption-abstract'] = CAPTION_ABSTRACT
-    assert @canon.changed_tags.include?('caption-abstract')
+    assert @canon.changed_tags.include?('Caption-Abstract')
     assert @canon.save
 #    @canon.reload
     assert_equal CAPTION_ABSTRACT, @canon.caption_abstract
