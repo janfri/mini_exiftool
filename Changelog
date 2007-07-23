@@ -1,6 +1,12 @@
 Version 0.4.0
 - MiniExiftool::Error inherits now from StandardError
-- New possibility for installation via setup.rb
+- Alternative installation via setup.rb
+- Bugfix
+  Saving of non-readed tags doesn't work with tags with hyphen
+  Thanks to Robin Romahn for reporting the bug
+- New methods: MiniExiftool.all_tags and MiniExiftool.original_tag
+- Interna: Original tag names (all and writable) are now saved via pstore in
+  a file for better performance
 
 Version 0.3.1
 - Typos fixed

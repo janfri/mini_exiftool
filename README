@@ -10,16 +10,28 @@ An installation of the Exiftool command-line application.
 Instructions for installation you can find under
 http://www.sno.phy.queensu.ca/~phil/exiftool/install.html .
 
+== Installation
+
+First you need Exiftool (see under Requirements above). Simply install the gem
+with
+ gem install mini_exiftool
+
+Alternative you can download the tarball and run
+ ruby setup config
+ ruby setup setup
+ sudo ruby setup install
+
 == Author
 Jan Friedrich
 
 == Copyright / License
 Copyright (c) 2007 by Jan Friedrich
 
-Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1, 
-February 1999
+Licensed under terms of the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1, 
+February 1999 (see file COPYING for more details)
 
 == Usage
 
-For further information about using MiniExiftool read the Tutorial and
-have a look at the examples in directory examples.
+For further information about using MiniExiftool read the
+Tutorial[link://files/Tutorial.html] and have a look at the examples in
+directory examples.
