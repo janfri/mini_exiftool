@@ -280,12 +280,12 @@ class MiniExiftool
   def self.load_or_create_pstore
     filename = File.join(Dir.tmpdir, 'exiftool_tags_' + exiftool_version.gsub('.', '_'))
     @@pstore = PStore.new filename
-    unless File.exist? filename
+    if !File.exist?(filename) || File.size(filename) == 0
       @@pstore.transaction do |ps|
         ps[:all_tags] = all_tags = determine_tags('list')
         ps[:writable_tags] = determine_tags('listw')
         map = {}
-        all_tags.each { |k| map[TagHash.unify(k)] = k }
+        all_tags.each { |k| map[unify(k)] = k }
         ps[:all_tags_map] = map
       end
     end

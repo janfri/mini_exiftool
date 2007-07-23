@@ -47,6 +47,12 @@ class TestClassMethods < Test::Unit::TestCase
     MiniExiftool.command = cmd
   end
 
+  def test_all_tags
+    all_tags = MiniExiftool.all_tags
+    assert all_tags.include?('ISO')
+    assert all_tags.include?('OriginalFilename')
+  end
+
   def test_writable_tags
     w_tags = MiniExiftool.writable_tags
     assert w_tags.include?('ISO')
