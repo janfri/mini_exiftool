@@ -14,6 +14,7 @@
 
 require 'fileutils'
 require 'tempfile'
+require 'pstore'
 require 'set'
 
 # Simple OO access to the Exiftool command-line application.
@@ -150,19 +151,23 @@ class MiniExiftool
     @@cmd = cmd
   end
 
-  @@writable_tags = Set.new
+  # Returns a set of all known tags of Exiftool.
+  def self.all_tags
+    unless defined? @@all_tags
+      @@all_tags = pstore_get :all_tags
+    end
+    @@all_tags
+  end
 
   # Returns a set of all possible writable tags of Exiftool.
   def self.writable_tags
-    if @@writable_tags.empty?
-      lines = `#{@@cmd} -listw`
-      @@writable_tags = Set.new
-      lines.each do |line|
-        next unless line =~ /^\s/
-        @@writable_tags |= line.chomp.split
-      end
+    unless defined? @@writable_tags
+      @@writable_tags = pstore_get :writable_tags
     end
     @@writable_tags
+  end
+
+  def self.original_tagname tag
   end
 
   # Returns the version of the Exiftool command-line application.
@@ -247,6 +252,40 @@ class MiniExiftool
     @temp_filename
   end
 
+  def self.pstore_get attribute
+    load_or_create_pstore unless defined? @@pstore
+    result = nil
+    @@pstore.transaction(true) do |ps|
+      result = ps[attribute]
+    end
+    result
+  end
+
+  def self.load_or_create_pstore
+    filename = File.join(Dir.tmpdir, 'exiftool_tags_' + exiftool_version.gsub('.', '_'))
+    @@pstore = PStore.new filename
+    unless File.exist? filename
+      @@pstore.transaction do |ps|
+        ps[:all_tags] = all_tags = determine_tags('list')
+        ps[:writable_tags] = determine_tags('listw')
+        map = {}
+        all_tags.each { |k| map[TagHash.unify(k)] = k }
+        ps[:all_tags_map] = map
+      end
+    end
+  end
+
+  def self.determine_tags arg
+    lines = `#{@@cmd} -#{arg}`
+    tags = Set.new
+    lines.each do |line|
+      next unless line =~ /^\s/
+      tags |= line.chomp.split
+    end
+    tags
+  end
+
+
   # Hash with indifferent access: 
   # DateTimeOriginal == datetimeoriginal == date_time_original
   class TagHash < Hash # :nodoc:
@@ -260,8 +299,11 @@ class MiniExiftool
       super(unify(k))
     end
 
-    private
     def unify tag
+      TagHash.unify tag
+    end
+
+    def self.unify tag
       tag.gsub(/[-_]/,'').downcase
     end
   end
