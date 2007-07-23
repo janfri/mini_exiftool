@@ -186,7 +186,13 @@ class MiniExiftool
     output.chomp!
   end
 
+  def self.unify tag
+    tag.gsub(/[-_]/,'').downcase
+  end
+
+  ############################################################################
   private
+  ############################################################################
 
   @@error_file = Tempfile.new 'errors'
   @@error_file.close
@@ -310,11 +316,7 @@ class MiniExiftool
     end
 
     def unify tag
-      TagHash.unify tag
-    end
-
-    def self.unify tag
-      tag.gsub(/[-_]/,'').downcase
+      MiniExiftool.unify tag
     end
   end
   
