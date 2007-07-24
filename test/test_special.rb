@@ -37,14 +37,12 @@ class TestSpecial < Test::Unit::TestCase
     @canon['caption-abstract'] = CAPTION_ABSTRACT
     assert @canon.changed_tags.include?('Caption-Abstract')
     assert @canon.save
-#    @canon.reload
     assert_equal CAPTION_ABSTRACT, @canon.caption_abstract
   end
 
   def test_caption_abstract_non_sesitive
     @canon.caption_abstract = CAPTION_ABSTRACT.reverse
     assert @canon.save
-#    @canon.reload
     assert_equal CAPTION_ABSTRACT.reverse, @canon.caption_abstract
   end
 
