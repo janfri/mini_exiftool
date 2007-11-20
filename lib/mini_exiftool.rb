@@ -47,7 +47,7 @@ class MiniExiftool
 
   # Load the tags of filename.
   def load filename
-    if filename.nil? || !File.exists?(filename)
+    if filename.nil? || !File.exist?(filename)
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
     elsif File.directory?(filename)
       raise MiniExiftool::Error.new("'#{filename}' is a directory.")
