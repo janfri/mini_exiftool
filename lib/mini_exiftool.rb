@@ -242,7 +242,9 @@ class MiniExiftool
       tag, value = $1, $2
       case value
       when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d$/
-        value = Time.local(* (value.split /[: ]/))
+        arr = value.split /[: ]/
+        arr.map! {|elem| elem.to_i}
+        value = Time.local *arr
       when /^\d+\.\d+$/
         value = value.to_f
       when /^0+[1-9]+$/
