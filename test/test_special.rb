@@ -24,8 +24,8 @@ class TestSpecial < Test::Unit::TestCase
   # Catching bug [#8073]
   # Thanks to Eric Young
   def test_special_chars
-    assert_equal 0, @canon['Self-timer']
-    assert_equal 0, @canon.self_timer
+    assert_not_nil @canon['Self-timer']
+    assert_not_nil @canon.self_timer
     # preserving the original tag name
     assert @canon.tags.include?('Self-timer')
     assert !@canon.tags.include?('self_timer')

@@ -71,14 +71,14 @@ class TestWrite < Test::Unit::TestCase
   end
 
   def test_float_conversion
-    assert_kind_of Float, @mini_exiftool_num['ExposureTime']
-    new_time = @mini_exiftool_num['ExposureTime'] * 2.0
-    @mini_exiftool_num['ExposureTime'] = new_time
-    assert_equal new_time, @mini_exiftool_num['ExposureTime']
-    assert true, @mini_exiftool_num.changed_tags.include?('ExposureTime')
+    assert_kind_of Float, @mini_exiftool_num['BrightnessValue']
+    new_time = @mini_exiftool_num['BrightnessValue'] + 1 
+    @mini_exiftool_num['BrightnessValue'] = new_time
+    assert_equal new_time, @mini_exiftool_num['BrightnessValue']
+    assert true, @mini_exiftool_num.changed_tags.include?('BrightnessValue')
     @mini_exiftool_num.save
-    assert_kind_of Float, @mini_exiftool_num['ExposureTime']
-    assert_equal new_time, @mini_exiftool_num['ExposureTime']
+    assert_kind_of Float, @mini_exiftool_num['BrightnessValue']
+    assert_equal new_time, @mini_exiftool_num['BrightnessValue']
   end
 
   def test_integer_conversion
