@@ -294,7 +294,8 @@ class MiniExiftool
   end
 
   def self.determine_tags arg
-    lines = `#{@@cmd} -#{arg}`
+    output = `#{@@cmd} -#{arg}`
+    lines = output.split /\n/
     tags = Set.new
     lines.each do |line|
       next unless line =~ /^\s/
