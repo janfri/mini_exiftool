@@ -42,7 +42,9 @@ EXT_DIST_FILES = EXT_SOURCES + EXTCONF_FILES
 #---
 REQUIRE_PATHS = ["lib"]
 REQUIRE_PATHS << EXT_DIR if HAVE_EXT
-$LOAD_PATH.concat(REQUIRE_PATHS)
+REQUIRE_PATHS.reverse_each do |p|
+  $LOAD_PATH.unshift p
+end
 # This library file defines the MyProject::VERSION constant.
 require "#{UNIX_NAME}"
 PROJECT_VERSION = eval("#{PROJECT}::VERSION") # e.g. "1.0.2"
@@ -203,7 +205,7 @@ end
 # files for a new release.
 desc "Run tests, generate RDoc and create packages."
 task "prepare-release" => ["clobber"] do
-  puts "Preparing release of #{PROJECT} version #{VERSION}"
+  puts "Preparing release of #{PROJECT} version #{PROJECT_VERSION}"
   Rake::Task["test"].invoke
   Rake::Task["rdoc"].invoke
   Rake::Task["package"].invoke
