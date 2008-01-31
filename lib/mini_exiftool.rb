@@ -29,12 +29,16 @@ class MiniExiftool
 
   VERSION = '0.4.1'
 
-  # opts support at the moment
+  # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
   # * <code>:composite</code> for including composite tags while loading,
   #   default is +false+
   # * <code>:timestamps</code> generating DateTime objects instead of
-  #   Time objects if set to <code>DateTime</code>, standard is +Time+
+  #   Time objects if set to <code>DateTime</code>, default is +Time+
+  #
+  #   <b>ATTENTION:</b> Time objects are created using <code>Time.local</code>
+  #   therefore they use <em>your local timezone</em>, DateTime objects instead
+  #   are created <em>without timezone</em>!
   def initialize filename, opts={}
     std_opts = {:numerical => false, :composite => false, :timestamps => Time}
     opts = std_opts.update opts

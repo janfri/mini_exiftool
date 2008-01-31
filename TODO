@@ -1,1 +1,3 @@
-Tests for managing tags with pstore
+* Tests for managing tags with pstore
+* Update Tutorial
+  * Describing the options :composite and :timestamps

@@ -54,7 +54,7 @@ the <code>:numerical</code> option to +true+ while generating a new
 instance with new or using the <code>numerical=</code>-method
 combining with calling <code>reload</code>.
 
-Let's make an example:
+Let's look at an example:
  # standard: numerical is false
  photo = MiniExiftool.new 'photo.jpg'
  photo.exposure_time # => '1/60' (String)
@@ -66,13 +66,14 @@ This behaviour can be useful if you want to do calculations on the
 value, if you only want to show the value the standard behaviour is
 maybe better.
 
-
 === Further Example
 
 For understanding reading access to meta data also have a look at the
 example file <code>print_portraits.rb</code> in the +examples+
 directory.
 
+<b>TODO:</b> Describing the options <code>:composite</code> and
+<code>:timestamps</code>!
 
 == Lesson 2: Writing Meta Data
 
@@ -104,6 +105,7 @@ value of a specific tag is changed or a changing in general is
 done. In the same way the +revert+-method reverts the value of a
 specific tag or in general all changes.
 
+You should also look at the rdoc information of MiniExiftool.
 
 === Further Example
 
