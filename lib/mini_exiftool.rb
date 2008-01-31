@@ -25,7 +25,7 @@ class MiniExiftool
   @@cmd = 'exiftool'
 
   attr_reader :filename
-  attr_accessor :numerical, :composite, :errors
+  attr_accessor :numerical, :composite, :errors, :timestamps
 
   VERSION = '0.4.1'
 
@@ -33,11 +33,14 @@ class MiniExiftool
   # * <code>:numerical</code> for numerical values, default is +false+
   # * <code>:composite</code> for including composite tags while loading,
   #   default is +false+
+  # * <code>:timestamps</code> generating DateTime objects instead of
+  #   Time objects if set to <code>DateTime</code>, standard is +Time+
   def initialize filename, opts={}
-    std_opts = {:numerical => false, :composite => false}
+    std_opts = {:numerical => false, :composite => false, :timestamps => Time}
     opts = std_opts.update opts
     @numerical = opts[:numerical]
     @composite = opts[:composite]
+    @timestamps = opts[:timestamps]
     @values = TagHash.new
     @tag_names = TagHash.new
     @changed_values = TagHash.new
@@ -244,7 +247,17 @@ class MiniExiftool
       when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d$/
         arr = value.split /[: ]/
         arr.map! {|elem| elem.to_i}
-        value = Time.local *arr
+        begin
+          if @timestamps == Time
+            value = Time.local *arr
+          elsif @timestamps == DateTime
+            value = DateTime.strptime(value,'%Y:%m:%d %H:%M:%S') 
+          else
+            raise MiniExiftool::Error.new "Value #@timestamps not allowed for option timestamps."
+          end
+        rescue ArgumentError
+          value = false
+        end
       when /^\d+\.\d+$/
         value = value.to_f
       when /^0+[1-9]+$/
