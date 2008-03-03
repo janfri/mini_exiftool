@@ -27,7 +27,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical, :composite, :errors, :timestamps
 
-  VERSION = '0.5.0'
+  VERSION = '0.5.1'
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
@@ -257,7 +257,7 @@ class MiniExiftool
           elsif @timestamps == DateTime
             value = DateTime.strptime(value,'%Y:%m:%d %H:%M:%S') 
           else
-            raise MiniExiftool::Error.new "Value #@timestamps not allowed for option timestamps."
+            raise MiniExiftool::Error.new("Value #@timestamps not allowed for option timestamps.")
           end
         rescue ArgumentError
           value = false
@@ -272,7 +272,7 @@ class MiniExiftool
         value = value.split(/ /)
       end
     else
-      raise MiniExiftool::Error
+      raise MiniExiftool::Error.new("Malformed line #{line.inspect} of exiftool output.")
     end
     return [tag, value]
   end
