@@ -1,7 +1,7 @@
 = MiniExiftool
 
 This library is wrapper for the Exiftool command-line application
-(http://www.sno.phy.queensu.ca/~phil/exiftool/) written by Phil Harvey.
+(http://www.sno.phy.queensu.ca/~phil/exiftool) written by Phil Harvey.
 Read and write access is done in a clean OO manner.
 
 == Requirements
@@ -12,20 +12,28 @@ http://www.sno.phy.queensu.ca/~phil/exiftool/install.html .
 
 == Installation
 
-First you need Exiftool (see under Requirements above). Simply install the gem
-with
+First you need Exiftool (see under Requirements above). Then you can simply
+install the gem with
  gem install mini_exiftool
+respectively (on *nix sytems)
+ sudo gem install mini_exiftool
 
-Alternative you can download the tarball and run
- ruby setup config
- ruby setup setup
- sudo ruby setup install
+Alternative you can download the tarball or zip file and run
+ ruby setup.rb config
+ ruby setup.rb setup
+ sudo ruby setup.rb install
+
+== Contribution
+
+The code is also hostet in a git repository on Gitorious at
+http://gitorious.org/projects/mini_exiftool 
+feel free to contribute!
 
 == Author
-Jan Friedrich
+Jan Friedrich <janfri DOT rubyforge AT gmail DOT com>
 
 == Copyright / License
-Copyright (c) 2007 by Jan Friedrich
+Copyright (c) 2007-2008 by Jan Friedrich
 
 Licensed under terms of the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1, 
 February 1999 (see file COPYING for more details)
