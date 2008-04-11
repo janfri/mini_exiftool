@@ -1,13 +1,8 @@
 require 'fileutils'
-require 'mini_exiftool'
 require 'tempfile'
-require 'test/unit'
-begin
-  require 'turn'
-rescue LoadError
-end
+require 'helpers_for_test'
 
-class TestSpecial < Test::Unit::TestCase
+class TestSpecial < TestCase
 
   CAPTION_ABSTRACT =  'Some text for caption abstract'
 

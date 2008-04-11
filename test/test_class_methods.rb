@@ -1,11 +1,6 @@
-require 'mini_exiftool'
-require 'test/unit'
-begin
-  require 'turn'
-rescue LoadError
-end
+require 'helpers_for_test'
 
-class TestClassMethods < Test::Unit::TestCase
+class TestClassMethods < TestCase
 
   def test_new
     assert_raises MiniExiftool::Error do

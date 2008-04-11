@@ -40,7 +40,7 @@ EXT_SOURCES = FileList["#{EXT_DIR}/**/*.{c,h}"]
 # Eventually add other files from EXT_DIR, like "MANIFEST"
 EXT_DIST_FILES = EXT_SOURCES + EXTCONF_FILES
 #---
-REQUIRE_PATHS = ["lib"]
+REQUIRE_PATHS = ['lib', 'test']
 REQUIRE_PATHS << EXT_DIR if HAVE_EXT
 REQUIRE_PATHS.reverse_each do |p|
   $LOAD_PATH.unshift p

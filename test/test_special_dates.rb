@@ -1,14 +1,9 @@
 require 'date'
 require 'fileutils'
-require 'mini_exiftool'
 require 'tempfile'
-require 'test/unit'
-begin
-  require 'turn'
-rescue LoadError
-end
+require 'helpers_for_test'
 
-class TestSpecialDates < Test::Unit::TestCase
+class TestSpecialDates < TestCase
 
   def setup
     data_dir = File.dirname(__FILE__) + '/data'

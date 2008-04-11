@@ -1,11 +1,6 @@
-require 'mini_exiftool'
-require 'test/unit'
-begin
-  require 'turn'
-rescue LoadError
-end
+require 'helpers_for_test'
 
-class TestComposite < Test::Unit::TestCase
+class TestComposite < TestCase
 
   def setup
     @data_dir = File.dirname(__FILE__) + '/data'

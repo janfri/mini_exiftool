@@ -1,14 +1,9 @@
 require 'digest/md5'
-require 'mini_exiftool'
 require 'fileutils'
 require 'tempfile'
-require 'test/unit'
-begin
-  require 'turn'
-rescue LoadError
-end
+require 'helpers_for_test'
 
-class TestSave < Test::Unit::TestCase
+class TestSave < TestCase
 
   def setup
     @temp_file = Tempfile.new('test')
