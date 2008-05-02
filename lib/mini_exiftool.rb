@@ -150,7 +150,17 @@ class MiniExiftool
     temp_file.delete
     all_ok
   end
-  
+
+  # Returns a hash equivalent of the MiniExiftool instance.
+  # Usefull for example to do YAML serialization.
+  def to_hash
+    result = {}
+    @values.each do |k,v|
+      result[@tag_names[k]] = v
+    end
+    result
+  end 
+
   # Returns the command name of the called Exiftool application.
   def self.command
     @@cmd
