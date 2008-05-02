@@ -39,7 +39,7 @@ class MiniExiftool
   #   <b>ATTENTION:</b> Time objects are created using <code>Time.local</code>
   #   therefore they use <em>your local timezone</em>, DateTime objects instead
   #   are created <em>without timezone</em>!
-  def initialize filename, opts={}
+  def initialize filename=nil, opts={}
     std_opts = {:numerical => false, :composite => false, :timestamps => Time}
     opts = std_opts.update opts
     @numerical = opts[:numerical]
@@ -49,14 +49,15 @@ class MiniExiftool
     @tag_names = TagHash.new
     @changed_values = TagHash.new
     @errors = TagHash.new
-    load filename
+    load filename unless filename.nil?
   end
 
   # Load the tags of filename.
   def load filename
-    if filename.nil? || !File.exist?(filename)
+    unless filename && File.exist?(filename)
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
-    elsif File.directory?(filename)
+    end
+    if File.directory?(filename)
       raise MiniExiftool::Error.new("'#{filename}' is a directory.")
     end
     @filename = filename

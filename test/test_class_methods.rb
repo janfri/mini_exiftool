@@ -3,8 +3,15 @@ require 'helpers_for_test'
 class TestClassMethods < TestCase
 
   def test_new
-    assert_raises MiniExiftool::Error do
+    assert_nothing_raised do
+      @mini_exiftool = MiniExiftool.new
+    end
+    assert_equal nil, @mini_exiftool.filename
+    assert_nothing_raised do
       MiniExiftool.new nil
+    end
+    assert_raises MiniExiftool::Error do
+      MiniExiftool.new false 
     end
     assert_raises MiniExiftool::Error do
       MiniExiftool.new ''
