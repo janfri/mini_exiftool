@@ -63,6 +63,8 @@ class TestDumping < TestCase
     composite = MiniExiftool.new(@filename_test, :composite => true).to_hash
     assert_equal false, MiniExiftool.from_hash(standard).composite
     assert_equal true, MiniExiftool.from_hash(composite).composite
+    assert_equal false, MiniExiftool.from_yaml(standard.to_yaml).composite
+    assert_equal true, MiniExiftool.from_yaml(composite.to_yaml).composite
   end
 
   def test_heuristics_for_restoring_numerical
@@ -70,6 +72,8 @@ class TestDumping < TestCase
     numerical = MiniExiftool.new(@filename_test, :numerical => true).to_hash
     assert_equal false, MiniExiftool.from_hash(standard).numerical
     assert_equal true, MiniExiftool.from_hash(numerical).numerical
+    assert_equal false, MiniExiftool.from_yaml(standard.to_yaml).numerical
+    assert_equal true, MiniExiftool.from_yaml(numerical.to_yaml).numerical
   end
 
   def test_heuristics_for_restoring_timestamps
@@ -77,6 +81,9 @@ class TestDumping < TestCase
     timestamps = MiniExiftool.new(@filename_test, :timestamps => DateTime).to_hash
     assert_equal Time, MiniExiftool.from_hash(standard).timestamps
     assert_equal DateTime, MiniExiftool.from_hash(timestamps).timestamps
+    # Doesn't work yet.
+    # assert_equal Time, MiniExiftool.from_yaml(standard.to_yaml).timestamps
+    # assert_equal DateTime, MiniExiftool.from_yaml(timestamps.to_yaml).timestamps
   end
 
 end
