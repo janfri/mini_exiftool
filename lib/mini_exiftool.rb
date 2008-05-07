@@ -56,6 +56,8 @@ class MiniExiftool
     hash.each_pair do |tag,value|
       set_value tag, value
     end
+    set_attributes_by_heuristic
+    self
   end
 
   # Load the tags of filename.
@@ -315,6 +317,18 @@ class MiniExiftool
   def set_value tag, value
     @tag_names[tag] = tag
     @values[tag] = value
+  end
+
+  def set_attributes_by_heuristic
+    if tags.include? 'ImageSize'
+      self.composite = true
+    end
+    if self.file_size.kind_of? Integer
+      self.numerical = true
+    end
+    if self.FileModifyDate.kind_of? DateTime
+      self.timestamps = DateTime
+    end
   end
 
   def temp_filename

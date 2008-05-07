@@ -58,4 +58,25 @@ class TestDumping < TestCase
     assert_equal hash, mini_exiftool_new.to_hash
   end
 
+  def test_heuristics_for_restoring_composite
+    standard = @mini_exiftool.to_hash
+    composite = MiniExiftool.new(@filename_test, :composite => true).to_hash
+    assert_equal false, MiniExiftool.from_hash(standard).composite
+    assert_equal true, MiniExiftool.from_hash(composite).composite
+  end
+
+  def test_heuristics_for_restoring_numerical
+    standard = @mini_exiftool.to_hash
+    numerical = MiniExiftool.new(@filename_test, :numerical => true).to_hash
+    assert_equal false, MiniExiftool.from_hash(standard).numerical
+    assert_equal true, MiniExiftool.from_hash(numerical).numerical
+  end
+
+  def test_heuristics_for_restoring_timestamps
+    standard = @mini_exiftool.to_hash
+    timestamps = MiniExiftool.new(@filename_test, :timestamps => DateTime).to_hash
+    assert_equal Time, MiniExiftool.from_hash(standard).timestamps
+    assert_equal DateTime, MiniExiftool.from_hash(timestamps).timestamps
+  end
+
 end
