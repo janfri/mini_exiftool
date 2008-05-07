@@ -1,4 +1,5 @@
 require 'helpers_for_test'
+require 'yaml'
 
 class TestDumping < TestCase
 
@@ -41,6 +42,20 @@ class TestDumping < TestCase
     end
     assert all_ok, "Tag #{diffenent_tag}: expected: #{@mini_exiftool[diffenent_tag]}, actual: #{mini_exiftool_new[diffenent_tag]}"
 
+  end
+
+  def test_to_yaml
+    hash = @mini_exiftool.to_hash
+    yaml = @mini_exiftool.to_yaml
+    assert_equal hash, YAML.load(yaml)
+  end
+
+  def test_from_yaml
+    hash = @mini_exiftool.to_hash
+    yaml = hash.to_yaml
+    mini_exiftool_new = MiniExiftool.from_yaml(yaml)
+    assert_equal MiniExiftool, mini_exiftool_new.class
+    assert_equal hash, mini_exiftool_new.to_hash
   end
 
 end

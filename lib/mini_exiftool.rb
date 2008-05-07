@@ -52,8 +52,7 @@ class MiniExiftool
     load filename unless filename.nil?
   end
 
-  # :nodoc: 
-  def initialize_from_hash hash
+  def initialize_from_hash hash # :nodoc: 
     hash.each_pair do |tag,value|
       set_value tag, value
     end
@@ -158,8 +157,8 @@ class MiniExiftool
     all_ok
   end
 
-  # Returns a hash equivalent of the MiniExiftool instance.
-  # Usefull for example to do YAML serialization.
+  # Returns a hash of the original loaded values of the MiniExiftool
+  # instance.
   def to_hash
     result = {}
     @values.each do |k,v|
@@ -168,11 +167,23 @@ class MiniExiftool
     result
   end 
 
+  # Returns a YAML representation of the original loaded values of the 
+  # MiniExiftool instance.
+  def to_yaml
+    to_hash.to_yaml
+  end
+
   # Create a MiniExiftool instance from a hash
   def self.from_hash hash
     instance = MiniExiftool.new
     instance.initialize_from_hash hash
     instance
+  end
+
+  # Create a MiniExiftool instance from YAML data created with
+  # MiniExiftool#to_yaml
+  def self.from_yaml yaml
+    MiniExiftool.from_hash YAML.load(yaml)
   end
 
   # Returns the command name of the called Exiftool application.
