@@ -52,6 +52,13 @@ class MiniExiftool
     load filename unless filename.nil?
   end
 
+  # :nodoc: 
+  def initialize_from_hash hash
+    hash.each_pair do |tag,value|
+      set_value tag, value
+    end
+  end
+
   # Load the tags of filename.
   def load filename
     unless filename && File.exist?(filename)
@@ -161,6 +168,13 @@ class MiniExiftool
     result
   end 
 
+  # Create a MiniExiftool instance from a hash
+  def self.from_hash hash
+    instance = MiniExiftool.new
+    instance.initialize_from_hash hash
+    instance
+  end
+
   # Returns the command name of the called Exiftool application.
   def self.command
     @@cmd
@@ -250,8 +264,7 @@ class MiniExiftool
   def parse_output
     @output.each_line do |line|
       tag, value = parse_line line
-      @tag_names[tag] = tag
-      @values[tag] = value
+      set_value tag, value
     end
   end
 
@@ -286,6 +299,11 @@ class MiniExiftool
       raise MiniExiftool::Error.new("Malformed line #{line.inspect} of exiftool output.")
     end
     return [tag, value]
+  end
+
+  def set_value tag, value
+    @tag_names[tag] = tag
+    @values[tag] = value
   end
 
   def temp_filename

@@ -24,4 +24,23 @@ class TestDumping < TestCase
     end
     assert all_ok, "Tag #{diffenent_tag}: expected: #{@mini_exiftool[diffenent_tag]}, actual: v"
   end
+
+  def test_from_hash
+    hash = @mini_exiftool.to_hash
+    mini_exiftool_new = MiniExiftool.from_hash hash
+    assert_equal MiniExiftool, mini_exiftool_new.class
+    assert_equal @mini_exiftool.tags.size, mini_exiftool_new.tags.size
+    all_ok = true
+    diffenent_tag = ''
+    @mini_exiftool.tags.each do |tag|
+      unless @mini_exiftool[tag] == mini_exiftool_new[tag]
+        all_ok = false
+        diffenent_tag = tag
+        break
+      end
+    end
+    assert all_ok, "Tag #{diffenent_tag}: expected: #{@mini_exiftool[diffenent_tag]}, actual: #{mini_exiftool_new[diffenent_tag]}"
+
+  end
+
 end
