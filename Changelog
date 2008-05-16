@@ -1,3 +1,13 @@
+Version 0.6.0
+- New methods for serialization:
+  - MiniExiftool.from_hash
+  - MiniExiftool.from_yaml
+  - MiniExiftool#to_hash
+  - MiniExiftool#to_yaml
+  Thanks to Andrew Bennett for the initial idea of YAML-serialization
+- Refactoring of tests
+- Small documetation update
+
 Version 0.5.1
 - Warning "parenthesize argument(s) for future version" removed
   Thanks to Greg from knobby.ws
