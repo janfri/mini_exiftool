@@ -28,4 +28,10 @@ class TestRead < TestCase
     assert_kind_of Array, @mini_exiftool['SubjectLocation']
   end
 
+  def test_encoding_conversion
+    @mini_exiftool_converted = MiniExiftool.new @filename_test, :convert_encoding => true
+    assert_equal 'Abenddämmerung', @mini_exiftool.title
+    assert_equal "Abendd\344mmerung", @mini_exiftool_converted.title
+  end
+
 end

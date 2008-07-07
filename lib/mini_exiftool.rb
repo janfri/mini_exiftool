@@ -7,7 +7,7 @@
 # Read and write access is done in a clean OO manner.
 #
 # Author: Jan Friedrich
-# Copyright (c) 2007 by Jan Friedrich
+# Copyright (c) 2007, 2008 by Jan Friedrich
 # Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, 
 # Version 2.1, February 1999
 #
@@ -24,15 +24,20 @@ class MiniExiftool
   # Name of the Exiftool command-line application
   @@cmd = 'exiftool'
 
-  attr_reader :filename
-  attr_accessor :numerical, :composite, :errors, :timestamps
+  # Hash of the standard options used when call MiniExiftool.new
+  @@opts = { :numerical => false, :composite => true, :convert_encoding => false, :timestamps => Time }
 
-  VERSION = '0.6.0'
+  attr_reader :filename
+  attr_accessor :numerical, :composite, :convert_encoding, :errors, :timestamps
+
+  VERSION = '0.7.0'
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
   # * <code>:composite</code> for including composite tags while loading,
-  #   default is +false+
+  #   default is +true+
+  # * <code>:convert_encoding</code> convert encoding (See -L-option of 
+  #   the exiftool command-line application, default is +false+
   # * <code>:timestamps</code> generating DateTime objects instead of
   #   Time objects if set to <code>DateTime</code>, default is +Time+
   #
@@ -40,10 +45,10 @@ class MiniExiftool
   #   therefore they use <em>your local timezone</em>, DateTime objects instead
   #   are created <em>without timezone</em>!
   def initialize filename=nil, opts={}
-    std_opts = {:numerical => false, :composite => false, :timestamps => Time}
-    opts = std_opts.update opts
+    opts = @@opts.merge opts
     @numerical = opts[:numerical]
     @composite = opts[:composite]
+    @convert_encoding = opts[:convert_encoding]
     @timestamps = opts[:timestamps]
     @values = TagHash.new
     @tag_names = TagHash.new
@@ -75,6 +80,7 @@ class MiniExiftool
     opt_params = ''
     opt_params << (@numerical ? '-n ' : '')
     opt_params << (@composite ? '' : '-e ')
+    opt_params << (@convert_encoding ? '-L ' : '')
     cmd = %Q(#@@cmd -q -q -s -t #{opt_params} "#{filename}")
     if run(cmd)
       parse_output
@@ -143,7 +149,9 @@ class MiniExiftool
     @changed_values.each do |tag, val|
       original_tag = MiniExiftool.original_tag(tag)
       converted_val = convert val
-      opt_params = converted_val.kind_of?(Numeric) ? '-n' : ''
+      opt_params = ''
+      opt_params << (converted_val.kind_of?(Numeric) ? '-n ' : '')
+      opt_params << (@convert_encoding ? '-L ' : '')
       cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} -#{original_tag}="#{converted_val}" "#{temp_filename}")
       result = run(cmd)
       unless result
@@ -196,6 +204,11 @@ class MiniExiftool
   # Setting the command name of the called Exiftool application.
   def self.command= cmd
     @@cmd = cmd
+  end
+
+  # Returns the options hash.
+  def self.opts
+    @@opts
   end
 
   # Returns a set of all known tags of Exiftool.
@@ -320,15 +333,10 @@ class MiniExiftool
   end
 
   def set_attributes_by_heuristic
-    if tags.include? 'ImageSize'
-      self.composite = true
-    end
-    if self.file_size.kind_of? Integer
-      self.numerical = true
-    end
-    if self.FileModifyDate.kind_of? DateTime
-      self.timestamps = DateTime
-    end
+    self.composite = tags.include?('ImageSize') ? true : false
+    self.numerical = self.file_size.kind_of?(Integer) ? true : false
+    # TODO: Is there a heuristic to determine @convert_encoding?
+    self.timestamps = self.FileModifyDate.kind_of?(DateTime) ? DateTime : Time
   end
 
   def temp_filename

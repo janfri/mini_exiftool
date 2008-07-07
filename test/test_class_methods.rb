@@ -49,6 +49,24 @@ class TestClassMethods < TestCase
     MiniExiftool.command = cmd
   end
 
+  def test_opts
+    opts = MiniExiftool.opts
+    assert_kind_of Hash, opts
+    begin
+      org = MiniExiftool.opts[:composite]
+      met1 = MiniExiftool.new
+      MiniExiftool.opts[:composite] = !org
+      met2 = MiniExiftool.new
+      MiniExiftool.opts[:composite] = org
+      met3 = MiniExiftool.new
+      assert_equal org, met1.composite
+      assert_equal !org, met2.composite
+      assert_equal org, met1.composite
+    ensure
+      MiniExiftool.opts[:composite] = org
+    end
+  end
+
   def test_all_tags
     all_tags = MiniExiftool.all_tags
     assert all_tags.include?('ISO')

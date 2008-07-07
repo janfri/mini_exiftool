@@ -5,8 +5,8 @@ class TestComposite < TestCase
   def setup
     @data_dir = File.dirname(__FILE__) + '/data'
     @filename_test = @data_dir + '/test.jpg'
-    @mini_exiftool = MiniExiftool.new @filename_test
-    @mini_exiftool_c = MiniExiftool.new @filename_test, :composite => true
+    @mini_exiftool = MiniExiftool.new @filename_test, :composite => false
+    @mini_exiftool_c = MiniExiftool.new @filename_test
   end
 
   def test_composite_tags

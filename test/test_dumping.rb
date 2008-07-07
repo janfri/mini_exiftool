@@ -60,11 +60,11 @@ class TestDumping < TestCase
 
   def test_heuristics_for_restoring_composite
     standard = @mini_exiftool.to_hash
-    composite = MiniExiftool.new(@filename_test, :composite => true).to_hash
-    assert_equal false, MiniExiftool.from_hash(standard).composite
-    assert_equal true, MiniExiftool.from_hash(composite).composite
-    assert_equal false, MiniExiftool.from_yaml(standard.to_yaml).composite
-    assert_equal true, MiniExiftool.from_yaml(composite.to_yaml).composite
+    no_composite = MiniExiftool.new(@filename_test, :composite => false).to_hash
+    assert_equal true, MiniExiftool.from_hash(standard).composite
+    assert_equal false, MiniExiftool.from_hash(no_composite).composite
+    assert_equal true, MiniExiftool.from_yaml(standard.to_yaml).composite
+    assert_equal false, MiniExiftool.from_yaml(no_composite.to_yaml).composite
   end
 
   def test_heuristics_for_restoring_numerical

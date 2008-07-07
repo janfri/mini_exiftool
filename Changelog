@@ -1,3 +1,11 @@
+Version 0.7.0
+- Changing composite behaviour: Composite tags are now included as standard!
+- New method MiniExiftool.opts which returns a hash of the standard
+  options used for MiniExiftool.new
+- New option :convert_encoding for MiniExiftool.new which uses the -L-option
+  of the exiftool command-line application (see online documentation for it)
+  Thanks to Henning Kulander for the causing of this change.
+
 Version 0.6.0
 - New methods for serialization:
   - MiniExiftool.from_hash

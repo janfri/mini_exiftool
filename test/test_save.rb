@@ -48,4 +48,17 @@ class TestSave < TestCase
     assert_equal @org_md5, Digest::MD5.hexdigest(File.read(@temp_filename))
   end
 
+  def test_encoding_conversion
+    special_string = 'ÄÖÜ'
+    @mini_exiftool.title = special_string
+    assert @mini_exiftool.save
+    assert_equal false, @mini_exiftool.convert_encoding
+    assert_equal special_string, @mini_exiftool.title
+    @mini_exiftool.convert_encoding = true
+    @mini_exiftool.title = special_string
+    assert @mini_exiftool.save
+    assert_equal true, @mini_exiftool.convert_encoding
+    assert_equal special_string, @mini_exiftool.title
+  end
+
 end
