@@ -14,7 +14,6 @@
 
 require 'fileutils'
 require 'tempfile'
-require 'tmpdir'
 require 'pstore'
 require 'set'
 
@@ -359,7 +358,11 @@ class MiniExiftool
   end
 
   def self.load_or_create_pstore
-    filename = File.join(Dir.tmpdir, 'exiftool_tags_' + exiftool_version.gsub('.', '_'))
+    # This will hopefully work on *NIX and Windows systems
+    home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
+    subdir = RUBY_PLATFORM =~ /win/i ? '_mini_exiftool' : '.mini_exiftool'
+    FileUtils.mkdir_p(File.join(home, subdir))
+    filename = File.join(home, subdir, 'exiftool_tags_' << exiftool_version.gsub('.', '_') << '.pstore')
     @@pstore = PStore.new filename
     if !File.exist?(filename) || File.size(filename) == 0
       @@pstore.transaction do |ps|
