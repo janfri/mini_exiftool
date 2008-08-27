@@ -22,7 +22,7 @@ class TestSpecial < TestCase
     assert_not_nil @canon['Self-timer']
     assert_not_nil @canon.self_timer
     # preserving the original tag name
-    assert @canon.tags.include?('Self-timer')
+    assert @canon.tags.include?('Self-timer') || @canon.tags.include?('SelfTimer')
     assert !@canon.tags.include?('self_timer')
   end
 
