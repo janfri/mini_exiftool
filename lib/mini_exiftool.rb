@@ -26,10 +26,6 @@ class MiniExiftool
   # Hash of the standard options used when call MiniExiftool.new
   @@opts = { :numerical => false, :composite => true, :convert_encoding => false, :timestamps => Time }
 
-  # Seperator for parsing list tags in exiftool before version 7.41
-  # always ', '
-  @@separator = ', '
-
   attr_reader :filename
   attr_accessor :numerical, :composite, :convert_encoding, :errors, :timestamps
 
@@ -84,7 +80,7 @@ class MiniExiftool
     opt_params << (@numerical ? '-n ' : '')
     opt_params << (@composite ? '' : '-e ')
     opt_params << (@convert_encoding ? '-L ' : '')
-    cmd = %Q(#@@cmd -q -q -s -t #{opt_params} "#{filename}")
+    cmd = %Q(#@@cmd -q -q -s -t #{opt_params} #{@@sep_op} "#{filename}")
     if run(cmd)
       parse_output
     else
@@ -257,6 +253,14 @@ class MiniExiftool
 
   @@error_file = Tempfile.new 'errors'
   @@error_file.close
+
+  if Float(exiftool_version) < 7.41
+    @@separator = ', '
+    @@sep_op = ''
+  else
+    @@separator = '@@'
+    @@sep_op = '-sep @@'
+  end
 
   def run cmd
     if $DEBUG
