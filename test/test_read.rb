@@ -27,6 +27,8 @@ class TestRead < TestCase
     assert_kind_of Fixnum, @mini_exiftool['ExposureCompensation']
     assert_kind_of String, @mini_exiftool['SubjectLocation']
     assert_kind_of Array, @mini_exiftool['Keywords']
+    assert_kind_of String, @mini_exiftool['SupplementalCategories']
+    assert_kind_of Array, @mini_exiftool['SupplementalCategories'].to_a
   end
 
   def test_encoding_conversion

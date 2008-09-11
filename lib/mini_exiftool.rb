@@ -329,6 +329,13 @@ class MiniExiftool
     else
       raise MiniExiftool::Error.new("Malformed line #{line.inspect} of exiftool output.")
     end
+    unless value.respond_to?('to_a')
+      class << value
+        def to_a
+          [self]
+        end
+      end
+    end
     return [tag, value]
   end
 
@@ -415,6 +422,15 @@ class MiniExiftool
   # Exception class
   class MiniExiftool::Error < StandardError; end
 
+end
+
+# Add to_a to Numerical if it's not yet defined
+unless Numeric.instance_methods.include? 'to_a'
+  class Numeric
+    def to_a
+      [self]
+    end
+  end
 end
 
 # Test if we can run the Exiftool command
