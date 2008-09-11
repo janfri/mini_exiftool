@@ -318,7 +318,7 @@ class MiniExiftool
       when /^-?\d+$/
         value = value.to_i
       when /^[\d ]+$/
-        value = value.split(/ /)
+        # nothing => String
       end
     else
       raise MiniExiftool::Error.new("Malformed line #{line.inspect} of exiftool output.")

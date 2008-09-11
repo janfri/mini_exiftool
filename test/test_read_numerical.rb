@@ -22,7 +22,7 @@ class TestReadNumerical < TestCase
     assert_kind_of Fixnum, @mini_exiftool_num.flash
     assert_kind_of String, @mini_exiftool_num.exif_version
     assert_kind_of Fixnum, @mini_exiftool_num['ExposureCompensation']
-    assert_kind_of Array, @mini_exiftool_num['SubjectLocation']
+    assert_kind_of String, @mini_exiftool_num['SubjectLocation']
   end
 
 end
