@@ -26,6 +26,10 @@ class MiniExiftool
   # Hash of the standard options used when call MiniExiftool.new
   @@opts = { :numerical => false, :composite => true, :convert_encoding => false, :timestamps => Time }
 
+  # Seperator for parsing list tags in exiftool before version 7.41
+  # always ', '
+  @@separator = ', '
+
   attr_reader :filename
   attr_accessor :numerical, :composite, :convert_encoding, :errors, :timestamps
 
@@ -319,6 +323,8 @@ class MiniExiftool
         value = value.to_i
       when /^[\d ]+$/
         # nothing => String
+      when /#{@@separator}/
+        value = value.split @@separator
       end
     else
       raise MiniExiftool::Error.new("Malformed line #{line.inspect} of exiftool output.")
