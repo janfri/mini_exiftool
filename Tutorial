@@ -42,11 +42,26 @@ or also
 === Value Types
 
 Following types of values are at the moment supported:
-* Array (e. g. SubjectLocation => 1504 1000 256 304)
+* Array (e. g. Keywords => ['tree', 'gras'])
 * Fixnum (e. g. ISO => 400)
 * Float (e. g. FNumber => 9.5) 
 * String (e. g. Model => DYNAX 7D)
 * Time (e. g. DateTimeOriginal => 2005:09:13 20:08:50)
+
+Be aware, if there is only one value in a tag which can hold multiple
+values the result is'nt an array! But you can get one with the to_a
+method:
+  # only _one_ keyword
+  p1 = MiniExiftool.new 'p1.jpg'
+  p1.keywords # => 'red'
+  # _more than one_ keywords
+  p3 = MiniExiftool.new 'p3.jpg'
+  p3.keywords # => ['red', 'yellow', 'green']
+
+  # if we want to get an array in both cases and don't know
+  # if there is one ore more values set let's take to_a
+  p1.keywords.to_a # => ['red']
+  p3.keywords.to_a # => ['red', 'yellow', 'green']
 
 The Exiftool command-line application has an option (-n) to get values
 as numbers if possible, in MiniExiftool you can do this with setting
@@ -66,14 +81,21 @@ This behaviour can be useful if you want to do calculations on the
 value, if you only want to show the value the standard behaviour is
 maybe better.
 
+The Time class of Ruby cannot handle timestamps before 1st January 1970
+on some platforms. If there are timestamps in files before this date it
+will result in an error. In this case we can set the option 
+<code>:timestamps</code> to +DateTime+ to use DateTime objects instead
+of Time objects.
+
+There is another option <code>:composite</code>. If this is set to
++false+ the composite tags are not calculated by the exiftool
+command-line application (option -e).
+
 === Further Example
 
 For understanding reading access to meta data also have a look at the
 example file <code>print_portraits.rb</code> in the +examples+
 directory.
-
-<b>TODO:</b> Describing the options <code>:composite</code> and
-<code>:timestamps</code>!
 
 == Lesson 2: Writing Meta Data
 
