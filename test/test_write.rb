@@ -86,6 +86,23 @@ class TestWrite < TestCase
     assert_equal new_mode, @mini_exiftool_num['MeteringMode']
   end
 
+  def test_list_conversion
+    arr =  ['a', 'b', 'c']
+    @mini_exiftool['Keywords'] = arr
+    ok = @mini_exiftool.save
+    assert ok
+    assert_equal arr, @mini_exiftool['Keywords']
+    arr = ['text, with', 'commas, let us look']
+    @mini_exiftool['Keywords'] = arr
+    ok = @mini_exiftool.save
+    assert ok
+    if MiniExiftool.exiftool_version.to_f < 7.41
+      assert_equal ['text', 'with', 'commas', 'let us look'], @mini_exiftool['Keywords']
+    else
+      assert_equal arr, @mini_exiftool['Keywords']
+    end
+  end
+
   def test_revert_one
     @mini_exiftool_num['Orientation'] = 2
     @mini_exiftool_num['ISO'] = 200

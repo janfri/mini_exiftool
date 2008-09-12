@@ -147,11 +147,16 @@ class MiniExiftool
     all_ok = true
     @changed_values.each do |tag, val|
       original_tag = MiniExiftool.original_tag(tag)
-      converted_val = convert val
+      arr_val = val.kind_of?(Array) ? val : [val]
+      arr_val.map! {|e| convert e}
+      tag_params = ''
+      arr_val.each do |v|
+        tag_params << %Q(-#{original_tag}="#{v}" )
+      end
       opt_params = ''
-      opt_params << (converted_val.kind_of?(Numeric) ? '-n ' : '')
+      opt_params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
       opt_params << (@convert_encoding ? '-L ' : '')
-      cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} -#{original_tag}="#{converted_val}" "#{temp_filename}")
+      cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} #{tag_params} "#{temp_filename}")
       result = run(cmd)
       unless result
         all_ok = false
