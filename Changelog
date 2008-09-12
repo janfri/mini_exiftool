@@ -1,4 +1,8 @@
-- Tag SubjectLocation is not longer an array value but a string value!
+Version 1.0.0
+- Be aware changing in the interface:
+  - List tags (e.g. Keywords, SupplementalCategories) are now handled as 
+    arrays.
+  - Tag SubjectLocation is not longer an array value but a string value!
 Version 0.7.0
 - Changing composite behaviour: Composite tags are now included as standard!
 - New method MiniExiftool.opts which returns a hash of the standard

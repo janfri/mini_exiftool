@@ -29,7 +29,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical, :composite, :convert_encoding, :errors, :timestamps
 
-  VERSION = '0.7.0'
+  VERSION = '1.0.0'
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
