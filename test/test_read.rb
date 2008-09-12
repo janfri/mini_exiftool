@@ -31,6 +31,12 @@ class TestRead < TestCase
     assert_kind_of Array, @mini_exiftool['SupplementalCategories'].to_a
   end
 
+  def test_list_tags
+    assert_equal ['Orange', 'Rot'], @mini_exiftool['Keywords']
+    assert_equal 'Natur', @mini_exiftool['SupplementalCategories']
+    assert_equal ['Natur'], @mini_exiftool['SupplementalCategories'].to_a
+  end
+
   def test_encoding_conversion
     @mini_exiftool_converted = MiniExiftool.new @filename_test, :convert_encoding => true
     assert_equal 'Abenddämmerung', @mini_exiftool.title
