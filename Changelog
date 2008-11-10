@@ -1,3 +1,7 @@
+Version 1.0.1
+- Fixing bug [#22726]
+  Making MiniExiftool::Error public.
+  Thanks to Mathias Stjernstrom for sending a patch.
 Version 1.0.0
 - Be aware changing in the interface:
   - List tags (e.g. Keywords, SupplementalCategories) are now handled as 

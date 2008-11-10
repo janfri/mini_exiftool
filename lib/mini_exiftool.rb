@@ -29,7 +29,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical, :composite, :convert_encoding, :errors, :timestamps
 
-  VERSION = '1.0.0'
+  VERSION = '1.0.1'
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
@@ -252,6 +252,9 @@ class MiniExiftool
     tag.gsub(/[-_]/,'').downcase
   end
 
+  # Exception class
+  class MiniExiftool::Error < StandardError; end
+
   ############################################################################
   private
   ############################################################################
@@ -427,10 +430,6 @@ class MiniExiftool
     end
   end
   
-
-  # Exception class
-  class MiniExiftool::Error < StandardError; end
-
 end
 
 # Add to_a to Numerical if it's not yet defined
