@@ -29,7 +29,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical, :composite, :convert_encoding, :errors, :timestamps
 
-  VERSION = '1.0.1'
+  VERSION = '1.0.2'
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
@@ -314,11 +314,11 @@ class MiniExiftool
       tag, value = $1, $2
       case value
       when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d$/
-        arr = value.split /[: ]/
+        arr = value.split(/[: ]/)
         arr.map! {|elem| elem.to_i}
         begin
           if @timestamps == Time
-            value = Time.local *arr
+            value = Time.local(*arr)
           elsif @timestamps == DateTime
             value = DateTime.strptime(value,'%Y:%m:%d %H:%M:%S') 
           else
@@ -402,7 +402,7 @@ class MiniExiftool
 
   def self.determine_tags arg
     output = `#{@@cmd} -#{arg}`
-    lines = output.split /\n/
+    lines = output.split(/\n/)
     tags = Set.new
     lines.each do |line|
       next unless line =~ /^\s/
