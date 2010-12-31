@@ -1,3 +1,4 @@
+# -- encoding: utf-8 --
 require 'digest/md5'
 require 'fileutils'
 require 'tempfile'
@@ -58,7 +59,7 @@ class TestWrite < TestCase
     t = Time.now
     @mini_exiftool_num['DateTimeOriginal'] = t
     assert_kind_of Time, @mini_exiftool_num['DateTimeOriginal']
-    assert true, @mini_exiftool_num.changed_tags.include?('DateTimeOriginal')
+    assert_equal true, @mini_exiftool_num.changed_tags.include?('DateTimeOriginal')
     @mini_exiftool_num.save
     assert_equal false, @mini_exiftool_num.changed?
     assert_kind_of Time, @mini_exiftool_num['DateTimeOriginal']
@@ -70,7 +71,7 @@ class TestWrite < TestCase
     new_time = @mini_exiftool_num['BrightnessValue'] + 1 
     @mini_exiftool_num['BrightnessValue'] = new_time
     assert_equal new_time, @mini_exiftool_num['BrightnessValue']
-    assert true, @mini_exiftool_num.changed_tags.include?('BrightnessValue')
+    assert_equal true, @mini_exiftool_num.changed_tags.include?('BrightnessValue')
     @mini_exiftool_num.save
     assert_kind_of Float, @mini_exiftool_num['BrightnessValue']
     assert_equal new_time, @mini_exiftool_num['BrightnessValue']

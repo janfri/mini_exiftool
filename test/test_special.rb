@@ -1,3 +1,4 @@
+# -- encoding: utf-8 --
 require 'fileutils'
 require 'tempfile'
 require 'helpers_for_test'

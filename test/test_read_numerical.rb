@@ -1,3 +1,4 @@
+# -- encoding: utf-8 --
 require 'helpers_for_test'
 
 class TestReadNumerical < TestCase

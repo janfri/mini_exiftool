@@ -1,3 +1,5 @@
+# -- encoding: utf-8 --
+require 'date'
 require 'fileutils'
 require 'tempfile'
 require 'helpers_for_test'

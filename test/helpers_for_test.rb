@@ -1,3 +1,4 @@
+# -- encoding: utf-8 --
 require 'mini_exiftool'
 require 'test/unit'
 begin
