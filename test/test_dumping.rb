@@ -76,14 +76,4 @@ class TestDumping < TestCase
     assert_equal true, MiniExiftool.from_yaml(numerical.to_yaml).numerical
   end
 
-  def test_heuristics_for_restoring_timestamps
-    standard = @mini_exiftool.to_hash
-    timestamps = MiniExiftool.new(@filename_test, :timestamps => DateTime).to_hash
-    assert_equal Time, MiniExiftool.from_hash(standard).timestamps
-    assert_equal DateTime, MiniExiftool.from_hash(timestamps).timestamps
-    # Doesn't work yet.
-    # assert_equal Time, MiniExiftool.from_yaml(standard.to_yaml).timestamps
-    # assert_equal DateTime, MiniExiftool.from_yaml(timestamps.to_yaml).timestamps
-  end
-
 end

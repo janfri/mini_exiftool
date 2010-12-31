@@ -25,7 +25,7 @@ class TestRead < TestCase
     assert_kind_of Float, @mini_exiftool['MaxApertureValue']
     assert_kind_of String, @mini_exiftool.flash
     assert_kind_of Fixnum, @mini_exiftool['ExposureCompensation']
-    assert_kind_of String, @mini_exiftool['SubjectLocation']
+    assert_kind_of String, (@mini_exiftool['SubjectLocation'] || @mini_exiftool['SubjectArea'])
     assert_kind_of Array, @mini_exiftool['Keywords']
     assert_kind_of String, @mini_exiftool['SupplementalCategories']
     assert_kind_of Array, @mini_exiftool['SupplementalCategories'].to_a

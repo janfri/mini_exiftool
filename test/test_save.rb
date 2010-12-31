@@ -32,7 +32,7 @@ class TestSave < TestCase
     result = @mini_exiftool.save
     assert_equal false, result
     assert_equal 1, @mini_exiftool.errors.size
-    assert_equal("Can't convert IFD0:Orientation (not in PrintConv)",
+    assert_match(/Can't convert IFD0:Orientation \(not in PrintConv\)/,
                  @mini_exiftool.errors['Orientation'])
     assert @mini_exiftool.changed?
     assert @mini_exiftool.changed_tags.include?('Orientation')
