@@ -7,7 +7,7 @@
 # Read and write access is done in a clean OO manner.
 #
 # Author: Jan Friedrich
-# Copyright (c) 2007, 2008 by Jan Friedrich
+# Copyright (c) 2007-2011 by Jan Friedrich
 # Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, 
 # Version 2.1, February 1999
 #
