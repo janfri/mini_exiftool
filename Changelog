@@ -1,6 +1,10 @@
+Version 1.1.0
+- Escaping filenames in shell commands
+  Thanks to Michael Hoy for the hint and implementing a patch which was
+  the base for this fix.
 Version 1.0.2
 - Fixing warings
-  thanks to Peter-Hinrich Krogmann for the hint.
+  Thanks to Peter-Hinrich Krogmann for the hint.
 Version 1.0.1
 - Fixing bug [#22726]
   Making MiniExiftool::Error public.

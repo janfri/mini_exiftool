@@ -16,6 +16,7 @@ require 'fileutils'
 require 'tempfile'
 require 'pstore'
 require 'set'
+require 'shellwords'
 
 # Simple OO access to the Exiftool command-line application.
 class MiniExiftool
@@ -29,7 +30,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical, :composite, :convert_encoding, :errors, :timestamps
 
-  VERSION = '1.0.2'
+  VERSION = '1.1.0'
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
@@ -80,7 +81,7 @@ class MiniExiftool
     opt_params << (@numerical ? '-n ' : '')
     opt_params << (@composite ? '' : '-e ')
     opt_params << (@convert_encoding ? '-L ' : '')
-    cmd = %Q(#@@cmd -q -q -s -t #{opt_params} #{@@sep_op} "#{filename}")
+    cmd = %Q(#@@cmd -q -q -s -t #{opt_params} #{@@sep_op} #{Shellwords.escape(filename)})
     if run(cmd)
       parse_output
     else
@@ -156,7 +157,7 @@ class MiniExiftool
       opt_params = ''
       opt_params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
       opt_params << (@convert_encoding ? '-L ' : '')
-      cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} #{tag_params} "#{temp_filename}")
+      cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} #{tag_params} #{temp_filename})
       result = run(cmd)
       unless result
         all_ok = false
