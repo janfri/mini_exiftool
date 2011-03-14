@@ -1,3 +1,6 @@
+Version 1.2.0
+- Fixing time zone handling.
+  Thanks to ccoenen for the hint.
 Version 1.1.0
 - Escaping filenames in shell commands
   Thanks to Michael Hoy for the hint and implementing a patch which was

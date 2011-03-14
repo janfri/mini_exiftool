@@ -1,4 +1,3 @@
-require 'date'
 require 'fileutils'
 require 'tempfile'
 require 'helpers_for_test'
@@ -41,6 +40,13 @@ class TestSpecialDates < TestCase
   # Thanks to Cecil Coupe
   def test_invalid_date
     assert_equal false, @mini_exiftool.modify_date
+  end
+
+  def test_time_zone
+    s = '1961-08-13 12:08:25+01:00'
+    assert_equal Time.parse(s), @mini_exiftool.preview_date_time
+    assert_equal DateTime.parse(s),
+      @mini_exiftool_datetime.preview_date_time
   end
 
 end

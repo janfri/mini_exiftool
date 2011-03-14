@@ -17,6 +17,7 @@ require 'tempfile'
 require 'pstore'
 require 'set'
 require 'shellwords'
+require 'time'
 
 # Simple OO access to the Exiftool command-line application.
 class MiniExiftool
@@ -314,14 +315,13 @@ class MiniExiftool
     if line =~ /^([^\t]+)\t(.*)$/
       tag, value = $1, $2
       case value
-      when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d$/
-        arr = value.split(/[: ]/)
-        arr.map! {|elem| elem.to_i}
+      when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
+        s = value.sub(/^(\d+):(\d+):/, '\1-\2-')
         begin
           if @timestamps == Time
-            value = Time.local(*arr)
-          elsif @timestamps == DateTime
-            value = DateTime.strptime(value,'%Y:%m:%d %H:%M:%S') 
+            value = Time.parse(s)
+            elsif @timestamps == DateTime
+            value = DateTime.parse(s)
           else
             raise MiniExiftool::Error.new("Value #@timestamps not allowed for option timestamps.")
           end
