@@ -1,23 +1,28 @@
-Version 1.2.0
+v1.2.0
 - Fixing time zone handling.
   Thanks to ccoenen for the hint.
-Version 1.1.0
+
+v1.1.0
 - Escaping filenames in shell commands
   Thanks to Michael Hoy for the hint and implementing a patch which was
   the base for this fix.
-Version 1.0.2
+
+v1.0.2
 - Fixing warings
   Thanks to Peter-Hinrich Krogmann for the hint.
-Version 1.0.1
+
+v1.0.1
 - Fixing bug [#22726]
   Making MiniExiftool::Error public.
   Thanks to Mathias Stjernstrom for sending a patch.
-Version 1.0.0
+
+v1.0.0
 - Be aware changing in the interface:
   - List tags (e.g. Keywords, SupplementalCategories) are now handled as 
     arrays.
   - Tag SubjectLocation is not longer an array value but a string value!
-Version 0.7.0
+
+v0.7.0
 - Changing composite behaviour: Composite tags are now included as standard!
 - New method MiniExiftool.opts which returns a hash of the standard
   options used for MiniExiftool.new
@@ -25,7 +30,7 @@ Version 0.7.0
   of the exiftool command-line application (see online documentation for it)
   Thanks to Henning Kulander for the causing of this change.
 
-Version 0.6.0
+v0.6.0
 - New methods for serialization:
   - MiniExiftool.from_hash
   - MiniExiftool.from_yaml
@@ -35,20 +40,20 @@ Version 0.6.0
 - Refactoring of tests
 - Small documetation update
 
-Version 0.5.1
+v0.5.1
 - Warning "parenthesize argument(s) for future version" removed
   Thanks to Greg from knobby.ws
 
-Version 0.5.0
+v0.5.0
 - New option :timestamps to create DateTime objects instead of Time objects
   for timestamps (Fixing bug #16328)
 - Invalid values of timestamps (i.e. 0000:00:00 00:00:00) are now mapped 
   to false
 
-Version 0.4.1
+v0.4.1
 - Compatibility for Ruby 1.9
 
-Version 0.4.0
+v0.4.0
 - MiniExiftool::Error inherits now from StandardError
 - Alternative installation via setup.rb
 - Bugfix
@@ -58,10 +63,10 @@ Version 0.4.0
 - Interna: Original tag names (all and writable) are now saved via pstore in
   a file for better performance
 
-Version 0.3.1
+v0.3.1
 - Typos fixed
 
-Version 0.3.0
+v0.3.0
 - Documentation completed and a Mini Tutorial added
 - Interface changes:
   - Test if a value for a tag can be saved is now done in
@@ -76,27 +81,27 @@ Version 0.3.0
     - :composite => read also composite tags
 - Tests added
 
-Version 0.2.0
+v0.2.0
 - Better error handling (i.e. error messages)
 - Checking if the exiftool command can be executed at loading the lib
 - New class method exiftool_version
 - Added tests
 - Documentation completed
 
-Version 0.1.2
+v0.1.2
 - Bugfix for Windows (Tempfile)
   Thanks to Jérome Soika for testing
 - Regexes optimized (a little bit)
 - New class-method MiniExiftool.writable_tags
 
-Version 0.1.1
+v0.1.1
 - Fixing bug [#8073]
   Handling the '-' in tag Self-timer
   Thanks to Eric Young
 
-Version 0.1.0
+v0.1.0
 - New method "revert"
 - More tests
 
-Version 0.0.1
+v0.0.1
 - Initial release
