@@ -1,3 +1,7 @@
+v1.2.1
+- Switching to echoe.
+- Update e-mail address.
+
 v1.2.0
 - Fixing time zone handling.
   Thanks to ccoenen for the hint.
