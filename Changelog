@@ -1,3 +1,7 @@
+v1.2.2
+- Fixing ptore directory naming convention for darwin.
+  Thanks to Denis Barushev for the hint.
+
 v1.2.1
 - Switching to echoe.
 - Update e-mail address.

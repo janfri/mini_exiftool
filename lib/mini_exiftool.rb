@@ -386,7 +386,7 @@ class MiniExiftool
   def self.load_or_create_pstore
     # This will hopefully work on *NIX and Windows systems
     home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
-    subdir = RUBY_PLATFORM =~ /win/i ? '_mini_exiftool' : '.mini_exiftool'
+    subdir = RUBY_PLATFORM =~ /\bmswin/i ? '_mini_exiftool' : '.mini_exiftool'
     FileUtils.mkdir_p(File.join(home, subdir))
     filename = File.join(home, subdir, 'exiftool_tags_' << exiftool_version.gsub('.', '_') << '.pstore')
     @@pstore = PStore.new filename
