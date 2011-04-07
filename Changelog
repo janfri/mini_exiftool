@@ -1,3 +1,7 @@
+v1.3.0
+- MiniExiftool is now ready for Ruby 1.9
+  All tests in the test suite pass. :)
+
 v1.2.2
 - Fixing ptore directory naming convention for darwin.
   Thanks to Denis Barushev for the hint.
