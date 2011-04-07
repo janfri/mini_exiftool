@@ -160,6 +160,9 @@ class MiniExiftool
       opt_params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
       opt_params << (@convert_encoding ? '-L ' : '')
       cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} #{tag_params} #{temp_filename})
+      if convert_encoding && cmd.respond_to?(:encode)
+        cmd.encode('ISO-8859-1')
+      end
       result = run(cmd)
       unless result
         all_ok = false
@@ -278,6 +281,9 @@ class MiniExiftool
       $stderr.puts cmd
     end
     @output = `#{cmd} 2>#{@@error_file.path}`
+    if convert_encoding && @output.respond_to?(:force_encoding)
+      @output.force_encoding('ISO-8859-1')
+    end
     @status = $?
     unless @status.exitstatus == 0
       @error_text = File.readlines(@@error_file.path).join
