@@ -14,4 +14,5 @@ Echoe.new('mini_exiftool') do |p|
 | http://www.sno.phy.queensu.ca/~phil/exiftool/install.html             |
 +-----------------------------------------------------------------------+
   }
+  p.changelog = 'Changelog'
 end
