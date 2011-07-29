@@ -15,4 +15,11 @@ Echoe.new('mini_exiftool') do |p|
 +-----------------------------------------------------------------------+
   }
   p.changelog = 'Changelog'
+  task :prerelease do
+    require "#{File.dirname(__FILE__)}/lib/mini_exiftool"
+    unless p.version == MiniExiftool::VERSION
+      $stderr.puts "Version conflict: Release version is #{p.version} but MiniExiftool::VERSION is #{MiniExiftool::VERSION}."
+      exit(1)
+    end
+  end
 end
