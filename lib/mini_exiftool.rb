@@ -9,7 +9,7 @@
 #
 # Author: Jan Friedrich
 # Copyright (c) 2007-2011 by Jan Friedrich
-# Licensed under the GNU LESSER GENERAL PUBLIC LICENSE, 
+# Licensed under the GNU LESSER GENERAL PUBLIC LICENSE,
 # Version 2.1, February 1999
 #
 
@@ -38,7 +38,7 @@ class MiniExiftool
   # * <code>:numerical</code> for numerical values, default is +false+
   # * <code>:composite</code> for including composite tags while loading,
   #   default is +true+
-  # * <code>:convert_encoding</code> convert encoding (See -L-option of 
+  # * <code>:convert_encoding</code> convert encoding (See -L-option of
   #   the exiftool command-line application, default is +false+
   # * <code>:timestamps</code> generating DateTime objects instead of
   #   Time objects if set to <code>DateTime</code>, default is +Time+
@@ -59,7 +59,7 @@ class MiniExiftool
     load filename unless filename.nil?
   end
 
-  def initialize_from_hash hash # :nodoc: 
+  def initialize_from_hash hash # :nodoc:
     hash.each_pair do |tag,value|
       set_value tag, value
     end
@@ -92,7 +92,7 @@ class MiniExiftool
     self
   end
 
-  # Reload the tags of an already readed file.
+  # Reload the tags of an already read file.
   def reload
     load @filename
   end
@@ -129,7 +129,7 @@ class MiniExiftool
     res
   end
 
-  # Returns an array of the tags (original tag names) of the readed file.
+  # Returns an array of the tags (original tag names) of the read file.
   def tags
     @values.keys.map { |key| @tag_names[key] }
   end
@@ -185,9 +185,9 @@ class MiniExiftool
       result[@tag_names[k]] = v
     end
     result
-  end 
+  end
 
-  # Returns a YAML representation of the original loaded values of the 
+  # Returns a YAML representation of the original loaded values of the
   # MiniExiftool instance.
   def to_yaml
     to_hash.to_yaml
@@ -420,7 +420,7 @@ class MiniExiftool
   end
 
 
-  # Hash with indifferent access: 
+  # Hash with indifferent access:
   # DateTimeOriginal == datetimeoriginal == date_time_original
   class TagHash < Hash # :nodoc:
     def[] k
@@ -437,7 +437,7 @@ class MiniExiftool
       MiniExiftool.unify tag
     end
   end
-  
+
 end
 
 # Add to_a to Numerical if it's not yet defined

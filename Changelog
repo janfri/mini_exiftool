@@ -35,7 +35,7 @@ v1.0.1
 
 v1.0.0
 - Be aware changing in the interface:
-  - List tags (e.g. Keywords, SupplementalCategories) are now handled as 
+  - List tags (e.g. Keywords, SupplementalCategories) are now handled as
     arrays.
   - Tag SubjectLocation is not longer an array value but a string value!
 
@@ -64,7 +64,7 @@ v0.5.1
 v0.5.0
 - New option :timestamps to create DateTime objects instead of Time objects
   for timestamps (Fixing bug #16328)
-- Invalid values of timestamps (i.e. 0000:00:00 00:00:00) are now mapped 
+- Invalid values of timestamps (i.e. 0000:00:00 00:00:00) are now mapped
   to false
 
 v0.4.1
@@ -74,7 +74,7 @@ v0.4.0
 - MiniExiftool::Error inherits now from StandardError
 - Alternative installation via setup.rb
 - Bugfix
-  Saving of non-readed tags doesn't work with tags with hyphen
+  Saving of non-read tags doesn't work with tags with hyphen
   Thanks to Robin Romahn for reporting the bug
 - New methods: MiniExiftool.all_tags and MiniExiftool.original_tag
 - Interna: Original tag names (all and writable) are now saved via pstore in
