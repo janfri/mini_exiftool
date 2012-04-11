@@ -1,3 +1,6 @@
+v1.4.2
+- Add .yardopts file to gem.
+
 v1.4.1
 - Update documentation for using yard.
 
