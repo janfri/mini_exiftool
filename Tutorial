@@ -53,7 +53,7 @@ Following types of values are at the moment supported:
 * Time (e. g. DateTimeOriginal => 2005:09:13 20:08:50)
 
 Be aware, if there is only one value in a tag which can hold multiple
-values the result is'nt an array! But you can get one with the to_a
+values the result is'nt an array! But you can get one with the Array
 method:
   # only _one_ keyword
   p1 = MiniExiftool.new 'p1.jpg'
@@ -63,9 +63,9 @@ method:
   p3.keywords # => ['red', 'yellow', 'green']
 
   # if we want to get an array in both cases and don't know
-  # if there is one ore more values set let's take to_a
-  p1.keywords.to_a # => ['red']
-  p3.keywords.to_a # => ['red', 'yellow', 'green']
+  # if there is one ore more values set let's take Array()
+  Array(p1.keywords) # => ['red']
+  Array(p3.keywords) # => ['red', 'yellow', 'green']
 
 The Exiftool command-line application has an option (-n) to get values
 as numbers if possible, in MiniExiftool you can do this with setting

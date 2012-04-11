@@ -28,7 +28,6 @@ class TestReadNumerical < TestCase
     assert_kind_of String, (@mini_exiftool_num['SubjectLocation'] || @mini_exiftool_num['SubjectArea'])
     assert_kind_of Array, @mini_exiftool_num['Keywords']
     assert_kind_of String, @mini_exiftool_num['SupplementalCategories']
-    assert_kind_of Array, @mini_exiftool_num['SupplementalCategories'].to_a
   end
 
 end

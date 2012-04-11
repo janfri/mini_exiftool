@@ -31,13 +31,12 @@ class TestRead < TestCase
     assert_kind_of String, (@mini_exiftool['SubjectLocation'] || @mini_exiftool['SubjectArea'])
     assert_kind_of Array, @mini_exiftool['Keywords']
     assert_kind_of String, @mini_exiftool['SupplementalCategories']
-    assert_kind_of Array, @mini_exiftool['SupplementalCategories'].to_a
   end
 
   def test_list_tags
     assert_equal ['Orange', 'Rot'], @mini_exiftool['Keywords']
     assert_equal 'Natur', @mini_exiftool['SupplementalCategories']
-    assert_equal ['Natur'], @mini_exiftool['SupplementalCategories'].to_a
+    assert_equal ['Natur'], Array(@mini_exiftool['SupplementalCategories'])
   end
 
   def test_encoding_conversion
