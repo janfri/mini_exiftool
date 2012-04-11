@@ -133,6 +133,7 @@ specific tag or in general all changes.
 
 You should also look at the rdoc information of MiniExiftool.
 
-=== Further Example
+=== Further Examples
 
-See <code>shift_time.rb</code> in the +examples+ directory.
+See external_photo.rb[link://file.external_photo.html], print_portraits.rb[link://file.print_portraits.html] and shift_time.rb[link://file.shift_time.html]  in the +examples+ directory.
+

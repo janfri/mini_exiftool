@@ -26,7 +26,7 @@ Alternative you can download the tarball or zip file and run
 == Contribution
 
 The code is also hostet in a git repository on Gitorious at
-http://gitorious.org/projects/mini_exiftool 
+http://gitorious.org/projects/mini_exiftool
 feel free to contribute!
 
 == Author
@@ -35,11 +35,11 @@ Jan Friedrich <janfri26 AT gmail DOT com>
 == Copyright / License
 Copyright (c) 2007-2011 by Jan Friedrich
 
-Licensed under terms of the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1, 
+Licensed under terms of the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1,
 February 1999 (see file COPYING for more details)
 
 == Usage
 
 For further information about using MiniExiftool read the
-Tutorial[link://files/Tutorial.html] and have a look at the examples in
+Tutorial[link://file.Tutorial.html] and have a look at the examples in
 directory examples.

@@ -6,7 +6,7 @@ Echoe.new('mini_exiftool') do |p|
   p.email = 'janfri26@gmail.com'
   p.summary = 'This library is wrapper for the Exiftool command-line application (http://www.sno.phy.queensu.ca/~phil/exiftool).'
   p.url = 'http://gitorious.org/mini_exiftool'
-  p.rdoc_files = %w(README Tutorial lib/*.rb)
+  p.rdoc_files = %w(README.rdoc Tutorial.rdoc lib/*.rb)
   p.install_message = %q{
 +-----------------------------------------------------------------------+
 | Please ensure you have installed exiftool and it's found in your PATH |
