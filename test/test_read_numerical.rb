@@ -12,6 +12,8 @@ class TestReadNumerical < TestCase
   def test_access_numerical
     assert_equal 'DYNAX 7D', @mini_exiftool_num['Model']
     assert_equal 'MLT0', @mini_exiftool_num['maker_note_version']
+    assert_equal 'MLT0', @mini_exiftool_num[:MakerNoteVersion]
+    assert_equal 'MLT0', @mini_exiftool_num[:maker_note_version]
     assert_equal 'MLT0', @mini_exiftool_num.maker_note_version
     assert_equal 400, @mini_exiftool_num.iso
   end

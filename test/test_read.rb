@@ -12,6 +12,8 @@ class TestRead < TestCase
   def test_access
     assert_equal 'DYNAX 7D', @mini_exiftool['Model']
     assert_equal 'MLT0', @mini_exiftool['maker_note_version']
+    assert_equal 'MLT0', @mini_exiftool[:MakerNoteVersion]
+    assert_equal 'MLT0', @mini_exiftool[:maker_note_version]
     assert_equal 'MLT0', @mini_exiftool.maker_note_version
     assert_equal 400, @mini_exiftool.iso
   end

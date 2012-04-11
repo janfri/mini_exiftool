@@ -255,7 +255,7 @@ class MiniExiftool
   end
 
   def self.unify tag
-    tag.gsub(/[-_]/,'').downcase
+    tag.to_s.gsub(/[-_]/,'').downcase
   end
 
   # Exception class

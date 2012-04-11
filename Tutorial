@@ -28,6 +28,10 @@ following expressions are equivalent:
  photo['datetimeoriginal']
  photo['date_time_original']
 
+It is also possible to use symbols:
+ photo[:DateTimeOriginal]
+ photo[:datetimeoriginal]
+ photo[:date_time_original]
 
 === Nicer Access Via Dynamic Methods
 
@@ -44,7 +48,7 @@ or also
 Following types of values are at the moment supported:
 * Array (e. g. Keywords => ['tree', 'gras'])
 * Fixnum (e. g. ISO => 400)
-* Float (e. g. FNumber => 9.5) 
+* Float (e. g. FNumber => 9.5)
 * String (e. g. Model => DYNAX 7D)
 * Time (e. g. DateTimeOriginal => 2005:09:13 20:08:50)
 
@@ -83,7 +87,7 @@ maybe better.
 
 The Time class of Ruby cannot handle timestamps before 1st January 1970
 on some platforms. If there are timestamps in files before this date it
-will result in an error. In this case we can set the option 
+will result in an error. In this case we can set the option
 <code>:timestamps</code> to +DateTime+ to use DateTime objects instead
 of Time objects.
 
