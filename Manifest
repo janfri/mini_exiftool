@@ -1,10 +1,10 @@
 COPYING
 Changelog
 Manifest
-README
+README.rdoc
 Rakefile
 TODO
-Tutorial
+Tutorial.rdoc
 examples/external_photo.rb
 examples/print_portraits.rb
 examples/shift_time.rb
