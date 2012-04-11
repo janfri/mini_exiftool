@@ -1,3 +1,7 @@
+v1.4.0
+- Allow symbols for tag access with [].
+- Refactoring tests.
+
 v1.3.1
 - Remove TestEscapeFilename test and releating test photo
   because the latter produces errors on windows systems.
