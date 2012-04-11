@@ -6,11 +6,11 @@ require 'helpers_for_test'
 
 class TestSave < TestCase
 
+  include TempfileTest
+
   def setup
-    @temp_file = Tempfile.new('test')
-    @temp_file.close
-    @temp_filename = @temp_file.path
-    @org_filename = File.dirname(__FILE__) + '/data/test.jpg'
+    super
+    @org_filename = @data_dir + '/test.jpg'
     FileUtils.cp(@org_filename, @temp_filename)
     @mini_exiftool = MiniExiftool.new @temp_filename
     @mini_exiftool_num = MiniExiftool.new @temp_filename, :numerical => true

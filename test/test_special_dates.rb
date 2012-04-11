@@ -1,18 +1,15 @@
 # -- encoding: utf-8 --
 require 'date'
-require 'fileutils'
-require 'tempfile'
 require 'helpers_for_test'
 
 class TestSpecialDates < TestCase
 
+  include TempfileTest
+
   def setup
-    data_dir = File.dirname(__FILE__) + '/data'
-    temp_file = Tempfile.new('test')
-    temp_file.close
-    @temp_filename = temp_file.path
-    org_filename = data_dir + '/test_special_dates.jpg'
-    FileUtils.cp org_filename, @temp_filename
+    super
+    @org_filename = @data_dir + '/test_special_dates.jpg'
+    FileUtils.cp @org_filename, @temp_filename
     @mini_exiftool = MiniExiftool.new @temp_filename
     @mini_exiftool_datetime = MiniExiftool.new @temp_filename,
       :timestamps => DateTime
@@ -21,7 +18,7 @@ class TestSpecialDates < TestCase
   # Catching bug [#16328] (1st part)
   # Thanks to unknown
   def test_datetime
-    datetime_original = @mini_exiftool.datetime_original 
+    datetime_original = @mini_exiftool.datetime_original
     if datetime_original
       assert_kind_of Time, datetime_original
     else

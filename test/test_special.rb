@@ -1,19 +1,16 @@
 # -- encoding: utf-8 --
-require 'fileutils'
-require 'tempfile'
 require 'helpers_for_test'
 
 class TestSpecial < TestCase
 
+  include TempfileTest
+
   CAPTION_ABSTRACT =  'Some text for caption abstract'
 
   def setup
-    data_dir = File.dirname(__FILE__) + '/data'
-    temp_file = Tempfile.new('test')
-    temp_file.close
-    @temp_filename = temp_file.path
-    org_filename = data_dir + '/Canon.jpg'
-    FileUtils.cp org_filename, @temp_filename
+    super
+    @org_filename = @data_dir + '/Canon.jpg'
+    FileUtils.cp @org_filename, @temp_filename
     @canon = MiniExiftool.new @temp_filename
   end
 
