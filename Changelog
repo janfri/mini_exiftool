@@ -1,3 +1,6 @@
+v1.4.1
+- Update documentation for using yard.
+
 v1.4.0
 - Allow symbols for tag access with [].
 - Refactoring tests.
