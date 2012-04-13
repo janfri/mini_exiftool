@@ -31,6 +31,7 @@ class TestRead < TestCase
     assert_kind_of String, (@mini_exiftool['SubjectLocation'] || @mini_exiftool['SubjectArea'])
     assert_kind_of Array, @mini_exiftool['Keywords']
     assert_kind_of String, @mini_exiftool['SupplementalCategories']
+    assert_kind_of Rational, @mini_exiftool.shutterspeed
   end
 
   def test_list_tags

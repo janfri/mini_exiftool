@@ -345,6 +345,8 @@ class MiniExiftool
         # nothing => String
       when /^-?\d+$/
         value = value.to_i
+      when %r(^\d+/\d+$)
+        value = Rational(value)
       when /^[\d ]+$/
         # nothing => String
       when /#{@@separator}/

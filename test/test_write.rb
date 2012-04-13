@@ -109,6 +109,16 @@ class TestWrite < TestCase
     assert_equal new_mode, @mini_exiftool_num['MeteringMode']
   end
 
+  def test_rational_conversion
+    new_exposure_time = Rational(1, 125)
+    @mini_exiftool.exposure_time = new_exposure_time
+    assert @mini_exiftool.changed?, 'No changing of value.'
+    ok = @mini_exiftool.save
+    assert ok, 'Saving failed.'
+    @mini_exiftool.reload
+    assert_equal new_exposure_time, @mini_exiftool.exposure_time
+  end
+
   def test_list_conversion
     arr =  ['a', 'b', 'c']
     @mini_exiftool['Keywords'] = arr
