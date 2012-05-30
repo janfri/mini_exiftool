@@ -55,6 +55,28 @@ class TestWrite < TestCase
     assert_equal true, @mini_exiftool_num.changed?
   end
 
+  # Catching rubyforge bug [#29596]
+  # Thanks to Michael Grove for reporting
+  # Part 1
+  def test_quotes_in_values
+    caption = "\"String in quotes\""
+    @mini_exiftool.caption = caption
+    assert_equal true, @mini_exiftool.save, 'Saving error'
+    @mini_exiftool.reload
+    assert_equal caption, @mini_exiftool.caption
+  end
+
+  # Catching rubyforge bug [#29596]
+  # Thanks to Michael Grove for reporting
+  # Part 2
+  def test_quotes_and_apostrophe_in_values
+    caption = caption = "\"Watch your step, it's slippery.\""
+    @mini_exiftool.caption = caption
+    assert_equal true, @mini_exiftool.save, 'Saving error'
+    @mini_exiftool.reload
+    assert_equal caption, @mini_exiftool.caption
+  end
+
   def test_time_conversion
     t = Time.now
     @mini_exiftool_num['DateTimeOriginal'] = t
