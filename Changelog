@@ -1,3 +1,7 @@
+v1.4.3
+- Fixing rubyforge bug [#29596] (Quotes in values)
+  Thanks to Michael Grove for reporting
+
 v1.4.2
 - Add .yardopts file to gem.
 
