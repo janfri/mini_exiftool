@@ -27,10 +27,10 @@ class MiniExiftool
   @@cmd = 'exiftool'
 
   # Hash of the standard options used when call MiniExiftool.new
-  @@opts = { :numerical => false, :composite => true, :convert_encoding => false, :timestamps => Time }
+  @@opts = { :numerical => false, :composite => true, :convert_encoding => false, :ignore_minor_errors => false, :timestamps => Time }
 
   attr_reader :filename
-  attr_accessor :numerical, :composite, :convert_encoding, :errors, :timestamps
+  attr_accessor :numerical, :composite, :convert_encoding, :ignore_minor_errors, :errors, :timestamps
 
   VERSION = '1.4.4'
 
@@ -39,7 +39,9 @@ class MiniExiftool
   # * <code>:composite</code> for including composite tags while loading,
   #   default is +true+
   # * <code>:convert_encoding</code> convert encoding (See -L-option of
-  #   the exiftool command-line application, default is +false+
+  #   the exiftool command-line application, default is +false+)
+  # * <code>:ignore_minor_errors</code> ignore minor errors (See -m-option
+  # of the exiftool command-line application, default is +false+)
   # * <code>:timestamps</code> generating DateTime objects instead of
   #   Time objects if set to <code>DateTime</code>, default is +Time+
   #
@@ -51,6 +53,7 @@ class MiniExiftool
     @numerical = opts[:numerical]
     @composite = opts[:composite]
     @convert_encoding = opts[:convert_encoding]
+    @ignore_minor_errors = opts[:ignore_minor_errors]
     @timestamps = opts[:timestamps]
     @values = TagHash.new
     @tag_names = TagHash.new
@@ -159,6 +162,7 @@ class MiniExiftool
       opt_params = ''
       opt_params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
       opt_params << (@convert_encoding ? '-L ' : '')
+      opt_params << (@ignore_minor_errors ? '-m' : '')
       cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} #{tag_params} #{temp_filename})
       if convert_encoding && cmd.respond_to?(:encode)
         cmd.encode('ISO-8859-1')

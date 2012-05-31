@@ -90,7 +90,7 @@ class TestWrite < TestCase
 
   def test_float_conversion
     assert_kind_of Float, @mini_exiftool_num['BrightnessValue']
-    new_time = @mini_exiftool_num['BrightnessValue'] + 1 
+    new_time = @mini_exiftool_num['BrightnessValue'] + 1
     @mini_exiftool_num['BrightnessValue'] = new_time
     assert_equal new_time, @mini_exiftool_num['BrightnessValue']
     assert_equal true, @mini_exiftool_num.changed_tags.include?('BrightnessValue')
