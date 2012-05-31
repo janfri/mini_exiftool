@@ -32,7 +32,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical, :composite, :convert_encoding, :errors, :timestamps
 
-  VERSION = '1.4.3'
+  VERSION = '1.4.4'
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
@@ -154,7 +154,7 @@ class MiniExiftool
       arr_val.map! {|e| convert e}
       tag_params = ''
       arr_val.each do |v|
-        tag_params << %Q(-#{original_tag}=#{Shellwords.escape(v)} )
+        tag_params << %Q(-#{original_tag}=#{Shellwords.escape(v.to_s)} )
       end
       opt_params = ''
       opt_params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')

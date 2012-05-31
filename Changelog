@@ -1,3 +1,6 @@
+v1.4.4
+- Fix escaping of values for older versions of Shellwords.
+
 v1.4.3
 - Fixing rubyforge bug [#29596] (Quotes in values)
   Thanks to Michael Grove for reporting
