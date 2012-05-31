@@ -16,6 +16,7 @@
 require 'fileutils'
 require 'tempfile'
 require 'pstore'
+require 'rational'
 require 'set'
 require 'shellwords'
 require 'time'
@@ -32,7 +33,7 @@ class MiniExiftool
   attr_reader :filename
   attr_accessor :numerical, :composite, :convert_encoding, :ignore_minor_errors, :errors, :timestamps
 
-  VERSION = '1.5.0'
+  VERSION = '1.5.1'
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
@@ -345,8 +346,8 @@ class MiniExiftool
         # nothing => String
       when /^-?\d+$/
         value = value.to_i
-      when %r(^\d+/\d+$)
-        value = Rational(value)
+      when %r(^(\d+)/(\d+)$)
+        value = Rational($1.to_i, $2.to_i)
       when /^[\d ]+$/
         # nothing => String
       when /#{@@separator}/
