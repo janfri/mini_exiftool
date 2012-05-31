@@ -1,3 +1,9 @@
+v1.5.0
+- Supporting exiftool command-line option -m.
+  rubyforge request [#29587]
+  Thanks to Michael Grove for reporting.
+- Supporting rational values.
+
 v1.4.4
 - Fix escaping of values for older versions of Shellwords.
 
