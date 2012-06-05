@@ -1,12 +1,18 @@
-require 'rubygems'
-require 'echoe'
+require 'rim'
+require 'rim/check_version'
+require 'rim/gem'
+require 'rim/test'
 
-Echoe.new('mini_exiftool') do |p|
-  p.author = 'Jan Friedrich'
+$:.unshift 'lib'
+require 'mini_exiftool'
+
+Rim.setup do |p|
+  p.name = 'mini_exiftool'
+  p.version = MiniExiftool::VERSION
+  p.authors = 'Jan Friedrich'
   p.email = 'janfri26@gmail.com'
   p.summary = 'This library is wrapper for the Exiftool command-line application (http://www.sno.phy.queensu.ca/~phil/exiftool).'
-  p.url = 'http://gitorious.org/mini_exiftool'
-  p.rdoc_files = %w(README.rdoc Tutorial.rdoc lib/*.rb)
+  p.homepage = 'http://gitorious.org/mini_exiftool'
   p.install_message = %q{
 +-----------------------------------------------------------------------+
 | Please ensure you have installed exiftool and it's found in your PATH |
@@ -14,12 +20,4 @@ Echoe.new('mini_exiftool') do |p|
 | http://www.sno.phy.queensu.ca/~phil/exiftool/install.html             |
 +-----------------------------------------------------------------------+
   }
-  p.changelog = 'Changelog'
-  task :prerelease do
-    require "#{File.dirname(__FILE__)}/lib/mini_exiftool"
-    unless p.version == MiniExiftool::VERSION
-      $stderr.puts "Version conflict: Release version is #{p.version} but MiniExiftool::VERSION is #{MiniExiftool::VERSION}."
-      exit(1)
-    end
-  end
 end
