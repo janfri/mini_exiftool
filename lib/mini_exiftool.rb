@@ -73,6 +73,7 @@ class MiniExiftool
 
   # Load the tags of filename.
   def load filename
+    self.class.setup
     unless filename && File.exist?(filename)
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
     end
@@ -145,6 +146,7 @@ class MiniExiftool
 
   # Save the changes to the file.
   def save
+    self.class.setup
     return false if @changed_values.empty?
     @errors.clear
     temp_file = Tempfile.new('mini_exiftool')
@@ -270,15 +272,20 @@ class MiniExiftool
   private
   ############################################################################
 
-  @@error_file = Tempfile.new 'errors'
-  @@error_file.close
+  @@setup_done = false
+  def self.setup
+    return if @@setup_done
+    @@error_file = Tempfile.new 'errors'
+    @@error_file.close
 
-  if Float(exiftool_version) < 7.41
-    @@separator = ', '
-    @@sep_op = ''
-  else
-    @@separator = '@@'
-    @@sep_op = '-sep @@'
+    if Float(exiftool_version) < 7.41
+      @@separator = ', '
+      @@sep_op = ''
+    else
+      @@separator = '@@'
+      @@sep_op = '-sep @@'
+    end
+    @@setup_done = true
   end
 
   def run cmd
