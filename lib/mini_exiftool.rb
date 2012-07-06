@@ -184,6 +184,16 @@ class MiniExiftool
     all_ok
   end
 
+  def save!
+    unless save
+      err = []
+      self.errors.each do |key, value|
+        err << "(#{key}) #{value}"
+      end
+      raise "MiniExiftool couldn't save. The following errors occurred: #{err.empty? ? "None" : err.join(", ")}"
+    end
+  end
+
   # Returns a hash of the original loaded values of the MiniExiftool
   # instance.
   def to_hash
