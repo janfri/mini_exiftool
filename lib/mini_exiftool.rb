@@ -73,7 +73,7 @@ class MiniExiftool
 
   # Load the tags of filename.
   def load filename
-    self.class.setup
+    MiniExiftool.setup
     unless filename && File.exist?(filename)
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
     end
@@ -146,7 +146,7 @@ class MiniExiftool
 
   # Save the changes to the file.
   def save
-    self.class.setup
+    MiniExiftool.setup
     return false if @changed_values.empty?
     @errors.clear
     temp_file = Tempfile.new('mini_exiftool')
