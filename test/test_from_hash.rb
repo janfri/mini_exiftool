@@ -5,7 +5,7 @@ class TestFromHash < TestCase
   def setup
     @data_dir = File.dirname(__FILE__) + '/data'
     hash_data = JSON.parse(File.read( @data_dir + '/test.jpg.json')).first
-    @mini_exiftool = MiniExifTool.from_hash hash_data
+    @mini_exiftool = MiniExiftool.from_hash hash_data
   end
 
   def test_conversion
