@@ -1,3 +1,12 @@
+v1.6.0
+- Type conversion in MiniExiftool.from_hash.
+  Thanks to Ethan Soutar-Rau for the merge request.
+- Switching to rim. (No longer troubles with echoe.)
+- Exiftool version detection delayed.
+  Thanks to Sebastian Skałacki for the merge request.
+- New method MiniExiftool#save!
+  Cherry-picked commit from Wil Gieseler.
+
 v1.5.1
 - Make rational values work on Ruby 1.8.7.
 
