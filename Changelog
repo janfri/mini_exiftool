@@ -1,4 +1,4 @@
-v1.6.0
+1.6.0
 - Type conversion in MiniExiftool.from_hash.
   Thanks to Ethan Soutar-Rau for the merge request.
 - Switching to rim. (No longer troubles with echoe.)
@@ -7,74 +7,74 @@ v1.6.0
 - New method MiniExiftool#save!
   Cherry-picked commit from Wil Gieseler.
 
-v1.5.1
+1.5.1
 - Make rational values work on Ruby 1.8.7.
 
-v1.5.0
+1.5.0
 - Supporting exiftool command-line option -m.
   rubyforge request [#29587]
   Thanks to Michael Grove for reporting.
 - Supporting rational values.
 
-v1.4.4
+1.4.4
 - Fix escaping of values for older versions of Shellwords.
 
-v1.4.3
+1.4.3
 - Fixing rubyforge bug [#29596] (Quotes in values)
   Thanks to Michael Grove for reporting
 
-v1.4.2
+1.4.2
 - Add .yardopts file to gem.
 
-v1.4.1
+1.4.1
 - Update documentation for using yard.
 
-v1.4.0
+1.4.0
 - Allow symbols for tag access with [].
 - Refactoring tests.
 
-v1.3.1
+1.3.1
 - Remove TestEscapeFilename test and releating test photo
   because the latter produces errors on windows systems.
 - Version check in prerelease task.
 
-v1.3.0
+1.3.0
 - MiniExiftool is now ready for Ruby 1.9
   All tests in the test suite pass. :)
 
-v1.2.2
+1.2.2
 - Fixing ptore directory naming convention for darwin.
   Thanks to Denis Barushev for the hint.
 
-v1.2.1
+1.2.1
 - Switching to echoe.
 - Update e-mail address.
 
-v1.2.0
+1.2.0
 - Fixing time zone handling.
   Thanks to ccoenen for the hint.
 
-v1.1.0
+1.1.0
 - Escaping filenames in shell commands
   Thanks to Michael Hoy for the hint and implementing a patch which was
   the base for this fix.
 
-v1.0.2
+1.0.2
 - Fixing warings
   Thanks to Peter-Hinrich Krogmann for the hint.
 
-v1.0.1
+1.0.1
 - Fixing bug [#22726]
   Making MiniExiftool::Error public.
   Thanks to Mathias Stjernstrom for sending a patch.
 
-v1.0.0
+1.0.0
 - Be aware changing in the interface:
   - List tags (e.g. Keywords, SupplementalCategories) are now handled as
     arrays.
   - Tag SubjectLocation is not longer an array value but a string value!
 
-v0.7.0
+0.7.0
 - Changing composite behaviour: Composite tags are now included as standard!
 - New method MiniExiftool.opts which returns a hash of the standard
   options used for MiniExiftool.new
@@ -82,7 +82,7 @@ v0.7.0
   of the exiftool command-line application (see online documentation for it)
   Thanks to Henning Kulander for the causing of this change.
 
-v0.6.0
+0.6.0
 - New methods for serialization:
   - MiniExiftool.from_hash
   - MiniExiftool.from_yaml
@@ -92,20 +92,20 @@ v0.6.0
 - Refactoring of tests
 - Small documetation update
 
-v0.5.1
+0.5.1
 - Warning "parenthesize argument(s) for future version" removed
   Thanks to Greg from knobby.ws
 
-v0.5.0
+0.5.0
 - New option :timestamps to create DateTime objects instead of Time objects
   for timestamps (Fixing bug #16328)
 - Invalid values of timestamps (i.e. 0000:00:00 00:00:00) are now mapped
   to false
 
-v0.4.1
+0.4.1
 - Compatibility for Ruby 1.9
 
-v0.4.0
+0.4.0
 - MiniExiftool::Error inherits now from StandardError
 - Alternative installation via setup.rb
 - Bugfix
@@ -115,10 +115,10 @@ v0.4.0
 - Interna: Original tag names (all and writable) are now saved via pstore in
   a file for better performance
 
-v0.3.1
+0.3.1
 - Typos fixed
 
-v0.3.0
+0.3.0
 - Documentation completed and a Mini Tutorial added
 - Interface changes:
   - Test if a value for a tag can be saved is now done in
@@ -133,27 +133,27 @@ v0.3.0
     - :composite => read also composite tags
 - Tests added
 
-v0.2.0
+0.2.0
 - Better error handling (i.e. error messages)
 - Checking if the exiftool command can be executed at loading the lib
 - New class method exiftool_version
 - Added tests
 - Documentation completed
 
-v0.1.2
+0.1.2
 - Bugfix for Windows (Tempfile)
   Thanks to Jérome Soika for testing
 - Regexes optimized (a little bit)
 - New class-method MiniExiftool.writable_tags
 
-v0.1.1
+0.1.1
 - Fixing bug [#8073]
   Handling the '-' in tag Self-timer
   Thanks to Eric Young
 
-v0.1.0
+0.1.0
 - New method "revert"
 - More tests
 
-v0.0.1
+0.0.1
 - Initial release
