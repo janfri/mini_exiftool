@@ -65,7 +65,7 @@ class MiniExiftool
 
   def initialize_from_hash hash # :nodoc:
     hash.each_pair do |tag,value|
-      set_value tag, value
+      set_value tag, perform_conversions(value)
     end
     set_attributes_by_heuristic
     self
@@ -198,7 +198,7 @@ class MiniExiftool
     to_hash.to_yaml
   end
 
-  # Create a MiniExiftool instance from a hash
+  # Create a MiniExiftool instance from a hash. Default value conversions will be applied if neccesary.
   def self.from_hash hash
     instance = MiniExiftool.new
     instance.initialize_from_hash hash
@@ -325,7 +325,14 @@ class MiniExiftool
 
   def parse_line line
     if line =~ /^([^\t]+)\t(.*)$/
-      tag, value = $1, $2
+      tag, value = $1, perform_conversions($2)
+    else
+      raise MiniExiftool::Error.new("Malformed line #{line.inspect} of exiftool output.")
+    end
+    return [tag, value]
+  end
+
+  def perform_conversions(value)
       case value
       when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
         s = value.sub(/^(\d+):(\d+):/, '\1-\2-')
@@ -353,10 +360,7 @@ class MiniExiftool
       when /#{@@separator}/
         value = value.split @@separator
       end
-    else
-      raise MiniExiftool::Error.new("Malformed line #{line.inspect} of exiftool output.")
-    end
-    return [tag, value]
+      value
   end
 
   def set_value tag, value
