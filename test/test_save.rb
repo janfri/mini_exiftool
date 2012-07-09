@@ -70,4 +70,16 @@ class TestSave < TestCase
     assert_equal special_string_latin1, @mini_exiftool.title
   end
 
+  def test_save_bang
+    @mini_exiftool.orientation = 'some value'
+    exception = false
+    begin
+      @mini_exiftool.save!
+    rescue MiniExiftool::Error => e
+      assert_match /Orientation/, e.message
+      exception = true
+    end
+    assert exception, "No exception when save! with error."
+  end
+
 end

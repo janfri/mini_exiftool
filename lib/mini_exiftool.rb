@@ -190,7 +190,7 @@ class MiniExiftool
       self.errors.each do |key, value|
         err << "(#{key}) #{value}"
       end
-      raise "MiniExiftool couldn't save. The following errors occurred: #{err.empty? ? "None" : err.join(", ")}"
+      raise MiniExiftool::Error.new("MiniExiftool couldn't save. The following errors occurred: #{err.empty? ? "None" : err.join(", ")}")
     end
   end
 
