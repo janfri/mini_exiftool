@@ -3,7 +3,7 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install libimage-exiftool-perl
   - exiftool -ver
-  - gem install rim
+  - gem install rim json
 rvm:
   - 1.8.7
   - 1.9.2
