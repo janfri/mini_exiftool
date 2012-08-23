@@ -10,6 +10,8 @@ An installation of the Exiftool command-line application.
 Instructions for installation you can find under
 http://www.sno.phy.queensu.ca/~phil/exiftool/install.html .
 
+A meta-gem that eliminates the need for a seperate Exiftool installation is also available: http://github.com/supapuerco/mini_exiftool_vendored
+
 == Installation
 
 First you need Exiftool (see under Requirements above). Then you can simply
