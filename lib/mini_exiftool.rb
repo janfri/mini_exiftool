@@ -343,6 +343,7 @@ class MiniExiftool
   end
 
   def parse_line line
+    line.encode!('UTF-16le', :invalid => :replace, :replace => '').encode!('UTF-8') unless line.valid_encoding?
     if line =~ /^([^\t]+)\t(.*)$/
       tag, value = $1, perform_conversions($2)
     else
