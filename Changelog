@@ -1,3 +1,11 @@
+1.7.0
+- Support exiftool -c option for formatting GPS
+  coordinates.
+  Thanks to Lee Horrocks for the patch.
+- Switching from shellwords to manual escaping.
+  Hopefully it works now on Windows systems.
+  Thanks to uwe58 and jpg0 for the hints.
+
 1.6.0
 - Type conversion in MiniExiftool.from_hash.
   Thanks to Ethan Soutar-Rau for the merge request.
