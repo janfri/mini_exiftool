@@ -18,7 +18,6 @@ require 'tempfile'
 require 'pstore'
 require 'rational'
 require 'set'
-require 'shellwords'
 require 'time'
 
 # Simple OO access to the Exiftool command-line application.
@@ -90,7 +89,7 @@ class MiniExiftool
     opt_params << (@composite ? '' : '-e ')
     opt_params << (@convert_encoding ? '-L ' : '')
     opt_params << (@coord_format ? "-c \"#{@coord_format}\"" : '')
-    cmd = %Q(#@@cmd -q -q -s -t #{opt_params} #{@@sep_op} #{Shellwords.escape(filename)})
+    cmd = %Q(#@@cmd -q -q -s -t #{opt_params} #{@@sep_op} #{MiniExiftool.escape(filename)})
     if run(cmd)
       parse_output
     else
@@ -162,7 +161,7 @@ class MiniExiftool
       arr_val.map! {|e| convert e}
       tag_params = ''
       arr_val.each do |v|
-        tag_params << %Q(-#{original_tag}=#{Shellwords.escape(v.to_s)} )
+        tag_params << %Q(-#{original_tag}=#{MiniExiftool.escape(v)} )
       end
       opt_params = ''
       opt_params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
@@ -442,6 +441,9 @@ class MiniExiftool
     tags
   end
 
+  def self.escape(val)
+    '"' << val.to_s.gsub(/\\/, '\\'*4).gsub(/"/, '\"') << '"'
+  end
 
   # Hash with indifferent access:
   # DateTimeOriginal == datetimeoriginal == date_time_original
