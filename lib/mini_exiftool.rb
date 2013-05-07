@@ -162,7 +162,7 @@ class MiniExiftool
       arr_val.map! {|e| convert e}
       tag_params = ''
       arr_val.each do |v|
-        tag_params << %Q(-#{original_tag}=#{Shellwords.escape(v.to_s)} )
+        tag_params << %Q(-#{original_tag}="#{v.to_s.gsub(/"/,'\"')}" )
       end
       opt_params = ''
       opt_params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
