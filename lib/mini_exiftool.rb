@@ -27,10 +27,10 @@ class MiniExiftool
   @@cmd = 'exiftool'
 
   # Hash of the standard options used when call MiniExiftool.new
-  @@opts = { :numerical => false, :composite => true, :convert_encoding => false, :ignore_minor_errors => false, :use_json => false, :timestamps => Time }
+  @@opts = { :numerical => false, :composite => true, :convert_encoding => false, :ignore_minor_errors => false, :timestamps => Time }
 
   attr_reader :filename
-  attr_accessor :numerical, :composite, :convert_encoding, :ignore_minor_errors, :errors, :timestamps, :use_json
+  attr_accessor :numerical, :composite, :convert_encoding, :ignore_minor_errors, :errors, :timestamps
 
   VERSION = '1.7.0'
 
@@ -56,7 +56,7 @@ class MiniExiftool
     @ignore_minor_errors = opts[:ignore_minor_errors]
     @timestamps = opts[:timestamps]
     @coord_format = opts[:coord_format]
-    @use_json = opts[:use_json]
+    @supports_json = MiniExiftool.exiftool_version >= '7.65'
     @values = TagHash.new
     @tag_names = TagHash.new
     @changed_values = TagHash.new
@@ -90,7 +90,7 @@ class MiniExiftool
     opt_params << (@composite ? '' : '-e ')
     opt_params << (@convert_encoding ? '-L ' : '')
     opt_params << (@coord_format ? "-c \"#{@coord_format}\"" : '')
-    opt_params << (@use_json ? '-j ' : '')
+    opt_params << (@supports_json ? '-j ' : '')
     cmd = %Q(#@@cmd -q -q -s -t #{opt_params} #{@@sep_op} #{MiniExiftool.escape(filename)})
     if run(cmd)
       parse_output
@@ -337,7 +337,7 @@ class MiniExiftool
   end
 
   def parse_output
-    if @use_json
+    if @supports_json
       JSON.parse(@output)[0].each do |tag,value|
         value = perform_conversions(value)
         set_value tag, value
