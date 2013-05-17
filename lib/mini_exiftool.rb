@@ -88,6 +88,7 @@ class MiniExiftool
     opt_params << (@numerical ? '-n ' : '')
     opt_params << (@composite ? '' : '-e ')
     opt_params << (@convert_encoding ? '-L ' : '')
+    opt_params << (@@use_json ? '-j ' : '')
     opt_params << (@coord_format ? "-c \"#{@coord_format}\"" : '')
     cmd = %Q(#@@cmd -q -q -s -t #{opt_params} #{@@sep_op} #{MiniExiftool.escape(filename)})
     if run(cmd)
@@ -296,6 +297,7 @@ class MiniExiftool
       @@separator = '@@'
       @@sep_op = '-sep @@'
     end
+    @@use_json = MiniExiftool.exiftool_version >= '7.65'
     @@setup_done = true
   end
 
@@ -335,9 +337,16 @@ class MiniExiftool
   end
 
   def parse_output
-    @output.each_line do |line|
-      tag, value = parse_line line
-      set_value tag, value
+    if @@use_json
+      JSON.parse(@output)[0].each do |tag,value|
+        value = perform_conversions(value)
+        set_value tag, value
+      end
+    else
+      @output.each_line do |line|
+        tag, value = parse_line line
+        set_value tag, value
+      end
     end
   end
 
