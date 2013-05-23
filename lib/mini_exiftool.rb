@@ -89,7 +89,7 @@ class MiniExiftool
     opt_params << (@composite ? '' : '-e ')
     opt_params << (@convert_encoding ? '-L ' : '')
     opt_params << (@coord_format ? "-c \"#{@coord_format}\"" : '')
-    cmd = %Q(#@@cmd -q -q -s -t #{opt_params} #{@@sep_op} #{MiniExiftool.escape(filename)})
+    cmd = %Q(#@@cmd -j -q -q -s -t #{opt_params} #{MiniExiftool.escape(filename)})
     if run(cmd)
       parse_output
     else
@@ -168,8 +168,8 @@ class MiniExiftool
       opt_params << (@convert_encoding ? '-L ' : '')
       opt_params << (@ignore_minor_errors ? '-m' : '')
       cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} #{tag_params} #{temp_filename})
-      if convert_encoding && cmd.respond_to?(:encode)
-        cmd.encode('ISO-8859-1')
+      if convert_encoding
+        cmd.encode!('ISO-8859-1')
       end
       result = run(cmd)
       unless result
@@ -288,14 +288,6 @@ class MiniExiftool
     return if @@setup_done
     @@error_file = Tempfile.new 'errors'
     @@error_file.close
-
-    if Float(exiftool_version) < 7.41
-      @@separator = ', '
-      @@sep_op = ''
-    else
-      @@separator = '@@'
-      @@sep_op = '-sep @@'
-    end
     @@setup_done = true
   end
 
@@ -304,9 +296,6 @@ class MiniExiftool
       $stderr.puts cmd
     end
     @output = `#{cmd} 2>#{@@error_file.path}`
-    if convert_encoding && @output.respond_to?(:force_encoding)
-      @output.force_encoding('ISO-8859-1')
-    end
     @status = $?
     unless @status.exitstatus == 0
       @error_text = File.readlines(@@error_file.path).join
@@ -335,50 +324,43 @@ class MiniExiftool
   end
 
   def parse_output
-    @output.each_line do |line|
-      tag, value = parse_line line
+    JSON.parse(@output)[0].each do |tag,value|
+      value = perform_conversions(value)
       set_value tag, value
     end
   end
 
-  def parse_line line
-    if line =~ /^([^\t]+)\t(.*)$/
-      tag, value = $1, perform_conversions($2)
-    else
-      raise MiniExiftool::Error.new("Malformed line #{line.inspect} of exiftool output.")
-    end
-    return [tag, value]
-  end
-
   def perform_conversions(value)
-      case value
-      when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
-        s = value.sub(/^(\d+):(\d+):/, '\1-\2-')
-        begin
-          if @timestamps == Time
-            value = Time.parse(s)
-            elsif @timestamps == DateTime
-            value = DateTime.parse(s)
-          else
-            raise MiniExiftool::Error.new("Value #@timestamps not allowed for option timestamps.")
-          end
-        rescue ArgumentError
-          value = false
+    return value unless value.kind_of?(String)
+    if convert_encoding
+      value.encode!('ISO-8859-1')
+    end
+    case value
+    when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
+      s = value.sub(/^(\d+):(\d+):/, '\1-\2-')
+      begin
+        if @timestamps == Time
+          value = Time.parse(s)
+        elsif @timestamps == DateTime
+          value = DateTime.parse(s)
+        else
+          raise MiniExiftool::Error.new("Value #@timestamps not allowed for option timestamps.")
         end
-      when /^\d+\.\d+$/
-        value = value.to_f
-      when /^0+[1-9]+$/
-        # nothing => String
-      when /^-?\d+$/
-        value = value.to_i
-      when %r(^(\d+)/(\d+)$)
-        value = Rational($1.to_i, $2.to_i)
-      when /^[\d ]+$/
-        # nothing => String
-      when /#{@@separator}/
-        value = value.split @@separator
+      rescue ArgumentError
+        value = false
       end
-      value
+    when /^\+\d+\.\d+$/
+      value = value.to_f
+    when /^0+[1-9]+$/
+      # nothing => String
+    when /^-?\d+$/
+      value = value.to_i
+    when %r(^(\d+)/(\d+)$)
+      value = Rational($1.to_i, $2.to_i)
+    when /^[\d ]+$/
+      # nothing => String
+    end
+    value
   end
 
   def set_value tag, value

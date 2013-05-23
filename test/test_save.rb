@@ -51,11 +51,7 @@ class TestSave < TestCase
 
   def test_encoding_conversion
     special_string = 'äöü'
-    if special_string.respond_to?(:encode)
-     special_string_latin1 = special_string.encode('ISO-8859-1')
-    else
-      special_string_latin1 = "\xE4\xF6\xFC"
-    end
+    special_string_latin1 = special_string.encode('ISO-8859-1')
     @mini_exiftool.title = special_string
     assert @mini_exiftool.save
     assert_equal false, @mini_exiftool.convert_encoding
@@ -64,9 +60,7 @@ class TestSave < TestCase
     @mini_exiftool.title = special_string_latin1
     assert @mini_exiftool.save
     assert_equal true, @mini_exiftool.convert_encoding
-    if special_string_latin1.respond_to?(:encode)
-      special_string_latin1.encode!('ISO-8859-1')
-    end
+    special_string_latin1.encode!('ISO-8859-1')
     assert_equal special_string_latin1, @mini_exiftool.title
   end
 

@@ -42,11 +42,9 @@ class TestRead < TestCase
 
   def test_encoding_conversion
     @mini_exiftool_converted = MiniExiftool.new @filename_test, :convert_encoding => true
-    assert_equal 'Abenddämmerung', @mini_exiftool.title
-    converted = "Abendd\344mmerung"
-    if converted.respond_to?(:force_encoding)
-      converted.force_encoding('ISO-8859-1')
-    end
+    title_utf8 = 'Abenddämmerung'
+    assert_equal title_utf8, @mini_exiftool.title
+    converted = title_utf8.encode('ISO-8859-1')
     assert_equal converted, @mini_exiftool_converted.title
   end
 
