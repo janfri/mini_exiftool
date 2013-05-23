@@ -6,7 +6,10 @@ Read and write access is done in a clean OO manner.
 
 == Requirements
 
-An installation of the Exiftool command-line application.
+Ruby 1.9 or higher and an installation of the Exiftool
+command-line application at least version 7.65.
+If you run on Ruby 1.8 or with a prior exiftool version
+install mini_exiftool version 1.x.x.
 Instructions for installation you can find under
 http://www.sno.phy.queensu.ca/~phil/exiftool/install.html .
 
@@ -23,6 +26,9 @@ install the gem with
 respectively (on *nix sytems)
  sudo gem install mini_exiftool
 
+If you need support of older versione (see Requirements above)
+  gem install --version "< 2.0.0" mini_exiftool
+
 Alternative you can download the tarball or zip file and run
  ruby setup.rb config
  ruby setup.rb setup
@@ -32,13 +38,15 @@ Alternative you can download the tarball or zip file and run
 
 The code is also hostet in a git repository on Gitorious at
 http://gitorious.org/projects/mini_exiftool
+and github at
+https://github.com/janfri/mini_exiftool
 feel free to contribute!
 
 == Author
-Jan Friedrich <janfri26 AT gmail DOT com>
+Jan Friedrich <janfri26@gmail.com>
 
 == Copyright / License
-Copyright (c) 2007-2011 by Jan Friedrich
+Copyright (c) 2007-2013 by Jan Friedrich
 
 Licensed under terms of the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1,
 February 1999 (see file COPYING for more details)
