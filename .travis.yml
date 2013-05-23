@@ -8,6 +8,7 @@ before_install:
   - perl Makefile.PL
   - make
   - sudo make install
+  - cd $TRAVIS_BUILD_DIR
   - exiftool -ver
   - gem install rim json
 rvm:
