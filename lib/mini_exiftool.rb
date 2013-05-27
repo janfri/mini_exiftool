@@ -27,10 +27,10 @@ class MiniExiftool
   @@cmd = 'exiftool'
 
   # Hash of the standard options used when call MiniExiftool.new
-  @@opts = { :numerical => false, :composite => true, :convert_encoding => false, :ignore_minor_errors => false, :timestamps => Time }
+  @@opts = { :numerical => false, :composite => true, :ignore_minor_errors => false, :timestamps => Time }
 
   attr_reader :filename
-  attr_accessor :numerical, :composite, :convert_encoding, :ignore_minor_errors, :errors, :timestamps
+  attr_accessor :numerical, :composite, :ignore_minor_errors, :errors, :timestamps
 
   VERSION = '2.0.0'
 
@@ -38,8 +38,6 @@ class MiniExiftool
   # * <code>:numerical</code> for numerical values, default is +false+
   # * <code>:composite</code> for including composite tags while loading,
   #   default is +true+
-  # * <code>:convert_encoding</code> convert encoding (See -L-option of
-  #   the exiftool command-line application, default is +false+)
   # * <code>:ignore_minor_errors</code> ignore minor errors (See -m-option
   # of the exiftool command-line application, default is +false+)
   # * <code>:coord_format</code> set format for GPS coordinates (See
@@ -55,7 +53,10 @@ class MiniExiftool
     opts = @@opts.merge opts
     @numerical = opts[:numerical]
     @composite = opts[:composite]
-    @convert_encoding = opts[:convert_encoding]
+    if opts[:convert_encoding]
+      warn 'Option :convert_encoding is not longer supported!'
+      warn 'Please use the String#encod* methods.'
+    end
     @ignore_minor_errors = opts[:ignore_minor_errors]
     @timestamps = opts[:timestamps]
     @coord_format = opts[:coord_format]
@@ -90,7 +91,6 @@ class MiniExiftool
     opt_params = ''
     opt_params << (@numerical ? '-n ' : '')
     opt_params << (@composite ? '' : '-e ')
-    opt_params << (@convert_encoding ? '-L ' : '')
     opt_params << (@coord_format ? "-c \"#{@coord_format}\"" : '')
     cmd = %Q(#@@cmd -j -q -q -s -t #{opt_params} #{MiniExiftool.escape(filename)})
     if run(cmd)
@@ -168,12 +168,8 @@ class MiniExiftool
       end
       opt_params = ''
       opt_params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
-      opt_params << (@convert_encoding ? '-L ' : '')
       opt_params << (@ignore_minor_errors ? '-m' : '')
       cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} #{tag_params} #{temp_filename})
-      if convert_encoding
-        cmd.encode!('ISO-8859-1')
-      end
       result = run(cmd)
       unless result
         all_ok = false
@@ -335,9 +331,6 @@ class MiniExiftool
 
   def perform_conversions(value)
     return value unless value.kind_of?(String)
-    if convert_encoding
-      value.encode!('ISO-8859-1')
-    end
     case value
     when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
       s = value.sub(/^(\d+):(\d+):/, '\1-\2-')
@@ -374,7 +367,6 @@ class MiniExiftool
   def set_attributes_by_heuristic
     self.composite = tags.include?('ImageSize') ? true : false
     self.numerical = self.file_size.kind_of?(Integer) ? true : false
-    # TODO: Is there a heuristic to determine @convert_encoding?
     self.timestamps = self.FileModifyDate.kind_of?(DateTime) ? DateTime : Time
   end
 

@@ -40,12 +40,10 @@ class TestRead < TestCase
     assert_equal ['Natur'], Array(@mini_exiftool['SupplementalCategories'])
   end
 
-  def test_encoding_conversion
-    @mini_exiftool_converted = MiniExiftool.new @filename_test, :convert_encoding => true
-    title_utf8 = 'Abenddämmerung'
-    assert_equal title_utf8, @mini_exiftool.title
-    converted = title_utf8.encode('ISO-8859-1')
-    assert_equal converted, @mini_exiftool_converted.title
+  def test_value_encoding
+    title= 'Abenddämmerung'
+    assert_equal Encoding::UTF_8, @mini_exiftool.title.encoding
+    assert_equal title, @mini_exiftool.title
   end
 
 end

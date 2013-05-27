@@ -49,19 +49,13 @@ class TestSave < TestCase
     assert_equal @org_md5, Digest::MD5.hexdigest(File.read(@temp_filename))
   end
 
-  def test_encoding_conversion
+  def test_value_encoding
     special_string = 'äöü'
-    special_string_latin1 = special_string.encode('ISO-8859-1')
     @mini_exiftool.title = special_string
     assert @mini_exiftool.save
-    assert_equal false, @mini_exiftool.convert_encoding
+    @mini_exiftool.reload
+    assert_equal Encoding::UTF_8, @mini_exiftool.title.encoding
     assert_equal special_string, @mini_exiftool.title
-    @mini_exiftool.convert_encoding = true
-    @mini_exiftool.title = special_string_latin1
-    assert @mini_exiftool.save
-    assert_equal true, @mini_exiftool.convert_encoding
-    special_string_latin1.encode!('ISO-8859-1')
-    assert_equal special_string_latin1, @mini_exiftool.title
   end
 
   def test_save_bang
