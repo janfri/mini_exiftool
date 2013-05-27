@@ -42,6 +42,9 @@ class MiniExiftool
   #   the exiftool command-line application, default is +false+)
   # * <code>:ignore_minor_errors</code> ignore minor errors (See -m-option
   # of the exiftool command-line application, default is +false+)
+  # * <code>:coord_format</code> set format for GPS coordinates (See
+  #   -c-option of the exiftool command-line application, default is +nil+
+  #   that means exiftool standard)
   # * <code>:timestamps</code> generating DateTime objects instead of
   #   Time objects if set to <code>DateTime</code>, default is +Time+
   #
