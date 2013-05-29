@@ -14,10 +14,11 @@
 #
 
 require 'fileutils'
-require 'tempfile'
+require 'json'
 require 'pstore'
 require 'rational'
 require 'set'
+require 'tempfile'
 require 'time'
 
 # Simple OO access to the Exiftool command-line application.
