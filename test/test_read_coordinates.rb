@@ -9,11 +9,11 @@ class TestReadCoordinates < TestCase
   end
 
   def test_access_coordinates
-    mini_exiftool_coord = MiniExiftool.new @filename_test, :coord_format => "%+.6f"
+    mini_exiftool_coord = MiniExiftool.new @filename_test, :coord_format => "%+.6f degrees"
     # checking float equality is here ok ;-)
-    assert_equal +43.653167, mini_exiftool_coord['GPSLatitude']
-    assert_equal -79.373167, mini_exiftool_coord['GPSLongitude']
-    assert_equal '+43.653167, -79.373167', mini_exiftool_coord['GPSPosition']
+    assert_match /^\+43.653167 degrees/, mini_exiftool_coord['GPSLatitude']
+    assert_match /^-79.373167 degrees/, mini_exiftool_coord['GPSLongitude']
+    assert_match /^\+43.653167 degrees.*, -79.373167 degrees/, mini_exiftool_coord['GPSPosition']
   end
 
 end
