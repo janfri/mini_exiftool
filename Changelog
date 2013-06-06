@@ -1,3 +1,10 @@
+2.1.0
+- insert require 'json'
+- Drop option :convert_encoding (use Ruby String
+  methods instead)
+- Make the test_access_coordinate work on different
+  exiftool version.
+
 2.0.0
 - Drop Ruby 1.8 compatibility.
 - Using JSON to parse exiftool output (need
