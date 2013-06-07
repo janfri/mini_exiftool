@@ -113,7 +113,7 @@ class MiniExiftool
   end
 
   # Set the value of a tag.
-  def []=(tag, val)
+  def []= tag, val
     @changed_values[tag] = val
   end
 
@@ -211,7 +211,8 @@ class MiniExiftool
     to_hash.to_yaml
   end
 
-  # Create a MiniExiftool instance from a hash. Default value conversions will be applied if neccesary.
+  # Create a MiniExiftool instance from a hash. Default value
+  # conversions will be applied if neccesary.
   def self.from_hash hash
     instance = MiniExiftool.new
     instance.initialize_from_hash hash
@@ -330,7 +331,7 @@ class MiniExiftool
     end
   end
 
-  def perform_conversions(value)
+  def perform_conversions value
     return value unless value.kind_of?(String)
     case value
     when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
@@ -409,7 +410,7 @@ class MiniExiftool
     tags
   end
 
-  def self.escape(val)
+  def self.escape val
     '"' << val.to_s.gsub(/\\/, '\\'*4).gsub(/"/, '\"') << '"'
   end
 
