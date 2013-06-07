@@ -371,16 +371,6 @@ class MiniExiftool
     self.timestamps = self.FileModifyDate.kind_of?(DateTime) ? DateTime : Time
   end
 
-  def temp_filename
-    unless @temp_filename
-      temp_file = Tempfile.new('mini-exiftool')
-      temp_file.close
-      FileUtils.cp(@filename, temp_file.path)
-      @temp_filename = temp_file.path
-    end
-    @temp_filename
-  end
-
   def self.pstore_get attribute
     load_or_create_pstore unless defined? @@pstore
     result = nil
@@ -395,9 +385,9 @@ class MiniExiftool
     home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
     subdir = RUBY_PLATFORM =~ /\bmswin/i ? '_mini_exiftool' : '.mini_exiftool'
     FileUtils.mkdir_p(File.join(home, subdir))
-    filename = File.join(home, subdir, 'exiftool_tags_' << exiftool_version.gsub('.', '_') << '.pstore')
-    @@pstore = PStore.new filename
-    if !File.exist?(filename) || File.size(filename) == 0
+    pstore_filename = File.join(home, subdir, 'exiftool_tags_' << exiftool_version.gsub('.', '_') << '.pstore')
+    @@pstore = PStore.new pstore_filename
+    if !File.exist?(pstore_filename) || File.size(pstore_filename) == 0
       @@pstore.transaction do |ps|
         ps[:all_tags] = all_tags = determine_tags('list')
         ps[:writable_tags] = determine_tags('listw')
