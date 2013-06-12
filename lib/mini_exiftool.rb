@@ -29,13 +29,15 @@ class MiniExiftool
   @@cmd = 'exiftool'
 
   # Hash of the standard options used when call MiniExiftool.new
-  @@opts = { :numerical => false, :composite => true, :ignore_minor_errors => false, :timestamps => Time }
+  @@opts = { :numerical => false, :composite => true, :ignore_minor_errors => false,
+   :replace_invalid_chars => false, :timestamps => Time }
 
   # Encoding of the filesystem (filenames in command line)
   @@fs_enc = Encoding.find('filesystem')
 
   attr_reader :filename
-  attr_accessor :numerical, :composite, :ignore_minor_errors, :errors, :timestamps
+  attr_accessor :numerical, :composite, :ignore_minor_errors, :errors,
+    :replace_invalid_chars, :timestamps
 
   VERSION = '2.1.0'
 
@@ -44,10 +46,13 @@ class MiniExiftool
   # * <code>:composite</code> for including composite tags while loading,
   #   default is +true+
   # * <code>:ignore_minor_errors</code> ignore minor errors (See -m-option
-  # of the exiftool command-line application, default is +false+)
+  #   of the exiftool command-line application, default is +false+)
   # * <code>:coord_format</code> set format for GPS coordinates (See
   #   -c-option of the exiftool command-line application, default is +nil+
   #   that means exiftool standard)
+  # * <code>:replace_invalid_chars</code> replace string for invalid
+  #   UTF-8 characters or +false+ if no replacing should be done,
+  #   default is +false+
   # * <code>:timestamps</code> generating DateTime objects instead of
   #   Time objects if set to <code>DateTime</code>, default is +Time+
   #
@@ -65,6 +70,7 @@ class MiniExiftool
     @ignore_minor_errors = opts[:ignore_minor_errors]
     @timestamps = opts[:timestamps]
     @coord_format = opts[:coord_format]
+    @replace_invalid_chars = opts[:replace_invalid_chars]
     @values = TagHash.new
     @tag_names = TagHash.new
     @changed_values = TagHash.new
@@ -77,6 +83,13 @@ class MiniExiftool
       set_value tag, convert_after_load(value)
     end
     set_attributes_by_heuristic
+    self
+  end
+
+  def initialize_from_json json # :nodoc:
+    @output = json
+    @errors.clear
+    parse_output
     self
   end
 
@@ -220,6 +233,14 @@ class MiniExiftool
     instance
   end
 
+  # Create a MiniExiftool instance from JSON data. Default value
+  # conversions will be applied if neccesary.
+  def self.from_json json, opts={}
+    instance = MiniExiftool.new nil, opts
+    instance.initialize_from_json json
+    instance
+  end
+
   # Create a MiniExiftool instance from YAML data created with
   # MiniExiftool#to_yaml
   def self.from_yaml yaml
@@ -305,6 +326,7 @@ class MiniExiftool
     @status = $?
     unless @status.exitstatus == 0
       @error_text = File.readlines(@@error_file.path).join
+      @error_text.force_encoding('UTF-8')
       return false
     else
       @error_text = ''
@@ -330,6 +352,10 @@ class MiniExiftool
   end
 
   def parse_output
+    @output.force_encoding('UTF-8')
+    if @replace_invalid_chars && !@output.valid_encoding?
+      @output.encode!('UTF-16le', invalid: :replace, replace: @replace_invalid_chars).encode!('UTF-8')
+    end
     JSON.parse(@output)[0].each do |tag,value|
       value = convert_after_load(value)
       set_value tag, value
