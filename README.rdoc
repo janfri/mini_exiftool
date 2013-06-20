@@ -53,6 +53,6 @@ February 1999 (see file COPYING for more details)
 
 == Usage
 
-For further information about using MiniExiftool read the
-Tutorial[link://file.Tutorial.html] and have a look at the examples in
-directory examples.
+For further information about using MiniExiftool read the Tutorial.rdoc
+in the project root folder and have a look at the examples in directory
+examples.
