@@ -30,6 +30,9 @@ class MiniExiftool
   # Hash of the standard options used when call MiniExiftool.new
   @@opts = { :numerical => false, :composite => true, :ignore_minor_errors => false, :timestamps => Time }
 
+  # Encoding of the filesystem (filenames in command line)
+  @@fs_enc = Encoding.find('filesystem')
+
   attr_reader :filename
   attr_accessor :numerical, :composite, :ignore_minor_errors, :errors, :timestamps
 
@@ -89,12 +92,11 @@ class MiniExiftool
     @values.clear
     @tag_names.clear
     @changed_values.clear
-    opt_params = ''
-    opt_params << (@numerical ? '-n ' : '')
-    opt_params << (@composite ? '' : '-e ')
-    opt_params << (@coord_format ? "-c \"#{@coord_format}\"" : '')
-    cmd = %Q(#@@cmd -j -q -q -s -t #{opt_params} #{MiniExiftool.escape(filename)})
-    if run(cmd)
+    params = '-j '
+    params << (@numerical ? '-n ' : '')
+    params << (@composite ? '' : '-e ')
+    params << (@coord_format ? "-c \"#{@coord_format}\"" : '')
+    if run(cmd_gen(params, @filename))
       parse_output
     else
       raise MiniExiftool::Error.new(@error_text)
@@ -163,15 +165,13 @@ class MiniExiftool
       original_tag = MiniExiftool.original_tag(tag)
       arr_val = val.kind_of?(Array) ? val : [val]
       arr_val.map! {|e| convert e}
-      tag_params = ''
+      params = '-q -P -overwrite_original '
+      params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
+      params << (@ignore_minor_errors ? '-m ' : '')
       arr_val.each do |v|
-        tag_params << %Q(-#{original_tag}=#{MiniExiftool.escape(v)} )
+        params << %Q(-#{original_tag}=#{MiniExiftool.escape(v)} )
       end
-      opt_params = ''
-      opt_params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
-      opt_params << (@ignore_minor_errors ? '-m' : '')
-      cmd = %Q(#@@cmd -q -P -overwrite_original #{opt_params} #{tag_params} #{temp_filename})
-      result = run(cmd)
+      result = run(cmd_gen(params, temp_filename))
       unless result
         all_ok = false
         @errors[tag] = @error_text.gsub(/Nothing to do.\n\z/, '').chomp
@@ -291,6 +291,11 @@ class MiniExiftool
     @@error_file.close
     @@setup_done = true
   end
+
+  def cmd_gen arg_str='', filename
+    [@@cmd, arg_str.encode('UTF-8'), MiniExiftool.escape(filename.encode(@@fs_enc))].map {|s| s.force_encoding('UTF-8')}.join(' ')
+  end
+
 
   def run cmd
     if $DEBUG
