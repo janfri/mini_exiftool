@@ -169,7 +169,7 @@ class MiniExiftool
       params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
       params << (@ignore_minor_errors ? '-m ' : '')
       arr_val.each do |v|
-        params << %Q(-#{original_tag}=#{MiniExiftool.escape(v)} )
+        params << %Q(-#{original_tag}=#{escape(v)} )
       end
       result = run(cmd_gen(params, temp_filename))
       unless result
@@ -293,9 +293,8 @@ class MiniExiftool
   end
 
   def cmd_gen arg_str='', filename
-    [@@cmd, arg_str.encode('UTF-8'), MiniExiftool.escape(filename.encode(@@fs_enc))].map {|s| s.force_encoding('UTF-8')}.join(' ')
+    [@@cmd, arg_str.encode('UTF-8'), escape(filename.encode(@@fs_enc))].map {|s| s.force_encoding('UTF-8')}.join(' ')
   end
-
 
   def run cmd
     if $DEBUG
@@ -415,8 +414,19 @@ class MiniExiftool
     tags
   end
 
-  def self.escape val
-    '"' << val.to_s.gsub(/\\/, '\\'*4).gsub(/"/, '\"') << '"'
+  # Check if running on windows by trying to load win32ole ;-)
+  ___old_verbose___, $VERBOSE = $VERBOSE, nil
+  @@running_on_windows = begin; require 'win32ole'; true; rescue LoadError; false; end
+  $VERBOSE = ___old_verbose___
+
+  if @@running_on_windows
+    def escape val
+      '"' << val.to_s.gsub(/([\\"])/, "\\\\\\1") << '"'
+    end
+  else
+    def escape val
+      '"' << val.to_s.gsub(/([\\"$])/, "\\\\\\1") << '"'
+    end
   end
 
   # Hash with indifferent access:
