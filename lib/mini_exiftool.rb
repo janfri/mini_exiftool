@@ -159,7 +159,7 @@ class MiniExiftool
     temp_file = Tempfile.new('mini_exiftool')
     temp_file.close
     temp_filename = temp_file.path
-    FileUtils.cp filename, temp_filename
+    FileUtils.cp filename.encode(@@fs_enc), temp_filename
     all_ok = true
     @changed_values.each do |tag, val|
       original_tag = MiniExiftool.original_tag(tag)
@@ -178,7 +178,7 @@ class MiniExiftool
       end
     end
     if all_ok
-      FileUtils.cp temp_filename, filename
+      FileUtils.cp temp_filename, filename.encode(@@fs_enc)
       reload
     end
     temp_file.delete
