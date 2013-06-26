@@ -2,7 +2,7 @@
 require 'helpers_for_test'
 require 'tmpdir'
 
-class TestFilesystem < TestCase
+class TestFilenameAccess < TestCase
 
 
   @@fs_enc = Encoding.find('filesystem')
