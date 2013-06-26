@@ -17,6 +17,7 @@ require 'fileutils'
 require 'json'
 require 'pstore'
 require 'rational'
+require 'rbconfig'
 require 'set'
 require 'tempfile'
 require 'time'
@@ -385,10 +386,12 @@ class MiniExiftool
     result
   end
 
+  @@running_on_windows = /mswin|mingw|cygwin/ === RbConfig::CONFIG['host_os']
+
   def self.load_or_create_pstore
     # This will hopefully work on *NIX and Windows systems
     home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
-    subdir = RUBY_PLATFORM =~ /\bmswin/i ? '_mini_exiftool' : '.mini_exiftool'
+    subdir = @@running_on_windows ? '_mini_exiftool' : '.mini_exiftool'
     FileUtils.mkdir_p(File.join(home, subdir))
     pstore_filename = File.join(home, subdir, 'exiftool_tags_' << exiftool_version.gsub('.', '_') << '.pstore')
     @@pstore = PStore.new pstore_filename
@@ -413,11 +416,6 @@ class MiniExiftool
     end
     tags
   end
-
-  # Check if running on windows by trying to load win32ole ;-)
-  ___old_verbose___, $VERBOSE = $VERBOSE, nil
-  @@running_on_windows = begin; require 'win32ole'; true; rescue LoadError; false; end
-  $VERBOSE = ___old_verbose___
 
   if @@running_on_windows
     def escape val
