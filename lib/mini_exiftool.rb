@@ -74,7 +74,7 @@ class MiniExiftool
 
   def initialize_from_hash hash # :nodoc:
     hash.each_pair do |tag,value|
-      set_value tag, perform_conversions(value)
+      set_value tag, convert_after_load(value)
     end
     set_attributes_by_heuristic
     self
@@ -165,7 +165,7 @@ class MiniExiftool
     @changed_values.each do |tag, val|
       original_tag = MiniExiftool.original_tag(tag)
       arr_val = val.kind_of?(Array) ? val : [val]
-      arr_val.map! {|e| convert e}
+      arr_val.map! {|e| convert_before_save(e)}
       params = '-q -P -overwrite_original '
       params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
       params << (@ignore_minor_errors ? '-m ' : '')
@@ -312,7 +312,7 @@ class MiniExiftool
     end
   end
 
-  def convert val
+  def convert_before_save val
     case val
     when Time
       val = val.strftime('%Y:%m:%d %H:%M:%S')
@@ -331,12 +331,12 @@ class MiniExiftool
 
   def parse_output
     JSON.parse(@output)[0].each do |tag,value|
-      value = perform_conversions(value)
+      value = convert_after_load(value)
       set_value tag, value
     end
   end
 
-  def perform_conversions value
+  def convert_after_load value
     return value unless value.kind_of?(String)
     case value
     when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
