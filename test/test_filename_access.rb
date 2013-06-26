@@ -1,9 +1,11 @@
 # -- encoding: utf-8 --
 require 'helpers_for_test'
+require 'rbconfig'
 require 'tmpdir'
 
 class TestFilenameAccess < TestCase
 
+  @@running_on_windows = /mswin|mingw|cygwin/ === RbConfig::CONFIG['host_os']
 
   @@fs_enc = Encoding.find('filesystem')
 
@@ -38,8 +40,10 @@ class TestFilenameAccess < TestCase
     do_testing_with 'filename_with_Ümläüts.jpg'
   end
 
-  def test_access_filename_with_doublequotes
-    do_testing_with 'filename_with_"doublequotes"_inside.jpg'
+  unless @@running_on_windows
+    def test_access_filename_with_doublequotes
+      do_testing_with 'filename_with_"doublequotes"_inside.jpg'
+    end
   end
 
   def test_access_filename_with_dollar_sign
