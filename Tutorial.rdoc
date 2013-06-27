@@ -67,6 +67,8 @@ method:
   Array(p1.keywords) # => ['red']
   Array(p3.keywords) # => ['red', 'yellow', 'green']
 
+=== Using options
+
 The Exiftool command-line application has an option (-n) to get values
 as numbers if possible, in MiniExiftool you can do this with setting
 the <code>:numerical</code> option to +true+ while generating a new
@@ -94,6 +96,17 @@ of Time objects.
 There is another option <code>:composite</code>. If this is set to
 +false+ the composite tags are not calculated by the exiftool
 command-line application (option -e).
+
+Further options are
+* <code>:ignore_minor_errors</code> to ignore minor
+  errors (See -m-option of the exiftool command-line application,
+  default is +false+)
+* <code>:coord_format</code> set format for GPS coordinates (See
+  -c-option of the exiftool command-line application, default is +nil+
+  that means exiftool standard)
+* <code>:replace_invalid_chars</code> replace string for invalid
+  UTF-8 characters or +false+ if no replacing should be done,
+  default is +false+
 
 === Further Example
 
@@ -135,5 +148,4 @@ You should also look at the rdoc information of MiniExiftool.
 
 === Further Examples
 
-See external_photo.rb[link://file.external_photo.html], print_portraits.rb[link://file.print_portraits.html] and shift_time.rb[link://file.shift_time.html]  in the +examples+ directory.
-
+Have a look in the examples folder of MiniExiftool.
