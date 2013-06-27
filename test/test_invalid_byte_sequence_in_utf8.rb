@@ -2,6 +2,9 @@
 require 'helpers_for_test'
 require 'json'
 
+# Thanks to Chris Salzberg (aka shioyama) and
+# Robert May (aka robotmay) for precious hints
+
 class TestInvalidByteSequenceInUtf8 < TestCase
 
   def setup

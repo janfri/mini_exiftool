@@ -1,3 +1,18 @@
+2.2.0
+The Encoding Release
+- New option :replace_invalid_chars to handle "bad data"
+  invalid byte sequences in UTF-8
+  Thanks to Chris Salzberg (aka shioyama) and
+  Robert May (aka robotmay) for precious hints
+- Support of different encodings for commandline params
+  and filenames (neccessary to support Windows)
+  to allow filenames with special chars
+  Thanks to uwe58 and others for hints
+- Doing different commandline escaping for windows and POSIX
+  systems
+  Thanks to Michael Dungan for the hint
+- Update Tutorial
+
 2.1.0
 - insert require 'json'
 - Drop option :convert_encoding (use Ruby String

@@ -3,6 +3,8 @@ require 'helpers_for_test'
 require 'rbconfig'
 require 'tmpdir'
 
+# Thanks to uwe58 and others for hints
+
 class TestFilenameAccess < TestCase
 
   @@running_on_windows = /mswin|mingw|cygwin/ === RbConfig::CONFIG['host_os']
@@ -47,6 +49,7 @@ class TestFilenameAccess < TestCase
   end
 
   def test_access_filename_with_dollar_sign
+    # Thanks to Michael Dungan for the hint
     do_testing_with 'filename_with_$_sign.jpg'
   end
 
