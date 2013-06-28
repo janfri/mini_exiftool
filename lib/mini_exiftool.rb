@@ -80,7 +80,7 @@ class MiniExiftool
 
   def initialize_from_hash hash # :nodoc:
     hash.each_pair do |tag,value|
-      set_value tag, convert_after_load(value)
+      set_value tag, convert_after_load(tag, value)
     end
     set_attributes_by_heuristic
     self
@@ -357,13 +357,17 @@ class MiniExiftool
       @output.encode!('UTF-16le', invalid: :replace, replace: @replace_invalid_chars).encode!('UTF-8')
     end
     JSON.parse(@output)[0].each do |tag,value|
-      value = convert_after_load(value)
+      value = convert_after_load(tag, value)
       set_value tag, value
     end
   end
 
-  def convert_after_load value
+  def convert_after_load tag, value
     return value unless value.kind_of?(String)
+    if %w(sourcefile filename directory).include?(MiniExiftool.unify(tag))
+      # ignore filesystem relevant tags to avoid encoding problems
+      return nil
+    end
     case value
     when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
       s = value.sub(/^(\d+):(\d+):/, '\1-\2-')
