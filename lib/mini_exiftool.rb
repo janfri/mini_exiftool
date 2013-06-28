@@ -39,7 +39,7 @@ class MiniExiftool
   attr_accessor :numerical, :composite, :ignore_minor_errors, :errors,
     :replace_invalid_chars, :timestamps
 
-  VERSION = '2.2.0'
+  VERSION = '2.2.1'
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+

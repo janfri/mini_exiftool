@@ -1,3 +1,7 @@
+2.2.1
+- Bugfix: Ignore filename specific tags to avoid encoding
+  confusions.
+
 2.2.0
 The Encoding Release
 - New option :replace_invalid_chars to handle "bad data"
