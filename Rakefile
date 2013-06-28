@@ -1,7 +1,6 @@
 require 'rim'
 require 'rim/check_version'
 require 'rim/gem'
-require 'rim/rdoc'
 require 'rim/test'
 
 $:.unshift 'lib'
@@ -14,8 +13,7 @@ Rim.setup do |p|
   p.email = 'janfri26@gmail.com'
   p.summary = 'This library is wrapper for the Exiftool command-line application (http://www.sno.phy.queensu.ca/~phil/exiftool).'
   p.homepage = 'http://gitorious.org/mini_exiftool'
-  p.gem_files << 'Tutorial.rdoc'
-  p.rdoc_files << 'Tutorial.rdoc'
+  # p.gem_files << 'Tutorial.rdoc'
   p.install_message = %q{
 +-----------------------------------------------------------------------+
 | Please ensure you have installed exiftool at least version 7.65       |
