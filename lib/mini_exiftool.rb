@@ -35,8 +35,19 @@ class MiniExiftool
   # Encoding of the filesystem (filenames in command line)
   @@fs_enc = Encoding.find('filesystem')
 
-  attr_reader :filename
-  attr_accessor :numerical, :composite, :ignore_minor_errors, :errors,
+  def self.opts_accessor *attrs
+    attrs.each do |a|
+      define_method a do
+        @opts[a]
+      end
+      define_method "#{a}=" do |val|
+        @opts[a] = val
+      end
+    end
+  end
+
+  attr_reader :filename, :errors
+  opts_accessor :numerical, :composite, :ignore_minor_errors,
     :replace_invalid_chars, :timestamps
 
   VERSION = '2.2.1'
@@ -60,17 +71,11 @@ class MiniExiftool
   #   therefore they use <em>your local timezone</em>, DateTime objects instead
   #   are created <em>without timezone</em>!
   def initialize filename=nil, opts={}
-    opts = @@opts.merge opts
-    @numerical = opts[:numerical]
-    @composite = opts[:composite]
-    if opts[:convert_encoding]
+    @opts = @@opts.merge opts
+    if @opts[:convert_encoding]
       warn 'Option :convert_encoding is not longer supported!'
       warn 'Please use the String#encod* methods.'
     end
-    @ignore_minor_errors = opts[:ignore_minor_errors]
-    @timestamps = opts[:timestamps]
-    @coord_format = opts[:coord_format]
-    @replace_invalid_chars = opts[:replace_invalid_chars]
     @values = TagHash.new
     @tag_names = TagHash.new
     @changed_values = TagHash.new
@@ -107,9 +112,9 @@ class MiniExiftool
     @tag_names.clear
     @changed_values.clear
     params = '-j '
-    params << (@numerical ? '-n ' : '')
-    params << (@composite ? '' : '-e ')
-    params << (@coord_format ? "-c \"#{@coord_format}\"" : '')
+    params << (@opts[:numerical] ? '-n ' : '')
+    params << (@opts[:composite] ? '' : '-e ')
+    params << (@opts[:coord_format] ? "-c \"#{@opts[:coord_format]}\"" : '')
     if run(cmd_gen(params, @filename))
       parse_output
     else
@@ -181,7 +186,7 @@ class MiniExiftool
       arr_val.map! {|e| convert_before_save(e)}
       params = '-q -P -overwrite_original '
       params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
-      params << (@ignore_minor_errors ? '-m ' : '')
+      params << (@opts[:ignore_minor_errors] ? '-m ' : '')
       arr_val.each do |v|
         params << %Q(-#{original_tag}=#{escape(v)} )
       end
@@ -202,7 +207,7 @@ class MiniExiftool
   def save!
     unless save
       err = []
-      self.errors.each do |key, value|
+      @errors.each do |key, value|
         err << "(#{key}) #{value}"
       end
       raise MiniExiftool::Error.new("MiniExiftool couldn't save. The following errors occurred: #{err.empty? ? "None" : err.join(", ")}")
@@ -353,8 +358,8 @@ class MiniExiftool
 
   def parse_output
     @output.force_encoding('UTF-8')
-    if @replace_invalid_chars && !@output.valid_encoding?
-      @output.encode!('UTF-16le', invalid: :replace, replace: @replace_invalid_chars).encode!('UTF-8')
+    if @opts[:replace_invalid_chars] && !@output.valid_encoding?
+      @output.encode!('UTF-16le', invalid: :replace, replace: @opts[:replace_invalid_chars]).encode!('UTF-8')
     end
     JSON.parse(@output)[0].each do |tag,value|
       value = convert_after_load(tag, value)
@@ -372,12 +377,12 @@ class MiniExiftool
     when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
       s = value.sub(/^(\d+):(\d+):/, '\1-\2-')
       begin
-        if @timestamps == Time
+        if @opts[:timestamps] == Time
           value = Time.parse(s)
-        elsif @timestamps == DateTime
+        elsif @opts[:timestamps] == DateTime
           value = DateTime.parse(s)
         else
-          raise MiniExiftool::Error.new("Value #@timestamps not allowed for option timestamps.")
+          raise MiniExiftool::Error.new("Value #{@opts[:timestamps]} not allowed for option timestamps.")
         end
       rescue ArgumentError
         value = false
