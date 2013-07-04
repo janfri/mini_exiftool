@@ -77,7 +77,6 @@ class MiniExiftool
       warn 'Please use the String#encod* methods.'
     end
     @values = TagHash.new
-    @tag_names = TagHash.new
     @changed_values = TagHash.new
     @errors = TagHash.new
     load filename unless filename.nil?
@@ -109,7 +108,6 @@ class MiniExiftool
     end
     @filename = filename
     @values.clear
-    @tag_names.clear
     @changed_values.clear
     params = '-j '
     params << (@opts[:numerical] ? '-n ' : '')
@@ -162,7 +160,7 @@ class MiniExiftool
 
   # Returns an array of the tags (original tag names) of the read file.
   def tags
-    @values.keys.map { |key| @tag_names[key] }
+    @values.keys.map { |key| MiniExiftool.original_tag(key) }
   end
 
   # Returns an array of all changed tags.
@@ -219,7 +217,7 @@ class MiniExiftool
   def to_hash
     result = {}
     @values.each do |k,v|
-      result[@tag_names[k]] = v
+      result[MiniExiftool.original_tag(k)] = v
     end
     result
   end
@@ -402,7 +400,6 @@ class MiniExiftool
   end
 
   def set_value tag, value
-    @tag_names[tag] = tag
     @values[tag] = value
   end
 
