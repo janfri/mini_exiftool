@@ -25,6 +25,8 @@ require 'time'
 # Simple OO access to the Exiftool command-line application.
 class MiniExiftool
 
+  VERSION = '2.2.1'
+
   # Name of the Exiftool command-line application
   @@cmd = 'exiftool'
 
@@ -47,10 +49,19 @@ class MiniExiftool
   end
 
   attr_reader :filename, :errors
+
   opts_accessor :numerical, :composite, :ignore_minor_errors,
     :replace_invalid_chars, :timestamps
 
-  VERSION = '2.2.1'
+  @@encoding_types = %w(exif iptc xmp png id3 pdf photoshop quicktime aiff mie vorbis)
+
+  def self.encoding_opt enc_type
+    (enc_type.to_s + '_encoding').to_sym
+  end
+
+  @@encoding_types.each do |enc_type|
+    opts_accessor encoding_opt(enc_type)
+  end
 
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
@@ -70,6 +81,14 @@ class MiniExiftool
   #   <b>ATTENTION:</b> Time objects are created using <code>Time.local</code>
   #   therefore they use <em>your local timezone</em>, DateTime objects instead
   #   are created <em>without timezone</em>!
+  # * <code>:exif_encoding</code>, <code>:iptc_encoding</code>,
+  #   <code>:xmp_encoding</code>, <code>:png_encoding</code>,
+  #   <code>:id3_encoding</code>, <code>:pdf_encoding</code>,
+  #   <code>:photoshop_encoding</code>, <code>:quicktime_encoding</code>,
+  #   <code>:aiff_encoding</code>, <code>:mie_encoding</code>,
+  #   <code>:vorbis_encoding</code> to set this specific encoding (see
+  #   -charset option of the exiftool command-line application, default is
+  #   +nil+: no encoding specified)
   def initialize filename=nil, opts={}
     @opts = @@opts.merge opts
     if @opts[:convert_encoding]
@@ -113,6 +132,11 @@ class MiniExiftool
     params << (@opts[:numerical] ? '-n ' : '')
     params << (@opts[:composite] ? '' : '-e ')
     params << (@opts[:coord_format] ? "-c \"#{@opts[:coord_format]}\"" : '')
+    @@encoding_types.each do |enc_type|
+      if enc_val = @opts[MiniExiftool.encoding_opt(enc_type)]
+        params << "-charset #{enc_type}=#{enc_val} "
+      end
+    end
     if run(cmd_gen(params, @filename))
       parse_output
     else
