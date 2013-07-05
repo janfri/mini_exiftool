@@ -1,3 +1,10 @@
+2.3.0
+- New options :exif_encoding, :iptc_encodings,
+  :xmp_encodings etc. to change specific encodings
+  See -charset option of the exiftool commandline
+  application
+- Some internal improvements
+
 2.2.1
 - Bugfix: Ignore filename specific tags to avoid encoding
   confusions.
