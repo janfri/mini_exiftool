@@ -252,8 +252,8 @@ class MiniExiftool
 
   # Create a MiniExiftool instance from a hash. Default value
   # conversions will be applied if neccesary.
-  def self.from_hash hash
-    instance = MiniExiftool.new
+  def self.from_hash hash, opts={}
+    instance = MiniExiftool.new nil, opts
     instance.initialize_from_hash hash
     instance
   end
@@ -268,8 +268,8 @@ class MiniExiftool
 
   # Create a MiniExiftool instance from YAML data created with
   # MiniExiftool#to_yaml
-  def self.from_yaml yaml
-    MiniExiftool.from_hash YAML.load(yaml)
+  def self.from_yaml yaml, opts={}
+    MiniExiftool.from_hash YAML.load(yaml), opts
   end
 
   # Returns the command name of the called Exiftool application.
@@ -377,11 +377,15 @@ class MiniExiftool
   end
 
   def parse_output
+    adapt_encoding
+    set_values JSON.parse(@output).first
+  end
+
+  def adapt_encoding
     @output.force_encoding('UTF-8')
     if @opts[:replace_invalid_chars] && !@output.valid_encoding?
       @output.encode!('UTF-16le', invalid: :replace, replace: @opts[:replace_invalid_chars]).encode!('UTF-8')
     end
-    set_values JSON.parse(@output).first
   end
 
   def convert_after_load tag, value
