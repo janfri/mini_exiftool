@@ -102,10 +102,8 @@ class MiniExiftool
   end
 
   def initialize_from_hash hash # :nodoc:
-    hash.each_pair do |tag,value|
-      set_value tag, convert_after_load(tag, value)
-    end
-    set_attributes_by_heuristic
+    set_values hash
+    set_opts_by_heuristic
     self
   end
 
@@ -383,10 +381,7 @@ class MiniExiftool
     if @opts[:replace_invalid_chars] && !@output.valid_encoding?
       @output.encode!('UTF-16le', invalid: :replace, replace: @opts[:replace_invalid_chars]).encode!('UTF-8')
     end
-    JSON.parse(@output)[0].each do |tag,value|
-      value = convert_after_load(tag, value)
-      set_value tag, value
-    end
+    set_values JSON.parse(@output).first
   end
 
   def convert_after_load tag, value
@@ -423,14 +418,16 @@ class MiniExiftool
     value
   end
 
-  def set_value tag, value
-    @values[tag] = value
+  def set_values hash
+    hash.each_pair do |tag,val|
+      @values[tag] = convert_after_load(tag, val)
+    end
   end
 
-  def set_attributes_by_heuristic
-    self.composite = tags.include?('ImageSize') ? true : false
-    self.numerical = self.file_size.kind_of?(Integer) ? true : false
-    self.timestamps = self.FileModifyDate.kind_of?(DateTime) ? DateTime : Time
+  def set_opts_by_heuristic
+    @opts[:composite] = tags.include?('ImageSize')
+    @opts[:numerical] = self.file_size.kind_of?(Integer)
+    @opts[:timestamps] = self.FileModifyDate.kind_of?(DateTime) ? DateTime : Time
   end
 
   def self.pstore_get attribute
