@@ -390,10 +390,7 @@ class MiniExiftool
 
   def convert_after_load tag, value
     return value unless value.kind_of?(String)
-    if %w(sourcefile filename directory).include?(MiniExiftool.unify(tag))
-      # ignore filesystem relevant tags to avoid encoding problems
-      return nil
-    end
+    return value unless value.valid_encoding?
     case value
     when /^\d{4}:\d\d:\d\d \d\d:\d\d:\d\d/
       s = value.sub(/^(\d+):(\d+):/, '\1-\2-')

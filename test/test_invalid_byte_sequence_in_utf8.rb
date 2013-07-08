@@ -11,9 +11,10 @@ class TestInvalidByteSequenceInUtf8 < TestCase
     @json = File.read(File.dirname(__FILE__) + '/data/invalid_byte_sequence_in_utf8.json')
   end
 
-  def test_invalid_byte_sequence_in_utf8_cause_error
-    assert_raises ArgumentError do
-      MiniExiftool.from_json(@json)
+  def test_invalid_byte_sequence_gets_unconverted_value_with_invalid_encoding
+    assert_nothing_raised do
+      mini_exiftool = MiniExiftool.from_json(@json)
+      assert_equal 1561, mini_exiftool.color_balance_unknown.size
     end
   end
 
