@@ -16,15 +16,16 @@ class TestDumping < TestCase
     assert_equal @mini_exiftool.tags.size, hash.size, 'Size of Hash is not correct.'
     assert_not_nil hash['ExifToolVersion'], 'Original name of exiftool tag is not preserved.'
     all_ok = true
-    diffenent_tag = ''
+    different_tag = ''
+    v = ''
     hash.each do |k,v|
       unless @mini_exiftool[k] == v
         all_ok = false
-        diffenent_tag = k
+        different_tag = k
         break
       end
     end
-    assert all_ok, "Tag #{diffenent_tag}: expected: #{@mini_exiftool[diffenent_tag]}, actual: v"
+    assert all_ok, "Tag #{different_tag.inspect}: expected: #{@mini_exiftool[different_tag].inspect}, actual: #{v.inspect}"
   end
 
   def test_from_hash
@@ -33,15 +34,15 @@ class TestDumping < TestCase
     assert_equal MiniExiftool, mini_exiftool_new.class
     assert_equal @mini_exiftool.tags.size, mini_exiftool_new.tags.size
     all_ok = true
-    diffenent_tag = ''
+    different_tag = ''
     @mini_exiftool.tags.each do |tag|
       unless @mini_exiftool[tag] == mini_exiftool_new[tag]
         all_ok = false
-        diffenent_tag = tag
+        different_tag = tag
         break
       end
     end
-    assert all_ok, "Tag #{diffenent_tag}: expected: #{@mini_exiftool[diffenent_tag]}, actual: #{mini_exiftool_new[diffenent_tag]}"
+    assert all_ok, "Tag #{different_tag.inspect}: expected: #{@mini_exiftool[different_tag].inspect}, actual: #{mini_exiftool_new[different_tag].inspect}"
 
   end
 
