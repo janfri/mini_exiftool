@@ -423,6 +423,17 @@ class MiniExiftool
     hash.each_pair do |tag,val|
       @values[tag] = convert_after_load(tag, val)
     end
+    # Remove filename specific tags use attr_reader
+    # MiniExiftool#filename instead
+    # Cause: value of tag filename and attribute
+    # filename have different content, the latter
+    # holds the filename with full path (like the
+    # sourcefile tag) and the former the basename
+    # of the filename also there is no official
+    # "original tag name" for sourcefile
+    %w(directory filename sourcefile).each do |t|
+      @values.delete(t)
+    end
   end
 
   def set_opts_by_heuristic
