@@ -23,21 +23,31 @@ http://rubygems.org/gems/mini_exiftool_vendored .
 First you need Exiftool (see under Requirements above). Then you can simply
 install the gem with
  gem install mini_exiftool
-respectively (on *nix sytems)
- sudo gem install mini_exiftool
 
-If you need support of older versione (see Requirements above)
+If you need to support older versions of Ruby or exiftool (see Requirements above)
   gem install --version "< 2.0.0" mini_exiftool
 
-Alternative you can download the tarball or zip file and run
- ruby setup.rb config
- ruby setup.rb setup
- sudo ruby setup.rb install
+== Usage
+
+In general MiniExiftool is very intuitive to use as the following examples show:
+
+ # Reading meta data
+ photo = MiniExiftool.new 'photo.jpg'
+ puts photo.title
+
+ # Writing meta data
+ photo = MiniExiftool.new 'photo.jpg'
+ photo.title = 'This is the new title'
+ photo.save
+
+For further information about using MiniExiftool read the Tutorial.rdoc
+in the project root folder and have a look at the examples in directory
+examples.
 
 == Contribution
 
-The code is also hostet in a git repository on Gitorious at
-http://gitorious.org/projects/mini_exiftool
+The code is hostet in a git repository on Gitorious at
+http://gitorious.org/mini_exiftool
 and github at
 https://github.com/janfri/mini_exiftool
 feel free to contribute!
@@ -50,9 +60,3 @@ Copyright (c) 2007-2013 by Jan Friedrich
 
 Licensed under terms of the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1,
 February 1999 (see file COPYING for more details)
-
-== Usage
-
-For further information about using MiniExiftool read the Tutorial.rdoc
-in the project root folder and have a look at the examples in directory
-examples.
