@@ -1,0 +1,551 @@
+---
+sample: read Bad_PreviewIFD.jpg
+result:
+  FileSize: 8.4 kB
+  FileType: JPEG
+  MIMEType: image/jpeg
+  JFIFVersion: 1.01
+  ExifByteOrder: Big-endian (Motorola, MM)
+  Make: NIKON CORPORATION
+  Model: NIKON D60
+  XResolution: 300
+  YResolution: 300
+  ResolutionUnit: inches
+  Software: GIMP 2.6.11
+  ModifyDate: 2012-05-31 21:33:12.000000000 +02:00
+  YCbCrPositioning: Centered
+  ExposureTime: !ruby/object:Rational
+    denominator: 125
+    numerator: 1
+  FNumber: 5.6
+  ExposureProgram: Not Defined
+  ISO: 110
+  ExifVersion: '0221'
+  DateTimeOriginal: 2008-12-12 11:12:30.000000000 +01:00
+  CreateDate: 2008-12-12 11:12:30.000000000 +01:00
+  ComponentsConfiguration: Y, Cb, Cr, -
+  ExposureCompensation: 0
+  MaxApertureValue: 4.0
+  MeteringMode: Multi-segment
+  Flash: No Flash
+  FocalLength: 55.0 mm
+  MakerNoteVersion: 2.1
+  ColorMode: Color
+  Quality: Fine
+  WhiteBalance: Auto
+  Sharpness: Auto
+  FocusMode: AF-A
+  WhiteBalanceFineTune: 0 0
+  WB_RBLevels: 56833 21761 1 1
+  ProgramShift: 0
+  ExposureDifference: 0
+  Warning: Bad PreviewIFD directory
+  ISOSetting: 110
+  ImageBoundary: 0 0 3872 2592
+  CropHiSpeed: Off (3904x2616 cropped to 3904x2616 at pixel 0,0)
+  SerialNumber: 3365614
+  VRInfoVersion: 100
+  VibrationReduction: 'On'
+  ActiveD-Lighting: 'Off'
+  Timezone: "-05:00"
+  DaylightSavings: 'No'
+  DateDisplayFormat: Y/M/D
+  ISOExpansion: 'Off'
+  ISO2: 112
+  ISOExpansion2: 'Off'
+  ToneComp: Auto
+  LensType: G VR
+  Lens: 55-200mm f/4-5.6
+  FlashMode: Did Not Fire
+  AFAreaMode: Dynamic Area (closest subject)
+  AFPoint: Center
+  AFPointsInFocus: Center
+  ShootingMode: Single-Frame
+  ColorHue: Mode3a
+  LightSource: Natural
+  ShotInfoVersion: '0211'
+  HueAdjustment: 0
+  NoiseReduction: 'Off'
+  WB_RGGBLevels: 56833 1 1 7
+  LensDataVersion: 202
+  ExitPupilPosition: 70.6 mm
+  AFAperture: 4.1
+  FocusPosition: '0x22'
+  FocusDistance: 6.31 m
+  LensIDNumber: 144
+  LensFStops: 4.92
+  MinFocalLength: 55.0 mm
+  MaxFocalLength: 201.6 mm
+  MaxApertureAtMinFocal: 4.0
+  MaxApertureAtMaxFocal: 5.7
+  MCUVersion: 146
+  EffectiveMaxAperture: 4.0
+  SensorPixelSize: 6.05 x 6.05 um
+  RetouchHistory: None
+  ImageDataSize: 4725881
+  ShutterCount: 290
+  ImageOptimization: ''
+  Saturation: Auto
+  VariProgram: Auto
+  MultiExposureVersion: 100
+  MultiExposureMode: 'Off'
+  MultiExposureShots: 0
+  MultiExposureAutoGain: 'Off'
+  HighISONoiseReduction: 'Off'
+  PowerUpTime: 2008-12-12 11:11:24.000000000 +01:00
+  FileInfoVersion: 100
+  DirectoryNumber: 100
+  FileNumber: 0081
+  NEFBitDepth: Unknown (0 0 16723 17225)
+  UserComment: ''
+  SubSecTime: 0
+  SubSecTimeOriginal: 0
+  SubSecTimeDigitized: 0
+  FlashpixVersion: 100
+  ColorSpace: sRGB
+  ExifImageWidth: 1
+  ExifImageHeight: 1
+  SensingMethod: One-chip color area
+  FileSource: Digital Camera
+  SceneType: Directly photographed
+  CFAPattern: "[Green,Blue][Red,Green]"
+  XPTitle: ''
+  XPKeywords: ''
+  Compression: JPEG (old-style)
+  ThumbnailOffset: 3690
+  ThumbnailLength: 631
+  RatingPercent: 0
+  Rating: 0
+  Title: ''
+  ProfileCMMType: Lino
+  ProfileVersion: 2.1.0
+  ProfileClass: Display Device Profile
+  ColorSpaceData: 'RGB '
+  ProfileConnectionSpace: 'XYZ '
+  ProfileDateTime: 1998-02-09 06:49:00.000000000 +01:00
+  ProfileFileSignature: acsp
+  PrimaryPlatform: Microsoft Corporation
+  CMMFlags: Not Embedded, Independent
+  DeviceManufacturer: 'IEC '
+  DeviceModel: sRGB
+  DeviceAttributes: Reflective, Glossy, Positive, Color
+  RenderingIntent: Perceptual
+  ConnectionSpaceIlluminant: 0.9642 1 0.82491
+  ProfileCreator: 'HP  '
+  ProfileID: 0
+  ProfileCopyright: Copyright (c) 1998 Hewlett-Packard Company
+  ProfileDescription: sRGB IEC61966-2.1
+  MediaWhitePoint: 0.95045 1 1.08905
+  MediaBlackPoint: 0 0 0
+  RedMatrixColumn: 0.43607 0.22249 0.01392
+  GreenMatrixColumn: 0.38515 0.71687 0.09708
+  BlueMatrixColumn: 0.14307 0.06061 0.7141
+  DeviceMfgDesc: IEC http://www.iec.ch
+  DeviceModelDesc: IEC 61966-2.1 Default RGB colour space - sRGB
+  ViewingCondDesc: Reference Viewing Condition in IEC61966-2.1
+  ViewingCondIlluminant: 19.6445 20.3718 16.8089
+  ViewingCondSurround: 3.92889 4.07439 3.36179
+  ViewingCondIlluminantType: D50
+  Luminance: 76.03647 80 87.12462
+  MeasurementObserver: CIE 1931
+  MeasurementBacking: 0 0 0
+  MeasurementGeometry: Unknown (0)
+  MeasurementFlare: 0.999%
+  MeasurementIlluminant: D65
+  Technology: Cathode Ray Tube Display
+  RedTRC: "(Binary data 2060 bytes)"
+  GreenTRC: "(Binary data 2060 bytes)"
+  BlueTRC: "(Binary data 2060 bytes)"
+  ImageWidth: 1
+  ImageHeight: 1
+  EncodingProcess: Baseline DCT, Huffman coding
+  BitsPerSample: 8
+  ColorComponents: 3
+  YCbCrSubSampling: YCbCr4:4:0 (1 2)
+  Aperture: 5.6
+  BlueBalance: 7
+  ImageSize: 1x1
+  LensID: AF-S DX VR Zoom-Nikkor 55-200mm f/4-5.6G IF-ED
+  LensSpec: 55-200mm f/4-5.6 G VR
+  RedBalance: 56833
+  ShutterSpeed: !ruby/object:Rational
+    denominator: 125
+    numerator: 1
+  SubSecCreateDate: 2008-12-12 11:12:30.000000000 +01:00
+  SubSecDateTimeOriginal: 2008-12-12 11:12:30.000000000 +01:00
+  SubSecModifyDate: 2012-05-31 21:33:12.000000000 +02:00
+  ThumbnailImage: "(Binary data 631 bytes)"
+  FocalLength35efl: 55.0 mm
+  LightValue: 11.8
+---
+sample: read Canon.jpg
+result:
+  FileSize: 2.6 kB
+  FileType: JPEG
+  MIMEType: image/jpeg
+  ExifByteOrder: Little-endian (Intel, II)
+  Make: Canon
+  Model: Canon EOS DIGITAL REBEL
+  Orientation: Horizontal (normal)
+  XResolution: 180
+  YResolution: 180
+  ResolutionUnit: inches
+  ModifyDate: 2003-12-04 06:46:52.000000000 +01:00
+  YCbCrPositioning: Centered
+  ExposureTime: 4
+  FNumber: 14.0
+  ISO: 100
+  ExifVersion: '0221'
+  DateTimeOriginal: 2003-12-04 06:46:52.000000000 +01:00
+  CreateDate: 2003-12-04 06:46:52.000000000 +01:00
+  ComponentsConfiguration: Y, Cb, Cr, -
+  CompressedBitsPerPixel: 9
+  ShutterSpeedValue: 0
+  ApertureValue: 14.0
+  MaxApertureValue: 4.5
+  Flash: No Flash
+  FocalLength: 34.0 mm
+  MacroMode: Unknown (0)
+  SelfTimer: 'Off'
+  Quality: RAW
+  CanonFlashMode: 'Off'
+  ContinuousDrive: Continuous
+  FocusMode: Manual Focus (3)
+  RecordMode: CRW+THM
+  CanonImageSize: Large
+  EasyMode: Manual
+  DigitalZoom: Unknown (-1)
+  Contrast: "+1"
+  Saturation: "+1"
+  Sharpness: "+1"
+  CameraISO: n/a
+  MeteringMode: Center-weighted average
+  FocusRange: Not Known
+  CanonExposureMode: Manual
+  LensType: Unknown (-1)
+  MaxFocalLength: 55 mm
+  MinFocalLength: 18 mm
+  FocalUnits: 1/mm
+  MaxAperture: 4
+  MinAperture: 27
+  FlashActivity: 0
+  FlashBits: "(none)"
+  ZoomSourceWidth: 3072
+  ZoomTargetWidth: 3072
+  ManualFlashOutput: n/a
+  ColorTone: Normal
+  FocalPlaneXSize: 23.22 mm
+  FocalPlaneYSize: 15.49 mm
+  AutoISO: 100
+  BaseISO: 100
+  MeasuredEV: -1.25
+  TargetAperture: 14
+  ExposureCompensation: 0
+  WhiteBalance: Auto
+  SlowShutter: None
+  SequenceNumber: 0
+  OpticalZoomCode: n/a
+  FlashGuideNumber: 0
+  FlashExposureComp: 0
+  AutoExposureBracketing: 'Off'
+  AEBBracketValue: 0
+  ControlMode: Camera Local Control
+  FocusDistanceUpper: inf
+  FocusDistanceLower: 5.46 m
+  MeasuredEV2: -1.25
+  BulbDuration: 4
+  CameraType: EOS Mid-range
+  AutoRotate: None
+  NDFilter: n/a
+  SelfTimer2: 0
+  BracketMode: 'Off'
+  BracketValue: 0
+  BracketShotNumber: 0
+  CanonImageType: CRW:EOS DIGITAL REBEL CMOS RAW
+  CanonFirmwareVersion: Firmware Version 1.1.1
+  SerialNumber: 560018150
+  SerialNumberFormat: Format 1
+  FileNumber: 118-1861
+  OwnerName: Phil Harvey
+  CanonModelID: EOS Digital Rebel / 300D / Kiss Digital
+  CanonFileLength: 4480822
+  MeasuredRGGB: 998 1022 1026 808
+  WB_RGGBLevelsAuto: 1719 832 831 990
+  WB_RGGBLevelsDaylight: 1722 832 831 989
+  WB_RGGBLevelsShade: 2035 832 831 839
+  WB_RGGBLevelsCloudy: 1878 832 831 903
+  WB_RGGBLevelsTungsten: 1228 913 912 1668
+  WB_RGGBLevelsFluorescent: 1506 842 841 1381
+  WB_RGGBLevelsFlash: 1933 832 831 895
+  WB_RGGBLevelsCustom: 1722 832 831 989
+  WB_RGGBLevelsKelvin: 1722 832 831 988
+  ColorTemperature: 5200
+  NumAFPoints: 7
+  ValidAFPoints: 7
+  CanonImageWidth: 3072
+  CanonImageHeight: 2048
+  AFImageWidth: 3072
+  AFImageHeight: 2048
+  AFAreaWidth: 151
+  AFAreaHeight: 151
+  AFAreaXPositions: 1014 608 0 0 0 -608 -1014
+  AFAreaYPositions: 0 0 -506 0 506 0 0
+  AFPointsInFocus: "(none)"
+  ThumbnailImageValidArea: 0 159 7 112
+  UserComment: ''
+  FlashpixVersion: 100
+  ColorSpace: sRGB
+  ExifImageWidth: 160
+  ExifImageHeight: 120
+  InteropIndex: THM - DCF thumbnail file
+  InteropVersion: 100
+  RelatedImageWidth: 3072
+  RelatedImageHeight: 2048
+  FocalPlaneXResolution: 3443.946188
+  FocalPlaneYResolution: 3442.016807
+  FocalPlaneResolutionUnit: inches
+  SensingMethod: One-chip color area
+  FileSource: Digital Camera
+  CustomRendered: Normal
+  ExposureMode: Manual
+  SceneCaptureType: Standard
+  ImageWidth: 8
+  ImageHeight: 8
+  EncodingProcess: Baseline DCT, Huffman coding
+  BitsPerSample: 8
+  ColorComponents: 3
+  YCbCrSubSampling: YCbCr4:2:0 (2 2)
+  Aperture: 14.0
+  DriveMode: Continuous Shooting
+  ImageSize: 8x8
+  Lens: 18.0 - 55.0 mm
+  LensID: Unknown 18-55mm
+  ScaleFactor35efl: 1.6
+  ShootingMode: Bulb
+  ShutterSpeed: 4
+  WB_RGGBLevels: 1719 832 831 990
+  BlueBalance: 1.190619
+  CircleOfConfusion: 0.019 mm
+  FOV: 37.7 deg
+  FocalLength35efl: '34.0 mm (35 mm equivalent: 52.7 mm)'
+  HyperfocalDistance: 4.26 m
+  Lens35efl: '18.0 - 55.0 mm (35 mm equivalent: 27.9 - 85.3 mm)'
+  LightValue: 5.6
+  RedBalance: 2.067348
+---
+sample: read test.jpg
+result:
+  FileSize: 46 kB
+  FileType: JPEG
+  MIMEType: image/jpeg
+  JFIFVersion: 1.01
+  ExifByteOrder: Big-endian (Motorola, MM)
+  ImageDescription: KONICA MINOLTA DIGITAL CAMERA
+  Make: KONICA MINOLTA
+  Model: DYNAX 7D
+  Orientation: Horizontal (normal)
+  XResolution: 72
+  YResolution: 72
+  ResolutionUnit: inches
+  Software: DYNAX 7D v1.10
+  ModifyDate: 2005-09-13 20:08:50.000000000 +02:00
+  YCbCrPositioning: Centered
+  ExposureTime: !ruby/object:Rational
+    denominator: 60
+    numerator: 1
+  FNumber: 9.5
+  ExposureProgram: Program AE
+  ISO: 400
+  ExifVersion: '0221'
+  DateTimeOriginal: 2005-09-13 20:08:50.000000000 +02:00
+  CreateDate: 2005-09-13 20:08:50.000000000 +02:00
+  ComponentsConfiguration: Y, Cb, Cr, -
+  BrightnessValue: 4.5
+  ExposureCompensation: -1
+  MaxApertureValue: 4.5
+  MeteringMode: Multi-segment
+  LightSource: Unknown
+  Flash: Off, Did not fire
+  FocalLength: 75.0 mm
+  SubjectArea: 1504 1000 256 304
+  MakerNoteVersion: MLT0
+  MinoltaImageSize: Large
+  WhiteBalance: Auto
+  FocusMode: AF-A
+  AFPoints: Center
+  FlashMode: Normal
+  ISOSetting: 400
+  FreeMemoryCardImages: 202
+  HueAdjustment: 0
+  Rotation: Horizontal (normal)
+  ImageNumber: 6
+  NoiseReduction: Unknown (2)
+  ImageNumber2: 50
+  ZoneMatchingOn: 'Off'
+  CompressedImageSize: 1598477
+  PreviewImageStart: 39152
+  PreviewImageLength: 0
+  SceneMode: Standard
+  ColorMode: Natural sRGB
+  MinoltaQuality: Fine
+  FlashExposureComp: 0
+  Teleconverter: None
+  ImageStabilization: 'On'
+  ZoneMatching: ISO Setting Used
+  ColorTemperature: 0
+  LensType: Minolta AF 28-135mm F4-4.5 or Sigma Lens
+  UserComment: ''
+  FlashpixVersion: 100
+  ColorSpace: sRGB
+  ExifImageWidth: 3008
+  ExifImageHeight: 2000
+  CustomRendered: Normal
+  ExposureMode: Auto
+  DigitalZoomRatio: 0
+  FocalLengthIn35mmFormat: 112 mm
+  SceneCaptureType: Standard
+  GainControl: Low gain up
+  Contrast: Normal
+  Saturation: Normal
+  Sharpness: Normal
+  PrintIMVersion: 300
+  Compression: JPEG (old-style)
+  ThumbnailOffset: 39274
+  ThumbnailLength: 1820
+  CurrentIPTCDigest: dd8d51d28ddf04f08f870e5ff2f64d01
+  Keywords:
+  - Orange
+  - Rot
+  ApplicationRecordVersion: 4
+  SupplementalCategories: Natur
+  XMPToolkit: Image::ExifTool 7.03
+  Title: Abenddämmerung
+  ImageWidth: 300
+  ImageHeight: 199
+  EncodingProcess: Baseline DCT, Huffman coding
+  BitsPerSample: 8
+  ColorComponents: 3
+  YCbCrSubSampling: YCbCr4:2:0 (2 2)
+  Aperture: 9.5
+  ImageSize: 300x199
+  LensID: Minolta AF 28-135mm F4-4.5
+  ScaleFactor35efl: 1.5
+  ShutterSpeed: !ruby/object:Rational
+    denominator: 60
+    numerator: 1
+  ThumbnailImage: "(Binary data 1820 bytes)"
+  CircleOfConfusion: 0.020 mm
+  FOV: 18.3 deg
+  FocalLength35efl: '75.0 mm (35 mm equivalent: 112.0 mm)'
+  HyperfocalDistance: 29.43 m
+  LightValue: 10.4
+---
+sample: read test_coordinates.jpg
+result:
+  FileSize: 251 kB
+  FileType: JPEG
+  MIMEType: image/jpeg
+  ExifByteOrder: Big-endian (Motorola, MM)
+  ImageDescription: clip
+  Orientation: Horizontal (normal)
+  XResolution: 72
+  YResolution: 72
+  ResolutionUnit: inches
+  YCbCrPositioning: Centered
+  ExposureTime: !ruby/object:Rational
+    denominator: 30
+    numerator: 1
+  FNumber: 2.4
+  ExposureProgram: Program AE
+  ISO: 400
+  ExifVersion: '0221'
+  ComponentsConfiguration: Y, Cb, Cr, -
+  ShutterSpeedValue: !ruby/object:Rational
+    denominator: 30
+    numerator: 1
+  ApertureValue: 2.4
+  BrightnessValue: 1.954376479
+  MeteringMode: Multi-segment
+  Flash: Off, Did not fire
+  FocalLength: 4.1 mm
+  SubjectArea: 519 403 239 180
+  UserComment: clip
+  FlashpixVersion: 100
+  ColorSpace: sRGB
+  ExifImageWidth: 1280
+  ExifImageHeight: 720
+  SensingMethod: One-chip color area
+  ExposureMode: Auto
+  WhiteBalance: Auto
+  FocalLengthIn35mmFormat: 35 mm
+  SceneCaptureType: Standard
+  GPSLatitudeRef: North
+  GPSLongitudeRef: West
+  GPSAltitude: 0 m
+  GPSTimeStamp: '00:00:00'
+  GPSDOP: 0
+  Compression: JPEG (old-style)
+  ThumbnailOffset: 766
+  ThumbnailLength: 3831
+  ImageWidth: 1280
+  ImageHeight: 720
+  EncodingProcess: Baseline DCT, Huffman coding
+  BitsPerSample: 8
+  ColorComponents: 3
+  YCbCrSubSampling: YCbCr4:2:0 (2 2)
+  Aperture: 2.4
+  GPSLatitude: 43 deg 39' 11.40" N
+  GPSLongitude: 79 deg 22' 23.40" W
+  GPSPosition: 43 deg 39' 11.40" N, 79 deg 22' 23.40" W
+  ImageSize: 1280x720
+  ScaleFactor35efl: 8.5
+  ShutterSpeed: !ruby/object:Rational
+    denominator: 30
+    numerator: 1
+  ThumbnailImage: "(Binary data 3831 bytes)"
+  CircleOfConfusion: 0.004 mm
+  FOV: 54.4 deg
+  FocalLength35efl: '4.1 mm (35 mm equivalent: 35.0 mm)'
+  HyperfocalDistance: 2.00 m
+  LightValue: 5.4
+---
+sample: read test_encodings.jpg
+result:
+  FileSize: 660 bytes
+  FileType: JPEG
+  MIMEType: image/jpeg
+  CurrentIPTCDigest: 09b79ab4703f3570ba3140ffc2dba2f6
+  ObjectName: Mšhre
+  ApplicationRecordVersion: 4
+  ImageWidth: 1
+  ImageHeight: 1
+  EncodingProcess: Baseline DCT, Huffman coding
+  BitsPerSample: 8
+  ColorComponents: 3
+  YCbCrSubSampling: YCbCr4:2:0 (2 2)
+  ImageSize: 1x1
+---
+sample: read test_special_dates.jpg
+result:
+  FileSize: 3.7 kB
+  FileType: JPEG
+  MIMEType: image/jpeg
+  ExifByteOrder: Big-endian (Motorola, MM)
+  XResolution: 72
+  YResolution: 72
+  ResolutionUnit: inches
+  ModifyDate: false
+  YCbCrPositioning: Centered
+  ExifVersion: 220
+  DateTimeOriginal: 1961-08-13 12:08:25.000000000 +01:00
+  ComponentsConfiguration: Y, Cb, Cr, -
+  FlashpixVersion: 100
+  ColorSpace: Uncalibrated
+  PreviewDateTime: 1961-08-13 12:08:25.000000000 +01:00
+  ImageWidth: 300
+  ImageHeight: 199
+  EncodingProcess: Baseline DCT, Huffman coding
+  BitsPerSample: 8
+  ColorComponents: 3
+  YCbCrSubSampling: YCbCr4:2:0 (2 2)
+  ImageSize: 300x199

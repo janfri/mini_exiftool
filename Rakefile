@@ -2,6 +2,7 @@ require 'rim'
 require 'rim/check_version'
 require 'rim/gem'
 require 'rim/test'
+require 'regtest/task'
 
 $:.unshift 'lib'
 require 'mini_exiftool'
