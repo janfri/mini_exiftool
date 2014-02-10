@@ -1,3 +1,12 @@
+2.4.0
+- New method MiniExiftool#copy_tags_from.
+  Many thanks to cgat for the hint and implementing a first
+  approach.
+- Saver handling of encoding problems.
+- Approving documentation.
+- Using regtest for integration testing.
+- Some internal refactorings.
+
 2.3.0
 - New options :exif_encoding, :iptc_encodings,
   :xmp_encodings etc. to change specific encodings
