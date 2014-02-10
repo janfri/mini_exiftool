@@ -12,7 +12,6 @@
 
 === A Simple Example
 
- require 'rubygems'
  require 'mini_exiftool'
 
  photo = MiniExiftool.new 'photo.jpg'
@@ -119,7 +118,6 @@ directory.
 
 === Also A Very Simple Example
 
- require 'rubygems'
  require 'mini_exiftool'
 
  photo = MiniExiftool.new 'photo.jpg'
@@ -149,3 +147,26 @@ You should also look at the rdoc information of MiniExiftool.
 === Further Examples
 
 Have a look in the examples folder of MiniExiftool.
+
+
+== Lesson 3: Copying Meta Data
+
+=== Examples
+
+ require 'mini_exiftool'
+
+ photo = MiniExiftool.new('photo.jpg')
+
+ # Update the author tag of photo.jpg with the value of the author tag
+ # of another_photo.jpg
+ photo.copy_tags_from('another_photo.jpg', 'Author')
+
+ # It's also possible to use symbols and case is also not meaningful
+ photo.copy_tags_from('another_photo.jpg', :author)
+
+ # Further more than one tag can be copied at once
+ photo.copy_tags_from('another_photo', %w[author copyright])
+
+=== Further Example
+
+Look at the file copy_icc_profile.rb in the examples folder of MiniExiftool.

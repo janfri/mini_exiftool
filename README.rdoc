@@ -40,6 +40,11 @@ In general MiniExiftool is very intuitive to use as the following examples show:
  photo.title = 'This is the new title'
  photo.save
 
+ # Copying meta data
+ photo = MiniExiftool.new('photo.jpg')
+ photo.copy_tags_from('another_photo.jpg', :author)
+
+
 For further information about using MiniExiftool read the Tutorial.rdoc
 in the project root folder and have a look at the examples in directory
 examples.
