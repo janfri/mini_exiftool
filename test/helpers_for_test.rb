@@ -25,4 +25,9 @@ module TempfileTest
   def teardown
     @temp_file.close
   end
+
+  def assert_md5 md5, filename
+    assert_equal md5,  Digest::MD5.hexdigest(File.read(filename))
+  end
+
 end

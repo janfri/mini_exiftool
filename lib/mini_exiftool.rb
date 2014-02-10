@@ -8,7 +8,7 @@
 # Read and write access is done in a clean OO manner.
 #
 # Author: Jan Friedrich
-# Copyright (c) 2007-2013 by Jan Friedrich
+# Copyright (c) 2007-2014 by Jan Friedrich
 # Licensed under the GNU LESSER GENERAL PUBLIC LICENSE,
 # Version 2.1, February 1999
 #
@@ -232,6 +232,20 @@ class MiniExiftool
       end
       raise MiniExiftool::Error.new("MiniExiftool couldn't save. The following errors occurred: #{err.empty? ? "None" : err.join(", ")}")
     end
+  end
+
+  def copy_tags_from(source_filename, tags)
+    @errors.clear
+    unless File.exist?(source_filename)
+      raise MiniExiftool::Error.new("Source file #{source_filename} does not exist!")
+    end
+    params = '-q -P -overwrite_original '
+    tags_params = Array(tags).map {|t| '-' << t.to_s}.join(' ')
+    cmd = [@@cmd, params, '-tagsFromFile', escape(source_filename).encode(@@fs_enc), tags_params.encode('UTF-8'), escape(filename).encode(@@fs_enc)].join(' ')
+    cmd.force_encoding('UTF-8')
+    result = run(cmd)
+    reload
+    result
   end
 
   # Returns a hash of the original loaded values of the MiniExiftool
