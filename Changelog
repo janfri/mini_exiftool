@@ -1,3 +1,8 @@
+2.4.1
+- Handling tag values of the form x/0 correct.
+  Thanks to Picturelife for a clever solution to solve this.
+- Some internal housekeeping.
+
 2.4.0
 - New method MiniExiftool#copy_tags_from.
   Many thanks to cgat for the hint and implementing a first
