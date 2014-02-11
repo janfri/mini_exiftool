@@ -426,7 +426,7 @@ class MiniExiftool
     when /^-?\d+$/
       value = value.to_i
     when %r(^(\d+)/(\d+)$)
-      value = Rational($1.to_i, $2.to_i)
+      value = Rational($1.to_i, $2.to_i) rescue value
     when /^[\d ]+$/
       # nothing => String
     end
