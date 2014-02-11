@@ -61,7 +61,7 @@ feel free to contribute!
 Jan Friedrich <janfri26@gmail.com>
 
 == Copyright / License
-Copyright (c) 2007-2013 by Jan Friedrich
+Copyright (c) 2007-2014 by Jan Friedrich
 
 Licensed under terms of the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1,
 February 1999 (see file COPYING for more details)
