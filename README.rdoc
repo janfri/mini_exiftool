@@ -14,7 +14,7 @@ Instructions for installation you can find under
 http://www.sno.phy.queensu.ca/~phil/exiftool/install.html .
 
 Alternatively Wil Gieseler has bundled a meta-gem that eliminates the
-need for a seperate Exiftool installation. Have a look at
+need for a separate Exiftool installation. Have a look at
 http://github.com/wilg/mini_exiftool_vendored or
 http://rubygems.org/gems/mini_exiftool_vendored .
 
@@ -51,7 +51,7 @@ examples.
 
 == Contribution
 
-The code is hostet in a git repository on Gitorious at
+The code is hosted in a git repository on Gitorious at
 http://gitorious.org/mini_exiftool
 and github at
 https://github.com/janfri/mini_exiftool
