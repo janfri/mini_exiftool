@@ -1,4 +1,5 @@
 require 'rim'
+require 'rim/aspell'
 require 'rim/check_version'
 require 'rim/gem'
 require 'rim/test'
