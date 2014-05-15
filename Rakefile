@@ -1,8 +1,5 @@
-require 'rim'
-require 'rim/aspell'
-require 'rim/check_version'
-require 'rim/gem'
-require 'rim/test'
+require 'rim/tire'
+require 'rim/version'
 require 'regtest/task'
 
 $:.unshift 'lib'
@@ -15,6 +12,7 @@ Rim.setup do |p|
   p.email = 'janfri26@gmail.com'
   p.summary = 'This library is wrapper for the Exiftool command-line application (http://www.sno.phy.queensu.ca/~phil/exiftool).'
   p.homepage = 'http://gitorious.org/mini_exiftool'
+  p.license = 'LPGLv2'
   p.gem_files << 'Tutorial.rdoc'
   p.install_message = %q{
 +-----------------------------------------------------------------------+
