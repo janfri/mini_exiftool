@@ -150,7 +150,7 @@ The Encoding Release
   - MiniExiftool#to_yaml
   Thanks to Andrew Bennett for the initial idea of YAML-serialization
 - Refactoring of tests
-- Small documetation update
+- Small documentation update
 
 0.5.1
 - Warning "parenthesize argument(s) for future version" removed
@@ -172,7 +172,7 @@ The Encoding Release
   Saving of non-read tags doesn't work with tags with hyphen
   Thanks to Robin Romahn for reporting the bug
 - New methods: MiniExiftool.all_tags and MiniExiftool.original_tag
-- Interna: Original tag names (all and writable) are now saved via pstore in
+- Internal: Original tag names (all and writable) are now saved via pstore in
   a file for better performance
 
 0.3.1
