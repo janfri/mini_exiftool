@@ -130,11 +130,7 @@ class MiniExiftool
     params << (@opts[:numerical] ? '-n ' : '')
     params << (@opts[:composite] ? '' : '-e ')
     params << (@opts[:coord_format] ? "-c \"#{@opts[:coord_format]}\"" : '')
-    @@encoding_types.each do |enc_type|
-      if enc_val = @opts[MiniExiftool.encoding_opt(enc_type)]
-        params << "-charset #{enc_type}=#{enc_val} "
-      end
-    end
+    params << generate_encoding_params
     if run(cmd_gen(params, @filename))
       parse_output
     else
@@ -207,6 +203,7 @@ class MiniExiftool
       params = '-q -P -overwrite_original '
       params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
       params << (@opts[:ignore_minor_errors] ? '-m ' : '')
+      params << generate_encoding_params
       arr_val.each do |v|
         params << %Q(-#{original_tag}=#{escape(v)} )
       end
@@ -504,6 +501,16 @@ class MiniExiftool
     def escape val
       '"' << val.to_s.gsub(/([\\"$])/, "\\\\\\1") << '"'
     end
+  end
+
+  def generate_encoding_params
+    params = ''
+    @@encoding_types.each do |enc_type|
+      if enc_val = @opts[MiniExiftool.encoding_opt(enc_type)]
+        params << "-charset #{enc_type}=#{enc_val} "
+      end
+    end
+    params
   end
 
   # Hash with indifferent access:

@@ -17,6 +17,14 @@ class TestEncodings < TestCase
     assert_not_equal @object_name, @mini_exiftool.object_name
     correct_iptc = MiniExiftool.new(@filename_test, iptc_encoding: 'MacRoman')
     assert_equal @object_name, correct_iptc.object_name
+    FileUtils.cp(@filename_test, @temp_filename)
+    correct_iptc_write = MiniExiftool.new(@temp_filename, iptc_encoding: 'MacRoman')
+    caption = 'Das ist eine Möhre'
+    correct_iptc_write.caption_abstract = caption
+    correct_iptc_write.save!
+    correct_iptc_write.reload
+    assert_equal @object_name, correct_iptc_write.object_name
+    assert_equal caption, correct_iptc_write.caption_abstract
   end
 
   def test_coded_character_set
