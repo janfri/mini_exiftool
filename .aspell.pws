@@ -1,16 +1,19 @@
-personal_ws-1.1 en 72 
+personal_ws-1.1 en 82 
 StandardError
 Refactoring
 timestamps
 Kulander
+pdf
 MiniExiftool
 json
 acki
 Salzberg
 jpg
 SupplementalCategories
+photoshop
 github
 iptc
+MacRoman
 UTF
 Wil
 commandline
@@ -27,11 +30,13 @@ ws
 uwe
 DateTime
 Gieseler
+aiff
 Barushev
 TestEscapeFilename
 Regexes
 robotmay
 neccessary
+ExifTool
 exiftool
 rdoc
 shellwords
@@ -40,12 +45,15 @@ shioyama
 warings
 GPS
 Horrocks
+vorbis
 Tempfile
 exif
+mie
 rubyforge
 regtest
 Rau
 Soika
+png
 prerelease
 filenames
 charset
@@ -59,6 +67,7 @@ releating
 Henning
 Hoy
 darwin
+encod
 Stjernstrom
 Romahn
 OO
@@ -69,5 +78,6 @@ Gitorious
 Soutar
 Dungan
 params
+quicktime
 POSIX
 yardopts

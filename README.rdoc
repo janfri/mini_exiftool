@@ -49,6 +49,40 @@ For further information about using MiniExiftool read the Tutorial.rdoc
 in the project root folder and have a look at the examples in directory
 examples.
 
+== Encodings
+
+In MiniExiftool all strings are encoded in UTF-8. If you need other
+encodings in your project use the String#encod* methods.
+
+If you have problems with corrupted strings when using MiniExiftool
+there are two reasons for this:
+
+=== Internal character sets
+
+You can specify the charset in which the meta data is in the file encoded
+if you read or write to some sections of meta data (i.e. IPTC, XMP ...).
+It exists various options of the form *_encoding: exif, iptc, xmp, png,
+id3, pdf, photoshop, quicktime, aiff, mie and vorbis.
+
+Please read the section about the character sets of the ExifTool command
+line application carefully to understand what's going on
+(http://www.sno.phy.queensu.ca/~phil/exiftool/faq.html#Q10)!
+
+ # Using UTF-8 as internal encoding for IPTC tags and MacRoman as internal
+ # encoding for EXIF tags
+ photo = MiniExiftool.new('photo.jpg', iptc_encoding: 'UTF8', exif_encoding: 'MacRoman'
+ puts photo.caption_abstract # this value is UTF-8 encoded
+ puts photo.comment # this value is converted to UTF-8
+
+=== Corrupt characters
+
+You use the correct internal character set but in the string are still corrupt
+characters.
+This problem you can solve with the option replace_invalid_chars:
+
+ # Replace all invalid characters with a question mark
+ photo = MiniExiftool.new('photo.jpg', replace_invalid_chars: '?')
+
 == Contribution
 
 The code is hosted in a git repository on Gitorious at
