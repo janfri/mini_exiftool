@@ -1,3 +1,6 @@
+2.4.2
+- Bugfix: Don't ignoring *_encoding options when saving.
+
 2.4.1
 - Handling tag values of the form x/0 correct.
   Thanks to Picturelife for a clever solution to solve this.
