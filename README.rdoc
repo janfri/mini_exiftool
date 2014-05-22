@@ -64,15 +64,31 @@ if you read or write to some sections of meta data (i.e. IPTC, XMP ...).
 It exists various options of the form *_encoding: exif, iptc, xmp, png,
 id3, pdf, photoshop, quicktime, aiff, mie and vorbis.
 
+For IPTC meta data it is recommended to set also the CodedCharacterSet
+tag.
+
 Please read the section about the character sets of the ExifTool command
 line application carefully to understand what's going on
 (http://www.sno.phy.queensu.ca/~phil/exiftool/faq.html#Q10)!
 
- # Using UTF-8 as internal encoding for IPTC tags and MacRoman as internal
- # encoding for EXIF tags
- photo = MiniExiftool.new('photo.jpg', iptc_encoding: 'UTF8', exif_encoding: 'MacRoman'
- puts photo.caption_abstract # this value is UTF-8 encoded
- puts photo.comment # this value is converted to UTF-8
+ # Using UTF-8 as internal encoding for IPTC tags and MacRoman
+ # as internal encoding for EXIF tags
+ photo = MiniExiftool.new('photo.jpg', iptc_encoding: 'UTF8',
+                          exif_encoding: 'MacRoman'
+ # IPTC CaptionAbstract is already UTF-8 encoded
+ puts photo.caption_abstract
+ # EXIF Comment is converted from MacRoman to UTF-8
+ puts photo.comment
+
+ photo = MiniExiftool.new('photo.jpg', iptc_encoding: 'UTF8',
+                          exif_encoding: 'MacRoman'
+ # When saving IPTC data setting CodedCharacterSet as recommended
+ photo.coded_character_set = 'UTF8'
+ # IPTC CaptionAbstract will be stored in UTF-8 encoding
+ photo.caption_abstract = 'Some text with Ümläuts'
+ # EXIF Comment will be stored in MacRoman encoding
+ photo.comment = 'Comment with Ümläuts'
+ photo.save
 
 === Corrupt characters
 
