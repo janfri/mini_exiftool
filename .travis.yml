@@ -1,6 +1,5 @@
 language: ruby
 before_install:
-  - sudo apt-get update
   - sudo apt-get install wget
   - wget http://www.sno.phy.queensu.ca/~phil/exiftool/Image-ExifTool-9.27.tar.gz
   - tar -xzf Image-ExifTool-9.27.tar.gz
@@ -10,7 +9,7 @@ before_install:
   - sudo make install
   - cd ..
   - exiftool -ver
-  - gem install rim json regtest
+  - gem install rim json test-unit regtest
 rvm:
   - 1.9.2
   - 1.9.3
@@ -18,7 +17,7 @@ rvm:
   - 2.1.0
   - 2.1.1
   - 2.1.2
-#  - ruby-head
+  - ruby-head
 notifications:
   email:
     - janfri26@gmail.com
