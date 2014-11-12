@@ -1,6 +1,7 @@
 # -- encoding: utf-8 --
 require 'mini_exiftool'
 require 'test/unit'
+require 'mocha/test_unit'
 require 'fileutils'
 require 'tempfile'
 begin
