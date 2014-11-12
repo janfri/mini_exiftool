@@ -1,5 +1,12 @@
+PATH
+  remote: .
+  specs:
+    mini_exiftool (2.4.2)
+      json
+      rim
+
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     json (1.8.1)
     metaclass (0.0.4)
@@ -16,9 +23,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  json
+  bundler (~> 1.7)
+  mini_exiftool!
   mocha
-  rake
+  rake (~> 10.0)
   regtest
-  rim
   test-unit
