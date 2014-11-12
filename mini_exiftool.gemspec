@@ -6,6 +6,7 @@ require 'mini_exiftool'
 
 Gem::Specification.new do |spec|
   spec.name          = "mini_exiftool"
+  spec.platform      = Gem::Platform::RUBY
   spec.version       = MiniExiftool::VERSION
   spec.authors       = ["Jan Friedrich"]
   spec.email         = "janfri26@gmail.com"
