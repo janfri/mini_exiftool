@@ -17,7 +17,7 @@ rvm:
   - 2.1.0
   - 2.1.1
   - 2.1.2
-  - ruby-head
+#  - ruby-head
 notifications:
   email:
     - janfri26@gmail.com
