@@ -27,6 +27,23 @@ install the gem with
 If you need to support older versions of Ruby or exiftool (see Requirements above)
   gem install --version "< 2.0.0" mini_exiftool
 
+== Configuration
+
+You can manually set the exiftool command that should be used via
+  MiniExiftool.command = '/path/to/my/exiftool'
+
+In addition, you can also tell MiniExiftool where to store the PStore files with tags
+which exiftool supports. The PStore files are used for performance issues.
+Per default the PStore files are stored in a sub directory .mini_exiftool or
+_mini_exiftool under your home directory.
+  MiniExiftool.pstore_dir = '/path/to/pstore/dir'
+
+If you're using Rails, this is easily done with
+  MiniExiftool.pstore_dir = Rails.root.join('tmp').to_s
+
+Important hint: if you have to change the configuration you have to do this direct
+after require 'mini_exiftool'.
+
 == Usage
 
 In general MiniExiftool is very intuitive to use as the following examples show:
