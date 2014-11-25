@@ -1,4 +1,4 @@
-personal_ws-1.1 en 87 
+personal_ws-1.1 en 89 
 StandardError
 Refactoring
 timestamps
@@ -55,6 +55,7 @@ exif
 mie
 rubyforge
 regtest
+customizable
 Rau
 Soika
 png
@@ -76,6 +77,7 @@ Stjernstrom
 Romahn
 OO
 rb
+README
 Jérome
 CaptionAbstract
 echoe

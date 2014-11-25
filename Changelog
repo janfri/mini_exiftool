@@ -1,3 +1,10 @@
+2.5.0
+- Make the pstore dir customizable:
+  MiniExiftool.pstore_dir and MiniExiftool.pstore_dir=
+  Thanks to Shawn Pyle for the idea and a first approach
+  of implementation.
+- Update README.
+
 2.4.2
 - Bugfix: Don't ignoring *_encoding options when saving.
 
