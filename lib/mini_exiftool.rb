@@ -335,6 +335,22 @@ class MiniExiftool
     tag.to_s.gsub(/[-_]/,'').downcase
   end
 
+  @@running_on_windows = /mswin|mingw|cygwin/ === RbConfig::CONFIG['host_os']
+
+  def self.pstore_dir
+    unless defined? @@pstore_dir
+      # This will hopefully work on *NIX and Windows systems
+      home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
+      subdir = @@running_on_windows ? '_mini_exiftool' : '.mini_exiftool'
+      @@pstore_dir = File.join(home, subdir)
+    end
+    @@pstore_dir
+  end
+
+  def self.pstore_dir= dir
+    @@pstore_dir = dir
+  end
+
   # Exception class
   class MiniExiftool::Error < StandardError; end
 
@@ -462,14 +478,9 @@ class MiniExiftool
     result
   end
 
-  @@running_on_windows = /mswin|mingw|cygwin/ === RbConfig::CONFIG['host_os']
-
   def self.load_or_create_pstore
-    # This will hopefully work on *NIX and Windows systems
-    home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
-    subdir = @@running_on_windows ? '_mini_exiftool' : '.mini_exiftool'
-    FileUtils.mkdir_p(File.join(home, subdir))
-    pstore_filename = File.join(home, subdir, 'exiftool_tags_' << exiftool_version.gsub('.', '_') << '.pstore')
+    FileUtils.mkdir_p(pstore_dir)
+    pstore_filename = File.join(pstore_dir, 'exiftool_tags_' << exiftool_version.gsub('.', '_') << '.pstore')
     @@pstore = PStore.new pstore_filename
     if !File.exist?(pstore_filename) || File.size(pstore_filename) == 0
       @@pstore.transaction do |ps|
