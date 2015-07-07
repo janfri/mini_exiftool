@@ -1,3 +1,6 @@
+2.5.1
+- Add gemspec.
+
 2.5.0
 - Make the pstore dir customizable:
   MiniExiftool.pstore_dir and MiniExiftool.pstore_dir=
