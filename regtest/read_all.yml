@@ -1,8 +1,10 @@
 ---
 sample: read Bad_PreviewIFD.jpg
 result:
+  ExifToolVersion: 10.09
   FileSize: 8.4 kB
   FileType: JPEG
+  FileTypeExtension: jpg
   MIMEType: image/jpeg
   JFIFVersion: 1.01
   ExifByteOrder: Big-endian (Motorola, MM)
@@ -46,8 +48,9 @@ result:
   SerialNumber: 3365614
   VRInfoVersion: 100
   VibrationReduction: 'On'
+  VRMode: Normal
   ActiveD-Lighting: 'Off'
-  Timezone: "-05:00"
+  TimeZone: "-05:00"
   DaylightSavings: 'No'
   DateDisplayFormat: Y/M/D
   ISOExpansion: 'Off'
@@ -96,6 +99,7 @@ result:
   FileInfoVersion: 100
   DirectoryNumber: 100
   FileNumber: 0081
+  RetouchInfoVersion: 100
   NEFBitDepth: Unknown (0 0 16723 17225)
   UserComment: ''
   SubSecTime: 0
@@ -149,13 +153,13 @@ result:
   Luminance: 76.03647 80 87.12462
   MeasurementObserver: CIE 1931
   MeasurementBacking: 0 0 0
-  MeasurementGeometry: Unknown (0)
+  MeasurementGeometry: Unknown
   MeasurementFlare: 0.999%
   MeasurementIlluminant: D65
   Technology: Cathode Ray Tube Display
-  RedTRC: "(Binary data 2060 bytes)"
-  GreenTRC: "(Binary data 2060 bytes)"
-  BlueTRC: "(Binary data 2060 bytes)"
+  RedTRC: "(Binary data 2060 bytes, use -b option to extract)"
+  GreenTRC: "(Binary data 2060 bytes, use -b option to extract)"
+  BlueTRC: "(Binary data 2060 bytes, use -b option to extract)"
   ImageWidth: 1
   ImageHeight: 1
   EncodingProcess: Baseline DCT, Huffman coding
@@ -167,6 +171,7 @@ result:
   ImageSize: 1x1
   LensID: AF-S DX VR Zoom-Nikkor 55-200mm f/4-5.6G IF-ED
   LensSpec: 55-200mm f/4-5.6 G VR
+  Megapixels: 1.0e-06
   RedBalance: 56833
   ShutterSpeed: !ruby/object:Rational
     denominator: 125
@@ -174,14 +179,16 @@ result:
   SubSecCreateDate: 2008-12-12 11:12:30.000000000 +01:00
   SubSecDateTimeOriginal: 2008-12-12 11:12:30.000000000 +01:00
   SubSecModifyDate: 2012-05-31 21:33:12.000000000 +02:00
-  ThumbnailImage: "(Binary data 631 bytes)"
+  ThumbnailImage: "(Binary data 631 bytes, use -b option to extract)"
   FocalLength35efl: 55.0 mm
   LightValue: 11.8
 ---
 sample: read Canon.jpg
 result:
+  ExifToolVersion: 10.09
   FileSize: 2.6 kB
   FileType: JPEG
+  FileTypeExtension: jpg
   MIMEType: image/jpeg
   ExifByteOrder: Little-endian (Intel, II)
   Make: Canon
@@ -222,7 +229,7 @@ result:
   MeteringMode: Center-weighted average
   FocusRange: Not Known
   CanonExposureMode: Manual
-  LensType: Unknown (-1)
+  LensType: n/a
   MaxFocalLength: 55 mm
   MinFocalLength: 18 mm
   FocalUnits: 1/mm
@@ -279,6 +286,7 @@ result:
   WB_RGGBLevelsFlash: 1933 832 831 895
   WB_RGGBLevelsCustom: 1722 832 831 989
   WB_RGGBLevelsKelvin: 1722 832 831 988
+  WB_RGGBBlackLevels: 124 123 124 123
   ColorTemperature: 5200
   NumAFPoints: 7
   ValidAFPoints: 7
@@ -320,23 +328,27 @@ result:
   ImageSize: 8x8
   Lens: 18.0 - 55.0 mm
   LensID: Unknown 18-55mm
+  Megapixels: 6.4e-05
   ScaleFactor35efl: 1.6
   ShootingMode: Bulb
   ShutterSpeed: 4
   WB_RGGBLevels: 1719 832 831 990
   BlueBalance: 1.190619
   CircleOfConfusion: 0.019 mm
-  FOV: 37.7 deg
-  FocalLength35efl: '34.0 mm (35 mm equivalent: 52.7 mm)'
-  HyperfocalDistance: 4.26 m
-  Lens35efl: '18.0 - 55.0 mm (35 mm equivalent: 27.9 - 85.3 mm)'
+  DOF: inf (4.31 m - inf)
+  FOV: 36.9 deg
+  FocalLength35efl: '34.0 mm (35 mm equivalent: 54.0 mm)'
+  HyperfocalDistance: 4.37 m
+  Lens35efl: '18.0 - 55.0 mm (35 mm equivalent: 28.6 - 87.4 mm)'
   LightValue: 5.6
   RedBalance: 2.067348
 ---
 sample: read test.jpg
 result:
+  ExifToolVersion: 10.09
   FileSize: 46 kB
   FileType: JPEG
+  FileTypeExtension: jpg
   MIMEType: image/jpeg
   JFIFVersion: 1.01
   ExifByteOrder: Big-endian (Motorola, MM)
@@ -429,11 +441,12 @@ result:
   Aperture: 9.5
   ImageSize: 300x199
   LensID: Minolta AF 28-135mm F4-4.5
+  Megapixels: 0.06
   ScaleFactor35efl: 1.5
   ShutterSpeed: !ruby/object:Rational
     denominator: 60
     numerator: 1
-  ThumbnailImage: "(Binary data 1820 bytes)"
+  ThumbnailImage: "(Binary data 1820 bytes, use -b option to extract)"
   CircleOfConfusion: 0.020 mm
   FOV: 18.3 deg
   FocalLength35efl: '75.0 mm (35 mm equivalent: 112.0 mm)'
@@ -442,8 +455,10 @@ result:
 ---
 sample: read test_coordinates.jpg
 result:
+  ExifToolVersion: 10.09
   FileSize: 251 kB
   FileType: JPEG
+  FileTypeExtension: jpg
   MIMEType: image/jpeg
   ExifByteOrder: Big-endian (Motorola, MM)
   ImageDescription: clip
@@ -498,11 +513,12 @@ result:
   GPSLongitude: 79 deg 22' 23.40" W
   GPSPosition: 43 deg 39' 11.40" N, 79 deg 22' 23.40" W
   ImageSize: 1280x720
+  Megapixels: 0.922
   ScaleFactor35efl: 8.5
   ShutterSpeed: !ruby/object:Rational
     denominator: 30
     numerator: 1
-  ThumbnailImage: "(Binary data 3831 bytes)"
+  ThumbnailImage: "(Binary data 3831 bytes, use -b option to extract)"
   CircleOfConfusion: 0.004 mm
   FOV: 54.4 deg
   FocalLength35efl: '4.1 mm (35 mm equivalent: 35.0 mm)'
@@ -511,8 +527,10 @@ result:
 ---
 sample: read test_encodings.jpg
 result:
+  ExifToolVersion: 10.09
   FileSize: 660 bytes
   FileType: JPEG
+  FileTypeExtension: jpg
   MIMEType: image/jpeg
   CurrentIPTCDigest: 09b79ab4703f3570ba3140ffc2dba2f6
   ObjectName: Mšhre
@@ -524,11 +542,14 @@ result:
   ColorComponents: 3
   YCbCrSubSampling: YCbCr4:2:0 (2 2)
   ImageSize: 1x1
+  Megapixels: 1.0e-06
 ---
 sample: read test_special_dates.jpg
 result:
+  ExifToolVersion: 10.09
   FileSize: 3.7 kB
   FileType: JPEG
+  FileTypeExtension: jpg
   MIMEType: image/jpeg
   ExifByteOrder: Big-endian (Motorola, MM)
   XResolution: 72
@@ -549,3 +570,4 @@ result:
   ColorComponents: 3
   YCbCrSubSampling: YCbCr4:2:0 (2 2)
   ImageSize: 300x199
+  Megapixels: 0.06
