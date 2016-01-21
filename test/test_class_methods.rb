@@ -63,13 +63,13 @@ class TestClassMethods < TestCase
   def test_all_tags
     all_tags = MiniExiftool.all_tags
     assert all_tags.include?('ISO')
-    assert all_tags.include?('OriginalFilename')
+    assert all_tags.include?('ExifToolVersion')
   end
 
   def test_writable_tags
     w_tags = MiniExiftool.writable_tags
     assert w_tags.include?('ISO')
-    assert_equal false, w_tags.include?('xxxxxx')
+    assert ! w_tags.include?('ExifToolVersion')
   end
 
   def test_exiftool_version
