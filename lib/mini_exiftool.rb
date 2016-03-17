@@ -116,6 +116,11 @@ class MiniExiftool
 
   # Load the tags of filename.
   def load filename
+    start_load filename
+    finish_load
+  end
+
+  def start_load filename
     MiniExiftool.setup
     unless filename && File.exist?(filename)
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
@@ -131,7 +136,12 @@ class MiniExiftool
     params << (@opts[:composite] ? '' : '-e ')
     params << (@opts[:coord_format] ? "-c \"#{@opts[:coord_format]}\"" : '')
     params << generate_encoding_params
-    if run(cmd_gen(params, @filename))
+
+    start_cmd(cmd_gen(params, @filename))
+  end
+
+  def finish_load
+    if finish_cmd
       parse_output
     else
       raise MiniExiftool::Error.new(@error_text)
@@ -371,11 +381,29 @@ class MiniExiftool
   end
 
   def run cmd
+    start_cmd cmd
+    finish_cmd
+  end
+
+  def start_cmd cmd
     if $DEBUG
       $stderr.puts cmd
     end
-    @output = `#{cmd} 2>#{@@error_file.path}`
+
+    @pipe, w = IO.pipe
+    @pid = Process.spawn("#{cmd} 2>#{@@error_file.path}", :out=>w)
+    w.close # used in child process but not here
+  end
+
+  def finish_cmd
+    @output = @pipe.read
+    @pipe.close
+    @pipe = nil
+
+    Process.wait @pid
     @status = $?
+    @pid = nil
+
     unless @status.exitstatus == 0
       @error_text = File.readlines(@@error_file.path).join
       @error_text.force_encoding('UTF-8')
