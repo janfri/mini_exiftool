@@ -15,6 +15,7 @@
 
 require 'fileutils'
 require 'json'
+require 'open3'
 require 'pstore'
 require 'rational'
 require 'rbconfig'
@@ -116,7 +117,6 @@ class MiniExiftool
 
   # Load the tags of filename.
   def load filename
-    MiniExiftool.setup
     unless filename && File.exist?(filename)
       raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
     end
@@ -188,7 +188,6 @@ class MiniExiftool
 
   # Save the changes to the file.
   def save
-    MiniExiftool.setup
     return false if @changed_values.empty?
     @errors.clear
     temp_file = Tempfile.new('mini_exiftool')
@@ -324,11 +323,11 @@ class MiniExiftool
 
   # Returns the version of the Exiftool command-line application.
   def self.exiftool_version
-    output = `#{MiniExiftool.command} -ver 2>&1`
-    unless $?.exitstatus == 0
-      raise MiniExiftool::Error.new("Command '#{MiniExiftool.command}' not found")
+    Open3.popen3 "#{MiniExiftool.command} -ver" do |_inp, out, _err, _thr|
+      out.read.chomp!
     end
-    output.chomp!
+  rescue SystemCallError
+    raise MiniExiftool::Error.new("Command '#{MiniExiftool.command}' not found")
   end
 
   def self.unify tag
@@ -358,14 +357,6 @@ class MiniExiftool
   private
   ############################################################################
 
-  @@setup_done = false
-  def self.setup
-    return if @@setup_done
-    @@error_file = Tempfile.new 'errors'
-    @@error_file.close
-    @@setup_done = true
-  end
-
   def cmd_gen arg_str='', filename
     [@@cmd, arg_str.encode('UTF-8'), escape(filename.encode(@@fs_enc))].map {|s| s.force_encoding('UTF-8')}.join(' ')
   end
@@ -374,16 +365,12 @@ class MiniExiftool
     if $DEBUG
       $stderr.puts cmd
     end
-    @output = `#{cmd} 2>#{@@error_file.path}`
-    @status = $?
-    unless @status.exitstatus == 0
-      @error_text = File.readlines(@@error_file.path).join
-      @error_text.force_encoding('UTF-8')
-      return false
-    else
-      @error_text = ''
-      return true
+    status = Open3.popen3(cmd) do |_inp, out, err, thr|
+      @output = out.read
+      @error_text = err.read
+      thr.value.exitstatus
     end
+    status == 0
   end
 
   def convert_before_save val
