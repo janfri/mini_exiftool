@@ -49,7 +49,7 @@ class MiniExiftool
     end
   end
 
-  attr_reader :filename, :errors
+  attr_reader :filename, :errors, :io
 
   opts_accessor :numerical, :composite, :ignore_minor_errors,
     :replace_invalid_chars, :timestamps
@@ -90,16 +90,18 @@ class MiniExiftool
   #   <code>:vorbis_encoding</code> to set this specific encoding (see
   #   -charset option of the exiftool command-line application, default is
   #   +nil+: no encoding specified)
-  def initialize filename=nil, opts={}
+  def initialize filename_or_io=nil, opts={}
     @opts = @@opts.merge opts
     if @opts[:convert_encoding]
       warn 'Option :convert_encoding is not longer supported!'
       warn 'Please use the String#encod* methods.'
     end
+    @filename = nil
+    @io = nil
     @values = TagHash.new
     @changed_values = TagHash.new
     @errors = TagHash.new
-    load filename unless filename.nil?
+    load filename_or_io unless filename_or_io.nil?
   end
 
   def initialize_from_hash hash # :nodoc:
@@ -115,15 +117,23 @@ class MiniExiftool
     self
   end
 
-  # Load the tags of filename.
-  def load filename
-    unless filename && File.exist?(filename)
-      raise MiniExiftool::Error.new("File '#{filename}' does not exist.")
+  # Load the tags of filename or io.
+  def load filename_or_io
+    case filename_or_io
+    when String
+      unless filename_or_io && File.exist?(filename_or_io)
+        raise MiniExiftool::Error.new("File '#{filename_or_io}' does not exist.")
+      end
+      if File.directory?(filename_or_io)
+        raise MiniExiftool::Error.new("'#{filename_or_io}' is a directory.")
+      end
+      @filename = filename_or_io
+    when IO
+      @io = filename_or_io
+      @filename = '-'
+    else
+      raise MiniExiftool::Error.new("Could not open filename_or_io.")
     end
-    if File.directory?(filename)
-      raise MiniExiftool::Error.new("'#{filename}' is a directory.")
-    end
-    @filename = filename
     @values.clear
     @changed_values.clear
     params = '-j '
@@ -188,6 +198,9 @@ class MiniExiftool
 
   # Save the changes to the file.
   def save
+    if @io
+      raise MiniExiftool::Error.new('No writing support when using an IO.')
+    end
     return false if @changed_values.empty?
     @errors.clear
     temp_file = Tempfile.new('mini_exiftool')
@@ -365,7 +378,17 @@ class MiniExiftool
     if $DEBUG
       $stderr.puts cmd
     end
-    status = Open3.popen3(cmd) do |_inp, out, err, thr|
+    status = Open3.popen3(cmd) do |inp, out, err, thr|
+      if @io
+        begin
+          data = @io.read
+        rescue Exception
+          raise MiniExiftool::Error.new("IO is not readable.")
+        end
+        inp.write data
+        @io.close
+        inp.close
+      end
       @output = out.read
       @error_text = err.read
       thr.value.exitstatus
