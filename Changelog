@@ -1,3 +1,9 @@
+2.6.0
+- Support reading from IO instances.
+- New option :fast to increase speed when extracting information from JPEG
+  images which are piped across a slow network connection.
+- Refactoring: Use Open3 for all command-line calls.
+
 2.5.1
 - Add gemspec.
 
