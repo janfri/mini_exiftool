@@ -1,5 +1,6 @@
 # -- encoding: utf-8 --
 require 'helpers_for_test'
+require 'stringio'
 
 class TestIo < TestCase
 
@@ -33,6 +34,23 @@ class TestIo < TestCase
         raise e
       end
     end
+  end
+
+  def test_fast_option
+    $DEBUG = true
+    s = StringIO.new
+    $stderr = s
+    MiniExiftool.new open_real_io
+    s.rewind
+    assert_equal 'exiftool -j  "-"', s.read.chomp
+    s = StringIO.new
+    $stderr = s
+    MiniExiftool.new open_real_io, :fast => true
+    s.rewind
+    assert_equal 'exiftool -j -fast  "-"', s.read.chomp
+  ensure
+    $DEBUG = false
+    $stderr = STDERR
   end
 
   protected

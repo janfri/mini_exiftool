@@ -32,7 +32,7 @@ class MiniExiftool
   @@cmd = 'exiftool'
 
   # Hash of the standard options used when call MiniExiftool.new
-  @@opts = { :numerical => false, :composite => true, :ignore_minor_errors => false,
+  @@opts = { :numerical => false, :composite => true, :fast => false, :ignore_minor_errors => false,
    :replace_invalid_chars => false, :timestamps => Time }
 
   # Encoding of the filesystem (filenames in command line)
@@ -73,6 +73,8 @@ class MiniExiftool
   # * <code>:coord_format</code> set format for GPS coordinates (See
   #   -c-option of the exiftool command-line application, default is +nil+
   #   that means exiftool standard)
+  # * <code>:fast</code> useful when reading JPEGs over a slow network connection
+  #   (See -fast-option of the exiftool command-line application, default is +false+)
   # * <code>:replace_invalid_chars</code> replace string for invalid
   #   UTF-8 characters or +false+ if no replacing should be done,
   #   default is +false+
@@ -140,6 +142,7 @@ class MiniExiftool
     params << (@opts[:numerical] ? '-n ' : '')
     params << (@opts[:composite] ? '' : '-e ')
     params << (@opts[:coord_format] ? "-c \"#{@opts[:coord_format]}\"" : '')
+    params << (@opts[:fast] ? '-fast ' : '')
     params << generate_encoding_params
     if run(cmd_gen(params, @filename))
       parse_output
