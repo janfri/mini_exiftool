@@ -17,7 +17,6 @@
  photo = MiniExiftool.new 'photo.jpg'
  puts photo['DateTimeOriginal']
 
-
 === Smart Tag Names
 In the example above we use <code>photo['DateTimeOriginal']</code> to
 get the value for the time the photo was taken. But tag names are not
@@ -41,7 +40,6 @@ using dynamic method access. You can write:
 or also
  photo.date_time_original
 
-
 === Value Types
 
 Following types of values are at the moment supported:
@@ -52,7 +50,7 @@ Following types of values are at the moment supported:
 * Time (e. g. DateTimeOriginal => 2005:09:13 20:08:50)
 
 Be aware, if there is only one value in a tag which can hold multiple
-values the result is'nt an array! But you can get one with the Array
+values the result isn't an array! But you can get one with the Array
 method:
   # only _one_ keyword
   p1 = MiniExiftool.new 'p1.jpg'
@@ -103,18 +101,43 @@ Further options are
 * <code>:coord_format</code> set format for GPS coordinates (See
   -c-option of the exiftool command-line application, default is +nil+
   that means exiftool standard)
+* <code>:fast</code> useful when reading JPEGs over a slow network connection
+  (See -fast-option of the exiftool command-line application, default is +false+)
+* <code>:fast2</code> useful when reading JPEGs over a slow network connection
+  (See -fast2-option of the exiftool command-line application, default is +false+)
 * <code>:replace_invalid_chars</code> replace string for invalid
   UTF-8 characters or +false+ if no replacing should be done,
   default is +false+
+* <code>:exif_encoding</code>, <code>:iptc_encoding</code>,
+  <code>:xmp_encoding</code>, <code>:png_encoding</code>,
+  <code>:id3_encoding</code>, <code>:pdf_encoding</code>,
+  <code>:photoshop_encoding</code>, <code>:quicktime_encoding</code>,
+  <code>:aiff_encoding</code>, <code>:mie_encoding</code>,
+  <code>:vorbis_encoding</code> to set this specific encoding (see
+  -charset option of the exiftool command-line application, default is
+  +nil+: no encoding specified)
 
-=== Further Example
+=== Using an IO instance
 
-For understanding reading access to meta data also have a look at the
-example file <code>print_portraits.rb</code> in the +examples+
-directory.
+ require 'mini_exiftool'
+ require 'open3'
+
+ # Using external curl command
+ input, output = Open3.popen2("curl -s http://www.url.of.a.photo")
+ input.close
+ photo = MiniExiftool.new output
+ puts photo['ISO']
+
+The kind of the parameter +filename_or_io+ is determined via duck typing:
+if the argument responds to +to_str+ it is interpreted as filename, if it
+responds to +read+ it is interpreted es IO instance.
+Attention: If you use an IO instance then writing of values is not supported!
+
+Look at the show_speedup_with_fast_option example in the MiniExiftool examples
+directory for more details about using an IO instance.
+
 
 == Lesson 2: Writing Meta Data
-
 
 === Also A Very Simple Example
 
@@ -127,12 +150,12 @@ directory.
 
 === Save Is Atomar
 
-If you have changed serval values and call the +save+-method either
+If you have changed several values and call the +save+-method either
 all changes will be written to the file or nothing. The return value
 of the +save+-method is +true+ if all values are written to the file
 otherwise save returns +false+. In the last case you can use the
 +errors+-method which returns a hash of the tags which values couldn't
-be writed with an error message for each of them.
+be written with an error message for each of them.
 
 
 === Interesting Methods
@@ -143,10 +166,6 @@ done. In the same way the +revert+-method reverts the value of a
 specific tag or in general all changes.
 
 You should also look at the rdoc information of MiniExiftool.
-
-=== Further Examples
-
-Have a look in the examples folder of MiniExiftool.
 
 
 == Lesson 3: Copying Meta Data
@@ -167,6 +186,9 @@ Have a look in the examples folder of MiniExiftool.
  # Further more than one tag can be copied at once
  photo.copy_tags_from('another_photo', %w[author copyright])
 
-=== Further Example
-
 Look at the file copy_icc_profile.rb in the examples folder of MiniExiftool.
+
+
+== Further Examples
+
+Have a look in the examples folder of MiniExiftool.

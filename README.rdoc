@@ -48,8 +48,12 @@ after require 'mini_exiftool'.
 
 In general MiniExiftool is very intuitive to use as the following examples show:
 
- # Reading meta data
+ # Reading meta data from a file
  photo = MiniExiftool.new 'photo.jpg'
+ puts photo.title
+
+ # Alternative reading meta data from an IO instance
+ photo = MiniExiftool.new io
  puts photo.title
 
  # Writing meta data

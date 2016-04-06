@@ -68,6 +68,9 @@ class MiniExiftool
   # +filename_or_io+ The kind of the parameter is determined via duck typing:
   # if the argument responds to +to_str+ it is interpreted as filename, if it
   # responds to +read+ it is interpreted es IO instance.
+  #
+  # <b>ATTENTION:</b> If using an IO instance writing of meta data is not supported!
+  #
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
   # * <code>:composite</code> for including composite tags while loading,
