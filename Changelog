@@ -1,3 +1,10 @@
+2.7.0
+- Use duck typing to determine if filename_or_io is a filename or an IO
+  instance.
+- New option :fast2.
+- Add example show_speedup_with_fast_option.
+- Update docs.
+
 2.6.0
 - Support reading from IO instances.
   Thanks to Gaelan <gbs@canishe.com> for the idea.
