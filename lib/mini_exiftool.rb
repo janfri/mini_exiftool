@@ -64,6 +64,9 @@ class MiniExiftool
     opts_accessor encoding_opt(enc_type)
   end
 
+  # +filename_or_io+ The kind of the parameter is determined via duck typing:
+  # if the argument responds to +to_str+ it is interpreted as filename, if it
+  # responds to +read+ it is interpreted es IO instance.
   # +opts+ support at the moment
   # * <code>:numerical</code> for numerical values, default is +false+
   # * <code>:composite</code> for including composite tags while loading,
@@ -121,16 +124,15 @@ class MiniExiftool
 
   # Load the tags of filename or io.
   def load filename_or_io
-    case filename_or_io
-    when String
+    if filename_or_io.respond_to? :to_str # String-like
       unless filename_or_io && File.exist?(filename_or_io)
         raise MiniExiftool::Error.new("File '#{filename_or_io}' does not exist.")
       end
       if File.directory?(filename_or_io)
         raise MiniExiftool::Error.new("'#{filename_or_io}' is a directory.")
       end
-      @filename = filename_or_io
-    when IO
+      @filename = filename_or_io.to_str
+    elsif filename_or_io.respond_to? :read # IO-like
       @io = filename_or_io
       @filename = '-'
     else
