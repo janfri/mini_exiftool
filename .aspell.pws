@@ -1,4 +1,4 @@
-personal_ws-1.1 en 90 
+personal_ws-1.1 en 91 
 Refactoring
 timestamps
 Kulander
@@ -27,8 +27,8 @@ filename
 Friedrich
 cgat
 ws
-uwe
 DateTime
+uwe
 Gieseler
 dir
 aiff
@@ -65,6 +65,7 @@ ptore
 yaml
 xmp
 MiniExiftool
+JPEG
 Bugfix
 releating
 Henning
