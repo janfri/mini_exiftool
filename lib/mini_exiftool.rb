@@ -386,11 +386,12 @@ class MiniExiftool
     status = Open3.popen3(cmd) do |inp, out, err, thr|
       if @io
         begin
-          data = @io.read
-        rescue Exception
+          IO.copy_stream @io, inp
+        rescue Errno::EPIPE
+          # Output closed, no problem
+        rescue ::IOError => e
           raise MiniExiftool::Error.new("IO is not readable.")
         end
-        inp.write data
         @io.close
         inp.close
       end
