@@ -1,7 +1,9 @@
 2.6.0
 - Support reading from IO instances.
+  Thanks to Gaelan <gbs@canishe.com> for the idea.
 - New option :fast to increase speed when extracting information from JPEG
   images which are piped across a slow network connection.
+  Thanks to Felipe Cypriano <felipe@cypriano.me> for the idea.
 - Refactoring: Use Open3 for all command-line calls.
 
 2.5.1
