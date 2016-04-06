@@ -36,7 +36,7 @@ class TestIo < TestCase
     end
   end
 
-  def test_fast_option
+  def test_fast_options
     $DEBUG = true
     s = StringIO.new
     $stderr = s
@@ -48,6 +48,11 @@ class TestIo < TestCase
     MiniExiftool.new open_real_io, :fast => true
     s.rewind
     assert_equal 'exiftool -j -fast  "-"', s.read.chomp
+    s = StringIO.new
+    $stderr = s
+    MiniExiftool.new open_real_io, :fast2 => true
+    s.rewind
+    assert_equal 'exiftool -j -fast2  "-"', s.read.chomp
   ensure
     $DEBUG = false
     $stderr = STDERR
