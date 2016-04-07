@@ -1,3 +1,8 @@
+2.7.1
+- Improve test for fast options: Ignore other messages from stderr.
+- Fix typo in license identifier.
+- Improve example show_speedup_with_fast_option.
+
 2.7.0
 - Use duck typing to determine if filename_or_io is a filename or an IO
   instance.
