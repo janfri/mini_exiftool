@@ -42,17 +42,17 @@ class TestIo < TestCase
     $stderr = s
     MiniExiftool.new open_real_io
     s.rewind
-    assert_equal 'exiftool -j  "-"', s.read.chomp
+    assert_match /^exiftool -j  "-"$/, s.read
     s = StringIO.new
     $stderr = s
     MiniExiftool.new open_real_io, :fast => true
     s.rewind
-    assert_equal 'exiftool -j -fast  "-"', s.read.chomp
+    assert_match /^exiftool -j -fast  "-"$/, s.read
     s = StringIO.new
     $stderr = s
     MiniExiftool.new open_real_io, :fast2 => true
     s.rewind
-    assert_equal 'exiftool -j -fast2  "-"', s.read.chomp
+    assert_match /^exiftool -j -fast2  "-"$/, s.read
   ensure
     $DEBUG = false
     $stderr = STDERR
