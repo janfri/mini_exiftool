@@ -88,3 +88,21 @@ fast2 = time { MiniExiftool.new output, fast2: true }
 
 print_statistics 'curl', without_fast, fast, fast2
 
+####################################
+# wget
+####################################
+
+input, output = Open3.popen3("wget -q -O - #{arg}")
+input.close
+without_fast = time { MiniExiftool.new output }
+
+input, output = Open3.popen3("wget -q -O - #{arg}")
+input.close
+fast = time { MiniExiftool.new output, fast: true }
+
+input, output = Open3.popen3("wget -q -O - #{arg}")
+input.close
+fast2 = time { MiniExiftool.new output, fast2: true }
+
+print_statistics 'wget', without_fast, fast, fast2
+
