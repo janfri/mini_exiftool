@@ -56,17 +56,23 @@ def read_from_http uri, io
   end
 end
 
-output, input = IO.pipe
-read_from_http uri, input
-without_fast = time { MiniExiftool.new output }
+without_fast = time do
+  output, input = IO.pipe
+  read_from_http uri, input
+  MiniExiftool.new output
+end
 
-output, input = IO.pipe
-read_from_http uri, input
-fast = time { MiniExiftool.new output, fast: true }
+fast = time do
+  output, input = IO.pipe
+  read_from_http uri, input
+  MiniExiftool.new output, fast: true
+end
 
-output, input = IO.pipe
-read_from_http uri, input
-fast2 = time { MiniExiftool.new output, fast2: true }
+fast2 = time do
+  output, input = IO.pipe
+  read_from_http uri, input
+  MiniExiftool.new output, fast2: true
+end
 
 print_statistics 'net/http', without_fast, fast, fast2
 
@@ -74,17 +80,23 @@ print_statistics 'net/http', without_fast, fast, fast2
 # curl
 ####################################
 
-input, output = Open3.popen3("curl -s #{arg}")
-input.close
-without_fast = time { MiniExiftool.new output }
+without_fast = time do
+  input, output = Open3.popen3("curl -s #{arg}")
+  input.close
+  MiniExiftool.new output
+end
 
-input, output = Open3.popen3("curl -s #{arg}")
-input.close
-fast = time { MiniExiftool.new output, fast: true }
+fast = time do
+  input, output = Open3.popen3("curl -s #{arg}")
+  input.close
+  MiniExiftool.new output, fast: true
+end
 
-input, output = Open3.popen3("curl -s #{arg}")
-input.close
-fast2 = time { MiniExiftool.new output, fast2: true }
+fast2 = time do
+  input, output = Open3.popen3("curl -s #{arg}")
+  input.close
+  MiniExiftool.new output, fast2: true
+end
 
 print_statistics 'curl', without_fast, fast, fast2
 
@@ -92,17 +104,23 @@ print_statistics 'curl', without_fast, fast, fast2
 # wget
 ####################################
 
-input, output = Open3.popen3("wget -q -O - #{arg}")
-input.close
-without_fast = time { MiniExiftool.new output }
+without_fast = time do
+  input, output = Open3.popen3("wget -q -O - #{arg}")
+  input.close
+  MiniExiftool.new output
+end
 
-input, output = Open3.popen3("wget -q -O - #{arg}")
-input.close
-fast = time { MiniExiftool.new output, fast: true }
+fast = time do
+  input, output = Open3.popen3("wget -q -O - #{arg}")
+  input.close
+  MiniExiftool.new output, fast: true
+end
 
-input, output = Open3.popen3("wget -q -O - #{arg}")
-input.close
-fast2 = time { MiniExiftool.new output, fast2: true }
+fast2 = time do
+  input, output = Open3.popen3("wget -q -O - #{arg}")
+  input.close
+  MiniExiftool.new output, fast2: true
+end
 
 print_statistics 'wget', without_fast, fast, fast2
 
