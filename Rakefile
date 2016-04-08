@@ -14,6 +14,7 @@ Rim.setup do |p|
   p.homepage = 'http://gitorious.org/mini_exiftool'
   p.license = 'LGPL-2.1'
   p.gem_files << 'Tutorial.rdoc'
+  p.gem_files += FileList.new('examples/**')
   p.install_message = %q{
 +-----------------------------------------------------------------------+
 | Please ensure you have installed exiftool at least version 7.65       |
