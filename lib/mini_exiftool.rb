@@ -26,7 +26,7 @@ require 'time'
 # Simple OO access to the Exiftool command-line application.
 class MiniExiftool
 
-  VERSION = '2.7.1'
+  VERSION = '2.7.2'
 
   # Name of the Exiftool command-line application
   @@cmd = 'exiftool'

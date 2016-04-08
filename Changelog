@@ -1,3 +1,6 @@
+2.7.2
+- Include example files in gem.
+
 2.7.1
 - Improve test for fast options: Ignore other messages from stderr.
 - Fix typo in license identifier.
