@@ -11,7 +11,7 @@ Rim.setup do |p|
   p.authors = 'Jan Friedrich'
   p.email = 'janfri26@gmail.com'
   p.summary = 'This library is wrapper for the Exiftool command-line application (http://www.sno.phy.queensu.ca/~phil/exiftool).'
-  p.homepage = 'http://gitorious.org/mini_exiftool'
+  p.homepage = 'https://github.com/janfri/mini_exiftool'
   p.license = 'LGPL-2.1'
   p.gem_files << 'Tutorial.rdoc'
   p.gem_files += FileList.new('examples/**')

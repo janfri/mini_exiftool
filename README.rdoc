@@ -122,9 +122,7 @@ This problem you can solve with the option replace_invalid_chars:
 
 == Contribution
 
-The code is hosted in a git repository on Gitorious at
-http://gitorious.org/mini_exiftool
-and github at
+The code is hosted in a git repository on github at
 https://github.com/janfri/mini_exiftool
 feel free to contribute!
 
