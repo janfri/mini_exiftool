@@ -2,7 +2,7 @@
 #
 # MiniExiftool
 #
-# This library is wrapper for the Exiftool command-line
+# This library is wrapper for the ExifTool command-line
 # application (http://www.sno.phy.queensu.ca/~phil/exiftool/)
 # written by Phil Harvey.
 # Read and write access is done in a clean OO manner.
@@ -23,12 +23,12 @@ require 'set'
 require 'tempfile'
 require 'time'
 
-# Simple OO access to the Exiftool command-line application.
+# Simple OO access to the ExifTool command-line application.
 class MiniExiftool
 
   VERSION = '2.7.2'
 
-  # Name of the Exiftool command-line application
+  # Name of the ExifTool command-line application
   @@cmd = 'exiftool'
 
   # Hash of the standard options used when call MiniExiftool.new
@@ -307,12 +307,12 @@ class MiniExiftool
     MiniExiftool.from_hash YAML.load(yaml), opts
   end
 
-  # Returns the command name of the called Exiftool application.
+  # Returns the command name of the called ExifTool application.
   def self.command
     @@cmd
   end
 
-  # Setting the command name of the called Exiftool application.
+  # Setting the command name of the called ExifTool application.
   def self.command= cmd
     @@cmd = cmd
   end
@@ -322,7 +322,7 @@ class MiniExiftool
     @@opts
   end
 
-  # Returns a set of all known tags of Exiftool.
+  # Returns a set of all known tags of ExifTool.
   def self.all_tags
     unless defined? @@all_tags
       @@all_tags = pstore_get :all_tags
@@ -330,7 +330,7 @@ class MiniExiftool
     @@all_tags
   end
 
-  # Returns a set of all possible writable tags of Exiftool.
+  # Returns a set of all possible writable tags of ExifTool.
   def self.writable_tags
     unless defined? @@writable_tags
       @@writable_tags = pstore_get :writable_tags
@@ -338,7 +338,7 @@ class MiniExiftool
     @@writable_tags
   end
 
-  # Returns the original Exiftool name of the given tag
+  # Returns the original ExifTool name of the given tag
   def self.original_tag tag
     unless defined? @@all_tags_map
       @@all_tags_map = pstore_get :all_tags_map
@@ -346,7 +346,7 @@ class MiniExiftool
     @@all_tags_map[tag]
   end
 
-  # Returns the version of the Exiftool command-line application.
+  # Returns the version of the ExifTool command-line application.
   def self.exiftool_version
     Open3.popen3 "#{MiniExiftool.command} -ver" do |_inp, out, _err, _thr|
       out.read.chomp!

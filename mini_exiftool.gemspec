@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.licenses = ["LGPL-2.1".freeze]
   s.post_install_message = "\n+-----------------------------------------------------------------------+\n| Please ensure you have installed exiftool at least version 7.65       |\n| and it's found in your PATH (Try \"exiftool -ver\" on your commandline).|\n| For more details see                                                  |\n| http://www.sno.phy.queensu.ca/~phil/exiftool/install.html             |\n| You need also Ruby 1.9 or higher.                                     |\n| If you need support for Ruby 1.8 or exiftool prior 7.65 install       |\n| mini_exiftool version < 2.0.0.                                        |\n+-----------------------------------------------------------------------+\n  ".freeze
   s.rubygems_version = "2.6.4".freeze
-  s.summary = "This library is wrapper for the Exiftool command-line application (http://www.sno.phy.queensu.ca/~phil/exiftool).".freeze
+  s.summary = "This library is wrapper for the ExifTool command-line application (http://www.sno.phy.queensu.ca/~phil/exiftool).".freeze
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

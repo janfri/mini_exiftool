@@ -3,7 +3,7 @@
 
 == Installation
 
-* Installing the Exiftool command-line application from Phil Harvey
+* Installing the ExifTool command-line application from Phil Harvey
   (see http://www.sno.phy.queensu.ca/~phil/exiftool/install.html)
 * Installing the Ruby library (<code>gem install mini_exiftool</code>)
 
@@ -66,7 +66,7 @@ method:
 
 === Using options
 
-The Exiftool command-line application has an option (-n) to get values
+The ExifTool command-line application has an option (-n) to get values
 as numbers if possible, in MiniExiftool you can do this with setting
 the <code>:numerical</code> option to +true+ while generating a new
 instance with new or using the <code>numerical=</code>-method

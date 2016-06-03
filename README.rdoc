@@ -1,12 +1,13 @@
 = MiniExiftool
 
-This library is wrapper for the Exiftool command-line application
+This library is a wrapper for the ExifTool command-line application
 (http://www.sno.phy.queensu.ca/~phil/exiftool) written by Phil Harvey.
-Read and write access is done in a clean OO manner.
+It provides the full power of ExifTool to Ruby: reading and writing of
+EXIF-data, IPTC-data and XMP-data.
 
 == Requirements
 
-Ruby 1.9 or higher and an installation of the Exiftool
+Ruby 1.9 or higher and an installation of the ExifTool
 command-line application at least version 7.65.
 If you run on Ruby 1.8 or with a prior exiftool version
 install mini_exiftool version 1.x.x.
@@ -14,13 +15,13 @@ Instructions for installation you can find under
 http://www.sno.phy.queensu.ca/~phil/exiftool/install.html .
 
 Alternatively Wil Gieseler has bundled a meta-gem that eliminates the
-need for a separate Exiftool installation. Have a look at
+need for a separate ExifTool installation. Have a look at
 http://github.com/wilg/mini_exiftool_vendored or
 http://rubygems.org/gems/mini_exiftool_vendored .
 
 == Installation
 
-First you need Exiftool (see under Requirements above). Then you can simply
+First you need ExifTool (see under Requirements above). Then you can simply
 install the gem with
  gem install mini_exiftool
 
