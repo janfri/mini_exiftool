@@ -26,4 +26,5 @@ Rim.setup do |p|
 | mini_exiftool version < 2.0.0.                                        |
 +-----------------------------------------------------------------------+
   }
+  p.test_warning = false
 end
