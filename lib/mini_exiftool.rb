@@ -506,6 +506,7 @@ class MiniExiftool
     pstore_filename = File.join(pstore_dir, 'exiftool_tags_' << exiftool_version.gsub('.', '_') << '.pstore')
     @@pstore = PStore.new pstore_filename
     if !File.exist?(pstore_filename) || File.size(pstore_filename) == 0
+      $stderr.puts 'Generating cache file for ExifTool tag names. This takes a few seconds but is only needed once...'
       @@pstore.transaction do |ps|
         ps[:all_tags] = all_tags = determine_tags('list')
         ps[:writable_tags] = determine_tags('listw')
@@ -513,6 +514,7 @@ class MiniExiftool
         all_tags.each { |k| map[unify(k)] = k }
         ps[:all_tags_map] = map
       end
+      $stderr.puts 'Cache file generated.'
     end
   end
 
