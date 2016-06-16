@@ -10,12 +10,18 @@ Rim.setup do |p|
   p.version = MiniExiftool::VERSION
   p.authors = 'Jan Friedrich'
   p.email = 'janfri26@gmail.com'
-  p.summary = 'This library is wrapper for the ExifTool command-line application (http://www.sno.phy.queensu.ca/~phil/exiftool).'
+  p.summary = 'This library is a wrapper for the ExifTool command-line application (http://www.sno.phy.queensu.ca/~phil/exiftool).'
+  p.description <<-END
+This library is a wrapper for the ExifTool command-line application
+(http://www.sno.phy.queensu.ca/~phil/exiftool) written by Phil Harvey.
+It provides the full power of ExifTool to Ruby: reading and writing of
+EXIF-data, IPTC-data and XMP-data.
+  END
   p.homepage = 'https://github.com/janfri/mini_exiftool'
   p.license = 'LGPL-2.1'
   p.gem_files << 'Tutorial.rdoc'
   p.gem_files += FileList.new('examples/**')
-  p.install_message = %q{
+  p.install_message = <<-END
 +-----------------------------------------------------------------------+
 | Please ensure you have installed exiftool at least version 7.65       |
 | and it's found in your PATH (Try "exiftool -ver" on your commandline).|
@@ -25,6 +31,6 @@ Rim.setup do |p|
 | If you need support for Ruby 1.8 or exiftool prior 7.65 install       |
 | mini_exiftool version < 2.0.0.                                        |
 +-----------------------------------------------------------------------+
-  }
+  END
   p.test_warning = false
 end
