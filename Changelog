@@ -1,5 +1,6 @@
 2.7.4
 - Print messages at $stdout when generating the PStore file with ExifTool tag names.
+  Thanks to Joshfindit for the idea.
 
 2.7.3
 - Update docs.
