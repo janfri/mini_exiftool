@@ -4,3 +4,4 @@ doc
 pkg
 .yardoc
 .rimrc
+Gemfile.lock
