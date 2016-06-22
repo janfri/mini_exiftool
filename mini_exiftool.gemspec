@@ -33,4 +33,6 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<rim>.freeze, ["~> 2.9"])
   end
+  s.add_development_dependency("regtest".freeze, ["~> 0.5"])
+  s.add_development_dependency("test-unit".freeze, ["~> 3.2"])
 end
