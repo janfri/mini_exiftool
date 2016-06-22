@@ -33,4 +33,5 @@ EXIF-data, IPTC-data and XMP-data.
 +-----------------------------------------------------------------------+
   END
   p.test_warning = false
+  p.development_dependencies << 'rake' << 'regtest' << 'test-unit'
 end
