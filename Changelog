@@ -1,3 +1,6 @@
+2.7.6
+- Add Gemfile (for those who use bundler).
+
 2.7.5
 - Add gem description and fix typo in summary.
 

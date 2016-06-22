@@ -1,9 +1,10 @@
-personal_ws-1.1 en 109 
+personal_ws-1.1 en 111 
 Stjernstrom
 iptc
 README
 releating
 Friedrich
+Gemfile
 echoe
 CaptionAbstract
 encodings
@@ -46,8 +47,8 @@ filename
 OO
 rb
 stdout
-exiftool
 ExifTool
+exiftool
 prerelease
 str
 Henning
@@ -55,6 +56,7 @@ SupplementalCategories
 Krogmann
 timestamps
 encod
+bundler
 Picturelife
 cgat
 Hinrich
@@ -74,8 +76,8 @@ Gieseler
 UTF
 Wil
 shioyama
-StandardError
 Joshfindit
+StandardError
 Dungan
 Romahn
 uwe
