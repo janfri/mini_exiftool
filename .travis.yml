@@ -9,7 +9,6 @@ before_install:
   - sudo make install
   - cd ..
   - exiftool -ver
-  - gem install rim json test-unit regtest
 rvm:
   - 1.9.2
   - 1.9.3
