@@ -10,12 +10,11 @@ before_install:
   - cd ..
   - exiftool -ver
 rvm:
-  - 1.9.2
-  - 1.9.3
   - 2.0.0
-  - 2.1.8
-  - 2.2.4
-  - 2.3.0
+  - 2.1.9
+  - 2.2.5
+  - 2.3.1
+  - ruby-head
 notifications:
   email:
     - janfri26@gmail.com
