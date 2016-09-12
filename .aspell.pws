@@ -1,12 +1,12 @@
-personal_ws-1.1 en 111 
+personal_ws-1.1 en 112 
+CodedCharacterSet
 Stjernstrom
 iptc
 README
 releating
-Friedrich
 Gemfile
+Friedrich
 echoe
-CaptionAbstract
 encodings
 stderr
 Cypriano
@@ -18,10 +18,11 @@ jpg
 Soika
 rdoc
 ccoenen
+StandardError
 gemspec
 Kulander
 exif
-SubjectLocation
+refactorings
 FNumber
 dir
 popen
@@ -29,6 +30,8 @@ io
 JPEG
 yaml
 coord
+mfo
+MiniExiftool
 Tempfile
 warings
 Gaelan
@@ -36,9 +39,7 @@ Atomar
 Regexes
 mie
 Ümläuts
-CodedCharacterSet
 commandline
-TestEscapeFilename
 robotmay
 params
 Soutar
@@ -46,17 +47,19 @@ metadata
 filename
 OO
 rb
+SupplementalCategories
 stdout
-ExifTool
 exiftool
+ExifTool
 prerelease
 str
 Henning
-SupplementalCategories
 Krogmann
 timestamps
 encod
+customizable
 bundler
+CaptionAbstract
 Picturelife
 cgat
 Hinrich
@@ -68,7 +71,7 @@ aiff
 pdf
 MacRoman
 DateTime
-refactorings
+TestEscapeFilename
 ptore
 ws
 icc
@@ -77,18 +80,17 @@ UTF
 Wil
 shioyama
 Joshfindit
-StandardError
 Dungan
 Romahn
 uwe
-MiniExiftool
+DateTimeOriginal
+datetimeoriginal
 filenames
 POSIX
 darwin
+SubjectLocation
 GPS
 quicktime
-DateTimeOriginal
-datetimeoriginal
 pstore
 PStore
 shellwords
@@ -107,6 +109,5 @@ Horrocks
 acki
 Salzberg
 Hoy
-customizable
 regtest
 json

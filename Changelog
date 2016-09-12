@@ -1,3 +1,8 @@
+2.8.0
+- MiniExiftool doesn't close any longer a given IO to MiniExiftool.new
+  respectively MiniExiftool#load. You are responsible to do that.
+  Thanks to mfo for the suggestion and implementing it.
+
 2.7.6
 - Add Gemfile (for those who use bundler).
 
