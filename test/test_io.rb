@@ -7,7 +7,7 @@ class TestIo < TestCase
   def test_simple_case
     io = open_real_io
     mini_exiftool = MiniExiftool.new(io)
-    assert io.closed?, 'IO should be closed after reading data.'
+    assert_equal false, io.closed?, 'IO should not be closed.'
     assert_equal 400, mini_exiftool.iso
   end
 
