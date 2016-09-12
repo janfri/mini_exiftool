@@ -399,7 +399,6 @@ class MiniExiftool
         rescue ::IOError => e
           raise MiniExiftool::Error.new("IO is not readable.")
         end
-        @io.close
         inp.close
       end
       @output = out.read
