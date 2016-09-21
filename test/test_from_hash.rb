@@ -13,7 +13,7 @@ class TestFromHash < TestCase
     assert_kind_of Time, @mini_exiftool['DateTimeOriginal']
     assert_kind_of Float, @mini_exiftool['MaxApertureValue']
     assert_kind_of String, @mini_exiftool.flash
-    assert_kind_of Fixnum, @mini_exiftool['ExposureCompensation']
+    assert_kind_of Integer, @mini_exiftool['ExposureCompensation']
     assert_kind_of String, (@mini_exiftool['SubjectLocation'] || @mini_exiftool['SubjectArea'])
     assert_kind_of Array, @mini_exiftool['Keywords']
     assert_kind_of String, @mini_exiftool['SupplementalCategories']
