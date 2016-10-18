@@ -392,7 +392,6 @@ class MiniExiftool
       $stderr.puts cmd
     end
 
-    puts cmd.inspect
     begin
       pid, inp, out, err = POSIX::Spawn.popen4(cmd)
       if @io
