@@ -15,13 +15,14 @@
 
 require 'fileutils'
 require 'json'
-require 'open3'
 require 'pstore'
 require 'rational'
 require 'rbconfig'
 require 'set'
 require 'tempfile'
 require 'time'
+require 'posix/spawn'
+require 'open3'
 
 # Simple OO access to the ExifTool command-line application.
 class MiniExiftool
@@ -390,7 +391,10 @@ class MiniExiftool
     if $DEBUG
       $stderr.puts cmd
     end
-    status = Open3.popen3(cmd) do |inp, out, err, thr|
+
+    puts cmd.inspect
+    begin
+      pid, inp, out, err = POSIX::Spawn.popen4(cmd)
       if @io
         begin
           IO.copy_stream @io, inp
@@ -403,10 +407,14 @@ class MiniExiftool
       end
       @output = out.read
       @error_text = err.read
-      thr.value.exitstatus
+    ensure
+      [inp, out, err].each { |io| io.close if !io.closed? }
+      Process::waitpid(pid)
     end
-    status == 0
+
+    $?.exitstatus == 0
   end
+
 
   def convert_before_save val
     case val

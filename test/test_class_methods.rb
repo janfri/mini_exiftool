@@ -12,7 +12,7 @@ class TestClassMethods < TestCase
       MiniExiftool.new nil
     end
     assert_raises MiniExiftool::Error do
-      MiniExiftool.new false 
+      MiniExiftool.new false
     end
     assert_raises MiniExiftool::Error do
       MiniExiftool.new ''
@@ -36,7 +36,7 @@ class TestClassMethods < TestCase
     MiniExiftool.command = 'non_existend'
     assert_equal 'non_existend', MiniExiftool.command
     assert_raises MiniExiftool::Error do
-      met = MiniExiftool.new(File.join(File.dirname(__FILE__), 
+      met = MiniExiftool.new(File.join(File.dirname(__FILE__),
                                        'data/test.jpg'))
     end
     MiniExiftool.command = cmd
