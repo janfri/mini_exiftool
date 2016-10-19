@@ -129,8 +129,13 @@ class MiniExiftool
     self
   end
 
-  # Load the tags of filename or io.
+  # Load the tags of filename.
   def load filename_or_io
+    start_load filename_or_io
+    finish_load
+  end
+
+  def start_load filename_or_io
     if filename_or_io.respond_to? :to_str # String-like
       unless filename_or_io && File.exist?(filename_or_io)
         raise MiniExiftool::Error.new("File '#{filename_or_io}' does not exist.")
@@ -154,7 +159,12 @@ class MiniExiftool
     params << (@opts[:fast] ? '-fast ' : '')
     params << (@opts[:fast2] ? '-fast2 ' : '')
     params << generate_encoding_params
-    if run(cmd_gen(params, @filename))
+
+    start_cmd(cmd_gen(params, @filename))
+  end
+
+  def finish_load
+    if finish_cmd
       parse_output
     else
       raise MiniExiftool::Error.new(@error_text)
@@ -388,32 +398,49 @@ class MiniExiftool
   end
 
   def run cmd
+    start_cmd cmd
+    finish_cmd
+  end
+
+  def start_cmd cmd
     if $DEBUG
       $stderr.puts cmd
     end
 
-    begin
-      pid, inp, out, err = POSIX::Spawn.popen4(cmd)
-      if @io
-        begin
-          IO.copy_stream @io, inp
-        rescue Errno::EPIPE
-          # Output closed, no problem
-        rescue ::IOError => e
-          raise MiniExiftool::Error.new("IO is not readable.")
-        end
-        inp.close
+    @pid, inp, @out, @err = POSIX::Spawn.popen4(cmd)
+    if @io
+      begin
+        IO.copy_stream @io, inp
+      rescue Errno::EPIPE
+        # Output closed, no problem
+      rescue ::IOError => e
+        raise MiniExiftool::Error.new("IO is not readable.")
       end
-      @output = out.read
-      @error_text = err.read
-    ensure
-      [inp, out, err].each { |io| io.close if !io.closed? }
-      Process::waitpid(pid)
     end
-
-    $?.exitstatus == 0
+    inp.close
   end
 
+  def finish_cmd
+    @output = @out.read
+
+    Process.wait @pid
+    @status = $?
+    @pid = nil
+
+    unless @status.exitstatus == 0
+      @error_text = @err.read
+      @error_text.force_encoding('UTF-8')
+      false
+    else
+      @error_text = ''
+      true
+    end
+  ensure
+    @out.close unless @out.closed?
+    @out = nil
+    @err.close unless @err.closed?
+    @out = nil
+  end
 
   def convert_before_save val
     case val
