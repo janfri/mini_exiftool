@@ -421,25 +421,20 @@ class MiniExiftool
   end
 
   def finish_cmd
-    @output = @out.read
-
-    Process::waitpid(@pid)
-    @status = $?
-    @pid = nil
-
-    if @status.exitstatus == 0
-      @error_text = ''
-      true
-    else
+    begin
+      @output = @out.read
       @error_text = @err.read
       @error_text.force_encoding('UTF-8')
-      false
+    ensure
+      @out.close unless @out.closed?
+      @out = nil
+      @err.close unless @err.closed?
+      @err = nil
+      Process::waitpid(@pid)
+      @pid = nil
     end
-  ensure
-    @out.close unless @out.closed?
-    @out = nil
-    @err.close unless @err.closed?
-    @err = nil
+
+    $?.exitstatus == 0
   end
 
   def convert_before_save val
