@@ -35,7 +35,7 @@ class MiniExiftool
   # Hash of the standard options used when call MiniExiftool.new
   @@opts = { :numerical => false, :composite => true, :fast => false, :fast2 => false,
              :ignore_minor_errors => false, :replace_invalid_chars => false,
-             :timestamps => Time }
+             :timestamps => Time, :async => false }
 
   # Encoding of the filesystem (filenames in command line)
   @@fs_enc = Encoding.find('filesystem')
@@ -113,7 +113,13 @@ class MiniExiftool
     @values = TagHash.new
     @changed_values = TagHash.new
     @errors = TagHash.new
-    load filename_or_io unless filename_or_io.nil?
+    unless filename_or_io.nil?
+      if opts[:async]
+        start_load filename_or_io
+      else
+        load filename_or_io
+      end
+    end
   end
 
   def initialize_from_hash hash # :nodoc:
