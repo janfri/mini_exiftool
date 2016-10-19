@@ -129,7 +129,7 @@ class MiniExiftool
     self
   end
 
-  # Load the tags of filename.
+  # Load the tags of filename or io.
   def load filename_or_io
     start_load filename_or_io
     finish_load
@@ -427,19 +427,19 @@ class MiniExiftool
     @status = $?
     @pid = nil
 
-    unless @status.exitstatus == 0
+    if @status.exitstatus == 0
+      @error_text = ''
+      true
+    else
       @error_text = @err.read
       @error_text.force_encoding('UTF-8')
       false
-    else
-      @error_text = ''
-      true
     end
   ensure
     @out.close unless @out.closed?
     @out = nil
     @err.close unless @err.closed?
-    @out = nil
+    @err = nil
   end
 
   def convert_before_save val
