@@ -423,7 +423,7 @@ class MiniExiftool
   def finish_cmd
     @output = @out.read
 
-    Process.wait @pid
+    Process::waitpid(@pid)
     @status = $?
     @pid = nil
 
