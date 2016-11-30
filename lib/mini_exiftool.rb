@@ -173,7 +173,7 @@ class MiniExiftool
     if finish_cmd
       parse_output
     else
-      raise MiniExiftool::Error.new(@error_text)
+      raise MiniExiftool::Error.new("stderr: #{@error_text} stdout: #{@output}")
     end
     self
   end
