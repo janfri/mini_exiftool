@@ -42,4 +42,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<regtest>.freeze, [">= 0"])
     s.add_dependency(%q<test-unit>.freeze, [">= 0"])
   end
+  s.add_development_dependency("regtest".freeze, ["~> 0.5"])
+  s.add_development_dependency("test-unit".freeze, ["~> 3.2"])
 end
