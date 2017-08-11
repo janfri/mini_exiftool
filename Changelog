@@ -1,3 +1,7 @@
+2.8.1
+- Improve documentation and use Integer instead of Fixnum because it's
+  deprecated in Ruby 2.4.0.
+
 2.8.0
 - MiniExiftool doesn't close any longer a given IO to MiniExiftool.new
   respectively MiniExiftool#load. You are responsible to do that.

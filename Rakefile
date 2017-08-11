@@ -19,7 +19,7 @@ EXIF-data, IPTC-data and XMP-data.
   END
   p.homepage = 'https://github.com/janfri/mini_exiftool'
   p.license = 'LGPL-2.1'
-  p.gem_files << 'Tutorial.rdoc'
+  p.gem_files << 'Tutorial.md'
   p.gem_files += FileList.new('examples/**')
   p.install_message = <<-END
 +-----------------------------------------------------------------------+
