@@ -96,6 +96,21 @@ For further information about using MiniExiftool read the Tutorial.md.
 in the project root folder and have a look at the examples in directory
 examples.
 
+## Caveats
+
+The philosophy of MiniExiftool is safety over performance.
+It can not handle more than one file at once. Writing operations are
+executed on a copy of the original file to have atomar writing: Either
+all changed values are written or none.
+To be able to assign errors to a specific tag writing operations also call
+the Exiftool command-line application once for each changed tag!
+
+In short: MiniExiftool has a very bad performance especially at write operations.
+
+**If you work with many files it is strongly recommended not to use MiniExiftool
+but instead my other gem [MultiExiftool](https://github.com/janfri/multi_exiftool).
+This is designed to handle many files and do reading and writing fast.**
+
 ## Encodings
 
 In MiniExiftool all strings are encoded in UTF-8. If you need other

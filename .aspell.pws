@@ -1,4 +1,4 @@
-personal_ws-1.1 en 113 
+personal_ws-1.1 en 114 
 CodedCharacterSet
 Stjernstrom
 iptc
@@ -31,11 +31,12 @@ JPEG
 yaml
 mfo
 coord
-MiniExiftool
 md
+MiniExiftool
 Tempfile
 warings
 Gaelan
+atomar
 Atomar
 Regexes
 mie
@@ -50,8 +51,8 @@ OO
 rb
 SupplementalCategories
 stdout
-ExifTool
 exiftool
+ExifTool
 prerelease
 str
 Henning
