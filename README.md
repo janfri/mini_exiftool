@@ -1,11 +1,11 @@
-= MiniExiftool
+# MiniExiftool
 
 This library is a wrapper for the ExifTool command-line application
 (http://www.sno.phy.queensu.ca/~phil/exiftool) written by Phil Harvey.
 It provides the full power of ExifTool to Ruby: reading and writing of
 EXIF-data, IPTC-data and XMP-data.
 
-== Requirements
+## Requirements
 
 Ruby 1.9 or higher and an installation of the ExifTool
 command-line application at least version 7.65.
@@ -19,59 +19,84 @@ need for a separate ExifTool installation. Have a look at
 http://github.com/wilg/mini_exiftool_vendored or
 http://rubygems.org/gems/mini_exiftool_vendored .
 
-== Installation
+## Installation
 
 First you need ExifTool (see under Requirements above). Then you can simply
 install the gem with
- gem install mini_exiftool
+```sh
+gem install mini_exiftool
+```
+or simply add to the following to your Gemfile:
+```ruby
+gem 'multi_exiftool'
+```
 
-If you need to support older versions of Ruby or exiftool (see Requirements above)
-  gem install --version "< 2.0.0" mini_exiftool
+If you need to support older versions of Ruby or Exiftool (see Requirements above)
 
-== Configuration
+```sh
+gem install --version "< 2.0.0" mini_exiftool
+```
+
+or if you use a Gemfile add:
+
+```ruby
+gem 'multi_exiftool', '<2.0.0'
+```
+
+## Configuration
 
 You can manually set the exiftool command that should be used via
-  MiniExiftool.command = '/path/to/my/exiftool'
+
+```ruby
+MiniExiftool.command = '/path/to/my/exiftool'
+```
 
 In addition, you can also tell MiniExiftool where to store the PStore files with tags
 which exiftool supports. The PStore files are used for performance issues.
-Per default the PStore files are stored in a sub directory .mini_exiftool or
-_mini_exiftool under your home directory.
-  MiniExiftool.pstore_dir = '/path/to/pstore/dir'
+Per default the PStore files are stored in a sub directory `.mini_exiftool` or
+`_mini_exiftool` under your home directory.
+
+```ruby
+MiniExiftool.pstore_dir = '/path/to/pstore/dir'
+```
 
 If you're using Rails, this is easily done with
-  MiniExiftool.pstore_dir = Rails.root.join('tmp').to_s
+
+```ruby
+MiniExiftool.pstore_dir = Rails.root.join('tmp').to_s
+```
 
 Important hint: if you have to change the configuration you have to do this direct
-after require 'mini_exiftool'.
+after `require 'mini_exiftool'`.
 
-== Usage
+## Usage
 
 In general MiniExiftool is very intuitive to use as the following examples show:
 
- # Reading meta data from a file
- photo = MiniExiftool.new 'photo.jpg'
- puts photo.title
+```ruby
+# Reading meta data from a file
+photo = MiniExiftool.new 'photo.jpg'
+puts photo.title
 
- # Alternative reading meta data from an IO instance
- photo = MiniExiftool.new io
- puts photo.title
+# Alternative reading meta data from an IO instance
+photo = MiniExiftool.new io
+puts photo.title
 
- # Writing meta data
- photo = MiniExiftool.new 'photo.jpg'
- photo.title = 'This is the new title'
- photo.save
+# Writing meta data
+photo = MiniExiftool.new 'photo.jpg'
+photo.title = 'This is the new title'
+photo.save
 
- # Copying meta data
- photo = MiniExiftool.new('photo.jpg')
- photo.copy_tags_from('another_photo.jpg', :author)
+# Copying meta data
+photo = MiniExiftool.new('photo.jpg')
+photo.copy_tags_from('another_photo.jpg', :author)
+```
 
-
-For further information about using MiniExiftool read the Tutorial.rdoc
+For further information about using MiniExiftool read the Tutorial.md.
 in the project root folder and have a look at the examples in directory
 examples.
 
-== Encodings
+## Encodings
 
 In MiniExiftool all strings are encoded in UTF-8. If you need other
 encodings in your project use the String#encod* methods.
@@ -79,7 +104,7 @@ encodings in your project use the String#encod* methods.
 If you have problems with corrupted strings when using MiniExiftool
 there are two reasons for this:
 
-=== Internal character sets
+### Internal character sets
 
 You can specify the charset in which the meta data is in the file encoded
 if you read or write to some sections of meta data (i.e. IPTC, XMP ...).
@@ -93,44 +118,48 @@ Please read the section about the character sets of the ExifTool command
 line application carefully to understand what's going on
 (http://www.sno.phy.queensu.ca/~phil/exiftool/faq.html#Q10)!
 
- # Using UTF-8 as internal encoding for IPTC tags and MacRoman
- # as internal encoding for EXIF tags
- photo = MiniExiftool.new('photo.jpg', iptc_encoding: 'UTF8',
-                          exif_encoding: 'MacRoman'
- # IPTC CaptionAbstract is already UTF-8 encoded
- puts photo.caption_abstract
- # EXIF Comment is converted from MacRoman to UTF-8
- puts photo.comment
+```ruby
+# Using UTF-8 as internal encoding for IPTC tags and MacRoman
+# as internal encoding for EXIF tags
+photo = MiniExiftool.new('photo.jpg', iptc_encoding: 'UTF8',
+                         exif_encoding: 'MacRoman'
+# IPTC CaptionAbstract is already UTF-8 encoded
+puts photo.caption_abstract
+# EXIF Comment is converted from MacRoman to UTF-8
+puts photo.comment
 
- photo = MiniExiftool.new('photo.jpg', iptc_encoding: 'UTF8',
-                          exif_encoding: 'MacRoman'
- # When saving IPTC data setting CodedCharacterSet as recommended
- photo.coded_character_set = 'UTF8'
- # IPTC CaptionAbstract will be stored in UTF-8 encoding
- photo.caption_abstract = 'Some text with Ümläuts'
- # EXIF Comment will be stored in MacRoman encoding
- photo.comment = 'Comment with Ümläuts'
- photo.save
+photo = MiniExiftool.new('photo.jpg', iptc_encoding: 'UTF8',
+                         exif_encoding: 'MacRoman'
+# When saving IPTC data setting CodedCharacterSet as recommended
+photo.coded_character_set = 'UTF8'
+# IPTC CaptionAbstract will be stored in UTF-8 encoding
+photo.caption_abstract = 'Some text with Ümläuts'
+# EXIF Comment will be stored in MacRoman encoding
+photo.comment = 'Comment with Ümläuts'
+photo.save
+```
 
-=== Corrupt characters
+### Corrupt characters
 
 You use the correct internal character set but in the string are still corrupt
 characters.
-This problem you can solve with the option replace_invalid_chars:
+This problem you can solve with the option `replace_invalid_chars`:
 
- # Replace all invalid characters with a question mark
- photo = MiniExiftool.new('photo.jpg', replace_invalid_chars: '?')
+```ruby
+# Replace all invalid characters with a question mark
+photo = MiniExiftool.new('photo.jpg', replace_invalid_chars: '?')
+```
 
-== Contribution
+## Contribution
 
 The code is hosted in a git repository on github at
 https://github.com/janfri/mini_exiftool
 feel free to contribute!
 
-== Author
+## Author
 Jan Friedrich <janfri26@gmail.com>
 
-== Copyright / License
+## Copyright / License
 Copyright (c) 2007-2016 by Jan Friedrich
 
 Licensed under terms of the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1,
