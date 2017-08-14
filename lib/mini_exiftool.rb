@@ -15,13 +15,14 @@
 
 require 'fileutils'
 require 'json'
-require 'open3'
 require 'pstore'
 require 'rational'
 require 'rbconfig'
 require 'set'
 require 'tempfile'
 require 'time'
+require 'posix/spawn'
+require 'open3'
 
 # Simple OO access to the ExifTool command-line application.
 class MiniExiftool
@@ -34,7 +35,7 @@ class MiniExiftool
   # Hash of the standard options used when call MiniExiftool.new
   @@opts = { :numerical => false, :composite => true, :fast => false, :fast2 => false,
              :ignore_minor_errors => false, :replace_invalid_chars => false,
-             :timestamps => Time }
+             :timestamps => Time, :async => false }
 
   # Encoding of the filesystem (filenames in command line)
   @@fs_enc = Encoding.find('filesystem')
@@ -112,7 +113,13 @@ class MiniExiftool
     @values = TagHash.new
     @changed_values = TagHash.new
     @errors = TagHash.new
-    load filename_or_io unless filename_or_io.nil?
+    unless filename_or_io.nil?
+      if opts[:async]
+        start_load filename_or_io
+      else
+        load filename_or_io
+      end
+    end
   end
 
   def initialize_from_hash hash # :nodoc:
@@ -130,6 +137,11 @@ class MiniExiftool
 
   # Load the tags of filename or io.
   def load filename_or_io
+    start_load filename_or_io
+    finish_load
+  end
+
+  def start_load filename_or_io
     if filename_or_io.respond_to? :to_str # String-like
       unless filename_or_io && File.exist?(filename_or_io)
         raise MiniExiftool::Error.new("File '#{filename_or_io}' does not exist.")
@@ -153,10 +165,15 @@ class MiniExiftool
     params << (@opts[:fast] ? '-fast ' : '')
     params << (@opts[:fast2] ? '-fast2 ' : '')
     params << generate_encoding_params
-    if run(cmd_gen(params, @filename))
+
+    start_cmd(cmd_gen(params, @filename))
+  end
+
+  def finish_load
+    if finish_cmd
       parse_output
     else
-      raise MiniExiftool::Error.new(@error_text)
+      raise MiniExiftool::Error.new("stderr: #{@error_text} stdout: #{@output}")
     end
     self
   end
@@ -387,25 +404,43 @@ class MiniExiftool
   end
 
   def run cmd
+    start_cmd cmd
+    finish_cmd
+  end
+
+  def start_cmd cmd
     if $DEBUG
       $stderr.puts cmd
     end
-    status = Open3.popen3(cmd) do |inp, out, err, thr|
-      if @io
-        begin
-          IO.copy_stream @io, inp
-        rescue Errno::EPIPE
-          # Output closed, no problem
-        rescue ::IOError => e
-          raise MiniExiftool::Error.new("IO is not readable.")
-        end
-        inp.close
+
+    @pid, inp, @out, @err = POSIX::Spawn.popen4(cmd)
+    if @io
+      begin
+        IO.copy_stream @io, inp
+      rescue Errno::EPIPE
+        # Output closed, no problem
+      rescue ::IOError => e
+        raise MiniExiftool::Error.new("IO is not readable.")
       end
-      @output = out.read
-      @error_text = err.read
-      thr.value.exitstatus
     end
-    status == 0
+    inp.close
+  end
+
+  def finish_cmd
+    begin
+      @output = @out.read
+      @error_text = @err.read
+      @error_text.force_encoding('UTF-8')
+    ensure
+      @out.close unless @out.closed?
+      @out = nil
+      @err.close unless @err.closed?
+      @err = nil
+      Process::waitpid(@pid)
+      @pid = nil
+    end
+
+    $?.exitstatus == 0
   end
 
   def convert_before_save val

@@ -30,16 +30,19 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rake>.freeze, [">= 0"])
       s.add_development_dependency(%q<regtest>.freeze, [">= 0"])
       s.add_development_dependency(%q<test-unit>.freeze, [">= 0"])
+      s.add_development_dependency(%q<posix-spawn>.freeze, [">= 0"])
     else
       s.add_dependency(%q<rim>.freeze, ["~> 2.9"])
       s.add_dependency(%q<rake>.freeze, [">= 0"])
       s.add_dependency(%q<regtest>.freeze, [">= 0"])
       s.add_dependency(%q<test-unit>.freeze, [">= 0"])
+      s.add_development_dependency(%q<posix-spawn>.freeze, [">= 0"])
     end
   else
     s.add_dependency(%q<rim>.freeze, ["~> 2.9"])
     s.add_dependency(%q<rake>.freeze, [">= 0"])
     s.add_dependency(%q<regtest>.freeze, [">= 0"])
     s.add_dependency(%q<test-unit>.freeze, [">= 0"])
+    s.add_development_dependency(%q<posix-spawn>.freeze, [">= 0"])
   end
 end
