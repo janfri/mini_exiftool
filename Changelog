@@ -1,3 +1,6 @@
+2.8.2
+- Upgrade to rim 2.10.0 to unfreeze gemspec.
+
 2.8.1
 - Improve documentation and use Integer instead of Fixnum because it's
   deprecated in Ruby 2.4.0.
