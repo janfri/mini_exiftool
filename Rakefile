@@ -1,6 +1,6 @@
 require 'rim/tire'
 require 'rim/version'
-require 'regtest/task'
+require 'rim/regtest'
 
 $:.unshift 'lib'
 require 'mini_exiftool'
