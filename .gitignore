@@ -3,5 +3,6 @@
 doc
 pkg
 .yardoc
+.regtestrc
 .rimrc
 Gemfile.lock
