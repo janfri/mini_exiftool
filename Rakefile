@@ -33,7 +33,7 @@ EXIF-data, IPTC-data and XMP-data.
 +-----------------------------------------------------------------------+
   END
   p.test_warning = false
-  p.development_dependencies << 'rake' << 'regtest' << 'test-unit'
+  p.development_dependencies << 'test-unit'
   if p.feature_loaded? 'rim/aspell'
     p.aspell_files << 'Tutorial.md'
   end
