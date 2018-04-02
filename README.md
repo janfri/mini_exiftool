@@ -100,7 +100,7 @@ examples.
 
 The philosophy of MiniExiftool is safety over performance.
 It can not handle more than one file at once. Writing operations are
-executed on a copy of the original file to have atomar writing: Either
+executed on a copy of the original file to have atomic writing: Either
 all changed values are written or none.
 To be able to assign errors to a specific tag writing operations also call
 the Exiftool command-line application once for each changed tag!
