@@ -1,4 +1,4 @@
-# MiniExiftool
+# MiniExiftool [![Build Status](https://travis-ci.org/janfri/multi_exiftool.svg?branch=master)](https://travis-ci.org/janfri/multi_exiftool)
 
 This library is a wrapper for the ExifTool command-line application
 (http://www.sno.phy.queensu.ca/~phil/exiftool) written by Phil Harvey.
