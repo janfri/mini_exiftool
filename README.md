@@ -28,7 +28,7 @@ gem install mini_exiftool
 ```
 or simply add to the following to your Gemfile:
 ```ruby
-gem 'multi_exiftool'
+gem 'mini_exiftool'
 ```
 
 If you need to support older versions of Ruby or Exiftool (see Requirements above)
@@ -40,7 +40,7 @@ gem install --version "< 2.0.0" mini_exiftool
 or if you use a Gemfile add:
 
 ```ruby
-gem 'multi_exiftool', '<2.0.0'
+gem 'mini_exiftool', '<2.0.0'
 ```
 
 ## Configuration
