@@ -12,6 +12,7 @@ class TestInvalidByteSequenceInUtf8 < TestCase
   end
 
   def test_invalid_byte_sequence_gets_unconverted_value_with_invalid_encoding
+    omit 'Java version of json gem can not handle invalid encoded data' if RUBY_PLATFORM == 'java'
     assert_nothing_raised do
       mini_exiftool = MiniExiftool.from_json(@json)
       assert_equal 1561, mini_exiftool.color_balance_unknown.size
