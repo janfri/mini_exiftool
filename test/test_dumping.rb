@@ -1,6 +1,5 @@
 # -- encoding: utf-8 --
 require 'helpers_for_test'
-require 'yaml'
 
 class TestDumping < TestCase
 

@@ -3,15 +3,7 @@ require 'mini_exiftool'
 require 'test/unit'
 require 'fileutils'
 require 'tempfile'
-begin
-  require 'turn'
-rescue LoadError
-  begin
-    require 'rubygems'
-    require 'turn'
-  rescue LoadError
-  end
-end
+require 'yaml'
 
 include Test::Unit
 
