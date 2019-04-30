@@ -18,6 +18,8 @@ rvm:
   - 2.5
   - 2.6
   - ruby-head
+  - jruby-19mode
+  - jruby-head
 notifications:
   email:
     - janfri26@gmail.com
