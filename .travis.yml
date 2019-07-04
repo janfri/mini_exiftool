@@ -1,5 +1,6 @@
 language: ruby
 before_install:
+  - uname -a
   - curl -L http://cpanmin.us | perl - --sudo Image::ExifTool
   - exiftool -ver
 rvm:
@@ -11,7 +12,6 @@ rvm:
   - 2.5
   - 2.6
   - ruby-head
-  - jruby-19mode
   - jruby-head
 notifications:
   email:
