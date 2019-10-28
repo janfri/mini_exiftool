@@ -418,8 +418,8 @@ class MiniExiftool
 
   def method_missing symbol, *args
     tag_name = symbol.id2name
-    if tag_name.sub!(/=$/, '')
-      self[tag_name] = args.first
+    if tag_name =~ /^(.+)=$/
+      self[$1] = args.first
     else
       self[tag_name]
     end
