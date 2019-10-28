@@ -4,7 +4,6 @@ before_install:
   - curl -L http://cpanmin.us | perl - --sudo Image::ExifTool
   - exiftool -ver
 rvm:
-  - 2.0
   - 2.1
   - 2.2
   - 2.3
