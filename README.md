@@ -171,11 +171,16 @@ The code is hosted in a git repository on github at
 https://github.com/janfri/mini_exiftool
 feel free to contribute!
 
+## Versioning
+
+MiniExiftool follows [Semantic Versioning](https://semver.org/), both SemVer and
+SemVerTag.
+
 ## Author
 Jan Friedrich <janfri26@gmail.com>
 
 ## Copyright / License
-Copyright (c) 2007-2016 by Jan Friedrich
+Copyright (c) 2007-2019 by Jan Friedrich
 
 Licensed under terms of the GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1,
 February 1999 (see file COPYING for more details)
