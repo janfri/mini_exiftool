@@ -1,3 +1,7 @@
+2.10.0
+- Implement the method MiniExiftool#respond_to_missing? for completeness and
+  the possibility to use MiniExiftool with Forwardable.
+
 2.9.1
 - Fix a problem with frozen string in newer Ruby versions.
 - Improve internal stuff and documentation.

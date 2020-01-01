@@ -1,4 +1,4 @@
-personal_ws-1.1 en 117 
+personal_ws-1.1 en 118 
 Barushev
 Bugfix
 CaptionAbstract
@@ -11,6 +11,7 @@ Dungan
 ExifTool
 FNumber
 Fixnum
+Forwardable
 Friedrich
 GPS
 Gaelan
