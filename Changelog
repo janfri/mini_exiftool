@@ -1,10 +1,10 @@
 2.9.1
-Fix a problem with frozen string in newer Ruby versions.
-Improve internal stuff and documentation.
+- Fix a problem with frozen string in newer Ruby versions.
+- Improve internal stuff and documentation.
 
 2.9.0
-Use rim/regtest instead of regtest/task to include regtest files into gem.
-Update to rim 2.15 to include Gemfile and other stuff into gem file.
+- Use rim/regtest instead of regtest/task to include regtest files into gem.
+- Update to rim 2.15 to include Gemfile and other stuff into gem file.
 
 2.8.2
 - Upgrade to rim 2.10.0 to unfreeze gemspec.
