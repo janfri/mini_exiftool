@@ -4,7 +4,7 @@
 ## Installation
 
 * Installing the ExifTool command-line application from Phil Harvey
-  (see http://www.sno.phy.queensu.ca/~phil/exiftool/install.html)
+  (see https://exiftool.org/install.html)
 * Installing the Ruby library (`gem install mini_exiftool`)
 
 

@@ -1,7 +1,7 @@
 # MiniExiftool [![Build Status](https://travis-ci.org/janfri/mini_exiftool.svg?branch=master)](https://travis-ci.org/janfri/mini_exiftool)
 
 This library is a wrapper for the ExifTool command-line application
-(http://www.sno.phy.queensu.ca/~phil/exiftool) written by Phil Harvey.
+(https://exiftool.org) written by Phil Harvey.
 It provides the full power of ExifTool to Ruby: reading and writing of
 EXIF-data, IPTC-data and XMP-data.
 
@@ -12,7 +12,7 @@ command-line application at least version 7.65.
 If you run on Ruby 1.8 or with a prior exiftool version
 install mini_exiftool version 1.x.x.
 Instructions for installation you can find under
-http://www.sno.phy.queensu.ca/~phil/exiftool/install.html .
+https://exiftool.org/install.html .
 
 Alternatively Wil Gieseler has bundled a meta-gem that eliminates the
 need for a separate ExifTool installation. Have a look at
@@ -131,7 +131,7 @@ tag.
 
 Please read the section about the character sets of the ExifTool command
 line application carefully to understand what's going on
-(http://www.sno.phy.queensu.ca/~phil/exiftool/faq.html#Q10)!
+(https://exiftool.org/faq.html#Q10)!
 
 ```ruby
 # Using UTF-8 as internal encoding for IPTC tags and MacRoman
