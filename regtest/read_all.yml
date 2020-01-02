@@ -1,7 +1,7 @@
 ---
 sample: read Bad_PreviewIFD.jpg
 result:
-  ExifToolVersion: 10.55
+  ExifToolVersion: 11.7
   FileSize: 8.4 kB
   FileType: JPEG
   FileTypeExtension: jpg
@@ -41,7 +41,7 @@ result:
   WB_RBLevels: 56833 21761 1 1
   ProgramShift: 0
   ExposureDifference: 0
-  Warning: Bad PreviewIFD directory
+  Warning: "[minor] Bad PreviewIFD directory"
   ISOSetting: 110
   ImageBoundary: 0 0 3872 2592
   CropHiSpeed: Off (3904x2616 cropped to 3904x2616 at pixel 0,0)
@@ -84,6 +84,7 @@ result:
   MCUVersion: 146
   EffectiveMaxAperture: 4.0
   SensorPixelSize: 6.05 x 6.05 um
+  DateStampMode: 'Off'
   RetouchHistory: None
   ImageDataSize: 4725881
   ShutterCount: 290
@@ -122,7 +123,7 @@ result:
   RatingPercent: 0
   Rating: 0
   Title: ''
-  ProfileCMMType: Lino
+  ProfileCMMType: Linotronic
   ProfileVersion: 2.1.0
   ProfileClass: Display Device Profile
   ColorSpaceData: 'RGB '
@@ -131,12 +132,12 @@ result:
   ProfileFileSignature: acsp
   PrimaryPlatform: Microsoft Corporation
   CMMFlags: Not Embedded, Independent
-  DeviceManufacturer: 'IEC '
+  DeviceManufacturer: Hewlett-Packard
   DeviceModel: sRGB
   DeviceAttributes: Reflective, Glossy, Positive, Color
   RenderingIntent: Perceptual
   ConnectionSpaceIlluminant: 0.9642 1 0.82491
-  ProfileCreator: 'HP  '
+  ProfileCreator: Hewlett-Packard
   ProfileID: 0
   ProfileCopyright: Copyright (c) 1998 Hewlett-Packard Company
   ProfileDescription: sRGB IEC61966-2.1
@@ -170,8 +171,6 @@ result:
   Aperture: 5.6
   BlueBalance: 7
   ImageSize: 1x1
-  LensID: AF-S DX VR Zoom-Nikkor 55-200mm f/4-5.6G IF-ED
-  LensSpec: 55-200mm f/4-5.6 G VR
   Megapixels: 1.0e-06
   RedBalance: 56833
   ShutterSpeed: !ruby/object:Rational
@@ -181,12 +180,14 @@ result:
   SubSecDateTimeOriginal: 2008-12-12 11:12:30.000000000 +01:00
   SubSecModifyDate: 2012-05-31 21:33:12.000000000 +02:00
   ThumbnailImage: "(Binary data 631 bytes, use -b option to extract)"
+  LensID: AF-S DX VR Zoom-Nikkor 55-200mm f/4-5.6G IF-ED
+  LensSpec: 55-200mm f/4-5.6 G VR
   FocalLength35efl: 55.0 mm
   LightValue: 11.8
 ---
 sample: read Canon.jpg
 result:
-  ExifToolVersion: 10.55
+  ExifToolVersion: 11.7
   FileSize: 2.6 kB
   FileType: JPEG
   FileTypeExtension: jpg
@@ -324,29 +325,29 @@ result:
   BitsPerSample: 8
   ColorComponents: 3
   YCbCrSubSampling: YCbCr4:2:0 (2 2)
-  Aperture: 14.0
   DriveMode: Continuous Shooting
-  ImageSize: 8x8
   Lens: 18.0 - 55.0 mm
+  ShootingMode: Bulb
+  WB_RGGBLevels: 1719 832 831 990
+  Aperture: 14.0
+  BlueBalance: 1.190619
+  ImageSize: 8x8
   LensID: Unknown 18-55mm
   Megapixels: 6.4e-05
+  RedBalance: 2.067348
   ScaleFactor35efl: 1.6
-  ShootingMode: Bulb
   ShutterSpeed: 4
-  WB_RGGBLevels: 1719 832 831 990
-  BlueBalance: 1.190619
+  Lens35efl: '18.0 - 55.0 mm (35 mm equivalent: 28.6 - 87.4 mm)'
   CircleOfConfusion: 0.019 mm
   DOF: inf (4.31 m - inf)
   FOV: 36.9 deg
   FocalLength35efl: '34.0 mm (35 mm equivalent: 54.0 mm)'
   HyperfocalDistance: 4.37 m
-  Lens35efl: '18.0 - 55.0 mm (35 mm equivalent: 28.6 - 87.4 mm)'
   LightValue: 5.6
-  RedBalance: 2.067348
 ---
 sample: read test.jpg
 result:
-  ExifToolVersion: 10.55
+  ExifToolVersion: 11.7
   FileSize: 46 kB
   FileType: JPEG
   FileTypeExtension: jpg
@@ -406,7 +407,7 @@ result:
   ImageStabilization: 'On'
   ZoneMatching: ISO Setting Used
   ColorTemperature: 0
-  LensType: Minolta AF 28-135mm F4-4.5 or Sigma Lens
+  LensType: Minolta AF 28-135mm F4-4.5 or Other Lens
   UserComment: ''
   FlashpixVersion: 100
   ColorSpace: sRGB
@@ -441,7 +442,7 @@ result:
   YCbCrSubSampling: YCbCr4:2:0 (2 2)
   Aperture: 9.5
   ImageSize: 300x199
-  LensID: Minolta AF 28-135mm F4-4.5
+  LensID: Tokina AT-X 242 AF 24-200mm F3.5-5.6
   Megapixels: 0.06
   ScaleFactor35efl: 1.5
   ShutterSpeed: !ruby/object:Rational
@@ -456,7 +457,7 @@ result:
 ---
 sample: read test_coordinates.jpg
 result:
-  ExifToolVersion: 10.55
+  ExifToolVersion: 11.7
   FileSize: 251 kB
   FileType: JPEG
   FileTypeExtension: jpg
@@ -510,9 +511,6 @@ result:
   ColorComponents: 3
   YCbCrSubSampling: YCbCr4:2:0 (2 2)
   Aperture: 2.4
-  GPSLatitude: 43 deg 39' 11.40" N
-  GPSLongitude: 79 deg 22' 23.40" W
-  GPSPosition: 43 deg 39' 11.40" N, 79 deg 22' 23.40" W
   ImageSize: 1280x720
   Megapixels: 0.922
   ScaleFactor35efl: 8.5
@@ -520,15 +518,18 @@ result:
     denominator: 30
     numerator: 1
   ThumbnailImage: "(Binary data 3831 bytes, use -b option to extract)"
+  GPSLatitude: 43 deg 39' 11.40" N
+  GPSLongitude: 79 deg 22' 23.40" W
   CircleOfConfusion: 0.004 mm
   FOV: 54.4 deg
   FocalLength35efl: '4.1 mm (35 mm equivalent: 35.0 mm)'
+  GPSPosition: 43 deg 39' 11.40" N, 79 deg 22' 23.40" W
   HyperfocalDistance: 2.00 m
   LightValue: 5.4
 ---
 sample: read test_encodings.jpg
 result:
-  ExifToolVersion: 10.55
+  ExifToolVersion: 11.7
   FileSize: 660 bytes
   FileType: JPEG
   FileTypeExtension: jpg
@@ -547,7 +548,7 @@ result:
 ---
 sample: read test_special_dates.jpg
 result:
-  ExifToolVersion: 10.55
+  ExifToolVersion: 11.7
   FileSize: 3.7 kB
   FileType: JPEG
   FileTypeExtension: jpg
