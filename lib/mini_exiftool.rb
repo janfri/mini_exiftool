@@ -508,7 +508,7 @@ class MiniExiftool
   def self.load_or_create_pstore
     FileUtils.mkdir_p(pstore_dir)
     pstore_filename = File.join(pstore_dir, 'exiftool_tags_' << exiftool_version.gsub('.', '_') << '.pstore')
-    @@pstore = PStore.new pstore_filename
+    @@pstore = PStore.new(pstore_filename, _threadsafe = true)
     if !File.exist?(pstore_filename) || File.size(pstore_filename) == 0
       $stderr.puts 'Generating cache file for ExifTool tag names. This takes a few seconds but is only needed once...'
       @@pstore.transaction do |ps|
