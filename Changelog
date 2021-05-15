@@ -1,3 +1,9 @@
+2.10.1
+- Make access via PStore thread-safe.
+- Fix conversion of values with leading zeros.
+  Thanks to jvradelis for reporting this bug (github issue #40) and the hint
+  to the incorrect regular expression.
+
 2.10.0
 - Implement the method MiniExiftool#respond_to_missing? for completeness and
   the possibility to use MiniExiftool with Forwardable.
