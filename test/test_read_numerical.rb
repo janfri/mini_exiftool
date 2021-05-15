@@ -30,4 +30,11 @@ class TestReadNumerical < TestCase
     assert_kind_of String, @mini_exiftool_num['SupplementalCategories']
   end
 
+  # Catching github issue [#40]
+  # Values with leading zeros can have further zeros in it
+  # Thanks to jvradelis
+  def test_digits_starting_with_zero_and_has_further_zeros
+    assert_equal '0300', @mini_exiftool_num['PrintIMVersion']
+  end
+
 end

@@ -461,8 +461,8 @@ class MiniExiftool
       end
     when /^\+\d+\.\d+$/
       value = value.to_f
-    when /^0+[1-9]+$/
-      # nothing => String
+    when /^0\d+$/
+      # no conversion => String
     when /^-?\d+$/
       value = value.to_i
     when %r(^(\d+)/(\d+)$)
