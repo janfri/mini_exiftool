@@ -149,7 +149,7 @@ class MiniExiftool
     params = '-j '
     params << (@opts[:numerical] ? '-n ' : '')
     params << (@opts[:composite] ? '' : '-e ')
-    params << (@opts[:coord_format] ? "-c \"#{@opts[:coord_format]}\"" : '')
+    params << (@opts[:coord_format] ? "-c #{escape(@opts[:coord_format])}" : '')
     params << (@opts[:fast] ? '-fast ' : '')
     params << (@opts[:fast2] ? '-fast2 ' : '')
     params << generate_encoding_params
