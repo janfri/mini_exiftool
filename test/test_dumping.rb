@@ -48,7 +48,7 @@ class TestDumping < TestCase
   def test_to_yaml
     hash = @mini_exiftool.to_hash
     yaml = @mini_exiftool.to_yaml
-    assert_equal hash, YAML.load(yaml)
+    assert_equal hash, YAML.unsafe_load(yaml)
   end
 
   def test_from_yaml

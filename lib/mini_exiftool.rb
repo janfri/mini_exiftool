@@ -22,6 +22,7 @@ require 'rbconfig'
 require 'set'
 require 'tempfile'
 require 'time'
+require 'yaml'
 
 # Simple OO access to the ExifTool command-line application.
 class MiniExiftool
@@ -304,7 +305,7 @@ class MiniExiftool
   # Create a MiniExiftool instance from YAML data created with
   # MiniExiftool#to_yaml
   def self.from_yaml yaml, opts={}
-    MiniExiftool.from_hash YAML.load(yaml), opts
+    MiniExiftool.from_hash YAML.unsafe_load(yaml), opts
   end
 
   # Returns the command name of the called ExifTool application.
@@ -551,6 +552,16 @@ class MiniExiftool
       end
     end
     params
+  end
+
+  # Backport YAML.unsafe_load
+  unless defined? YAML.unsafe_load
+    module BackportYAML
+      def unsafe_load *args
+        load *args
+      end
+    end
+    YAML.extend BackportYAML
   end
 
   # Hash with indifferent access:

@@ -31,7 +31,7 @@ class TestPstore < TestCase
       puts YAML.dump res
     END
     cmd = %Q(#{RUBY_ENGINE} -EUTF-8 -I lib -r mini_exiftool -r yaml -e "#{script}")
-    YAML.load(`#{cmd}`)
+    YAML.unsafe_load(`#{cmd}`)
   end
 
 end
