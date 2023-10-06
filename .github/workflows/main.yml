@@ -22,4 +22,7 @@ jobs:
           curl -L http://cpanmin.us | perl - --sudo Image::ExifTool
           export PATH=/usr/local/bin:$PATH
           exiftool -ver
+      - name: Run Tests
+        run: |
+          rake
 
