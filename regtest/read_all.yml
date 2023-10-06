@@ -1,8 +1,8 @@
 ---
 sample: read Bad_PreviewIFD.jpg
 result:
-  ExifToolVersion: 11.7
-  FileSize: 8.4 kB
+  ExifToolVersion: 12.26
+  FileSize: 8.4 KiB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
@@ -46,7 +46,7 @@ result:
   ImageBoundary: 0 0 3872 2592
   CropHiSpeed: Off (3904x2616 cropped to 3904x2616 at pixel 0,0)
   SerialNumber: 3365614
-  VRInfoVersion: 100
+  VRInfoVersion: '0100'
   VibrationReduction: 'On'
   VRMode: Normal
   ActiveD-Lighting: 'Off'
@@ -70,7 +70,7 @@ result:
   HueAdjustment: 0
   NoiseReduction: 'Off'
   WB_RGGBLevels: 56833 1 1 7
-  LensDataVersion: 202
+  LensDataVersion: '0202'
   ExitPupilPosition: 70.6 mm
   AFAperture: 4.1
   FocusPosition: '0x22'
@@ -91,23 +91,23 @@ result:
   ImageOptimization: ''
   Saturation: Auto
   VariProgram: Auto
-  MultiExposureVersion: 100
+  MultiExposureVersion: '0100'
   MultiExposureMode: 'Off'
   MultiExposureShots: 0
   MultiExposureAutoGain: 'Off'
   HighISONoiseReduction: 'Off'
   PowerUpTime: 2008-12-12 11:11:24.000000000 +01:00
-  FileInfoVersion: 100
+  FileInfoVersion: '0100'
   MemoryCardNumber: 0
   DirectoryNumber: 100
   FileNumber: '0081'
-  RetouchInfoVersion: 100
+  RetouchInfoVersion: '0100'
   NEFBitDepth: Unknown (0 0 16723 17225)
   UserComment: ''
-  SubSecTime: 0
-  SubSecTimeOriginal: 0
-  SubSecTimeDigitized: 0
-  FlashpixVersion: 100
+  SubSecTime: '00'
+  SubSecTimeOriginal: '00'
+  SubSecTimeDigitized: '00'
+  FlashpixVersion: '0100'
   ColorSpace: sRGB
   ExifImageWidth: 1
   ExifImageHeight: 1
@@ -187,8 +187,8 @@ result:
 ---
 sample: read Canon.jpg
 result:
-  ExifToolVersion: 11.7
-  FileSize: 2.6 kB
+  ExifToolVersion: 12.26
+  FileSize: 2.6 KiB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
@@ -272,7 +272,7 @@ result:
   BracketShotNumber: 0
   CanonImageType: CRW:EOS DIGITAL REBEL CMOS RAW
   CanonFirmwareVersion: Firmware Version 1.1.1
-  SerialNumber: 560018150
+  SerialNumber: '0560018150'
   SerialNumberFormat: Format 1
   FileNumber: 118-1861
   OwnerName: Phil Harvey
@@ -303,12 +303,12 @@ result:
   AFPointsInFocus: "(none)"
   ThumbnailImageValidArea: 0 159 7 112
   UserComment: ''
-  FlashpixVersion: 100
+  FlashpixVersion: '0100'
   ColorSpace: sRGB
   ExifImageWidth: 160
   ExifImageHeight: 120
   InteropIndex: THM - DCF thumbnail file
-  InteropVersion: 100
+  InteropVersion: '0100'
   RelatedImageWidth: 3072
   RelatedImageHeight: 2048
   FocalPlaneXResolution: 3443.946188
@@ -347,8 +347,8 @@ result:
 ---
 sample: read test.jpg
 result:
-  ExifToolVersion: 11.7
-  FileSize: 46 kB
+  ExifToolVersion: 12.26
+  FileSize: 46 KiB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
@@ -409,7 +409,7 @@ result:
   ColorTemperature: 0
   LensType: Minolta AF 28-135mm F4-4.5 or Other Lens
   UserComment: ''
-  FlashpixVersion: 100
+  FlashpixVersion: '0100'
   ColorSpace: sRGB
   ExifImageWidth: 3008
   ExifImageHeight: 2000
@@ -422,7 +422,7 @@ result:
   Contrast: Normal
   Saturation: Normal
   Sharpness: Normal
-  PrintIMVersion: 300
+  PrintIMVersion: '0300'
   Compression: JPEG (old-style)
   ThumbnailOffset: 39274
   ThumbnailLength: 1820
@@ -457,8 +457,8 @@ result:
 ---
 sample: read test_coordinates.jpg
 result:
-  ExifToolVersion: 11.7
-  FileSize: 251 kB
+  ExifToolVersion: 12.26
+  FileSize: 251 KiB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
@@ -487,7 +487,7 @@ result:
   FocalLength: 4.1 mm
   SubjectArea: 519 403 239 180
   UserComment: clip
-  FlashpixVersion: 100
+  FlashpixVersion: '0100'
   ColorSpace: sRGB
   ExifImageWidth: 1280
   ExifImageHeight: 720
@@ -529,7 +529,7 @@ result:
 ---
 sample: read test_encodings.jpg
 result:
-  ExifToolVersion: 11.7
+  ExifToolVersion: 12.26
   FileSize: 660 bytes
   FileType: JPEG
   FileTypeExtension: jpg
@@ -548,8 +548,8 @@ result:
 ---
 sample: read test_special_dates.jpg
 result:
-  ExifToolVersion: 11.7
-  FileSize: 3.7 kB
+  ExifToolVersion: 12.26
+  FileSize: 3.7 KiB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
@@ -559,10 +559,10 @@ result:
   ResolutionUnit: inches
   ModifyDate: false
   YCbCrPositioning: Centered
-  ExifVersion: 220
+  ExifVersion: '0220'
   DateTimeOriginal: 1961-08-13 12:08:25.000000000 +01:00
   ComponentsConfiguration: Y, Cb, Cr, -
-  FlashpixVersion: 100
+  FlashpixVersion: '0100'
   ColorSpace: Uncalibrated
   PreviewDateTime: 1961-08-13 12:08:25.000000000 +01:00
   ImageWidth: 300
