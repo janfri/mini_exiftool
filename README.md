@@ -1,4 +1,4 @@
-# MiniExiftool [![Build Status](https://travis-ci.org/janfri/mini_exiftool.svg?branch=master)](https://travis-ci.org/janfri/mini_exiftool)
+# MiniExiftool ![Test Status](https://github.com/janfri/mini_exiftool/actions/workflows/main.yml/badge.svg)
 
 This library is a wrapper for the ExifTool command-line application
 (https://exiftool.org) written by Phil Harvey.
