@@ -1,0 +1,25 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version:
+          - '3.0'
+          - 'ruby-head'
+          - 'jruby-head'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+      - name: Before Install
+        run: |
+          uname -a
+          curl -L http://cpanmin.us | perl - --sudo Image::ExifTool
+          export PATH=/usr/local/bin:$PATH
+          exiftool -ver
+
