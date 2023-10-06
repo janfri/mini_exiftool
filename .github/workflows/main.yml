@@ -16,12 +16,14 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
-      - name: Before Install
+      - name: Install Exiftool
         run: |
-          uname -a
           curl -L http://cpanmin.us | perl - --sudo Image::ExifTool
           export PATH=/usr/local/bin:$PATH
           exiftool -ver
+      - name: Install Dependencies
+        run: |
+          bundle install
       - name: Run Tests
         run: |
           rake
