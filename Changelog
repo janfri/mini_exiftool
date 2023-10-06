@@ -1,3 +1,6 @@
+2.10.4
+- Maintenance release.
+
 2.10.3
 - Use YAML.unsafe_load and backport it if necessary.
 
