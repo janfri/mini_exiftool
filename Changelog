@@ -1,3 +1,6 @@
+2.10.3
+- Use YAML.unsafe_load and backport it if necessary.
+
 2.10.2
 - Escape backticks and use escaped values in option coord_format.
 
