@@ -147,14 +147,14 @@ class MiniExiftool
     end
     @values.clear
     @changed_values.clear
-    params = '-j '
-    params << (@opts[:numerical] ? '-n ' : '')
-    params << (@opts[:composite] ? '' : '-e ')
+    params = ['-j ']
+    params << (@opts[:numerical] ? '-n' : '')
+    params << (@opts[:composite] ? '' : '-e')
     params << (@opts[:coord_format] ? "-c #{escape(@opts[:coord_format])}" : '')
-    params << (@opts[:fast] ? '-fast ' : '')
-    params << (@opts[:fast2] ? '-fast2 ' : '')
+    params << (@opts[:fast] ? '-fast' : '')
+    params << (@opts[:fast2] ? '-fast2' : '')
     params << generate_encoding_params
-    if run(cmd_gen(params, @filename))
+    if run(cmd_gen(params.join(' '), @filename))
       parse_output
     else
       raise MiniExiftool::Error.new(@error_text)
@@ -225,14 +225,14 @@ class MiniExiftool
       original_tag = MiniExiftool.original_tag(tag)
       arr_val = val.kind_of?(Array) ? val : [val]
       arr_val.map! {|e| convert_before_save(e)}
-      params = '-q -P -overwrite_original '
-      params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n ' : '')
-      params << (@opts[:ignore_minor_errors] ? '-m ' : '')
+      params = ['-q -P -overwrite_original']
+      params << (arr_val.detect {|x| x.kind_of?(Numeric)} ? '-n' : '')
+      params << (@opts[:ignore_minor_errors] ? '-m' : '')
       params << generate_encoding_params
       arr_val.each do |v|
         params << %Q(-#{original_tag}=#{escape(v)} )
       end
-      result = run(cmd_gen(params, temp_filename))
+      result = run(cmd_gen(params.join(' '), temp_filename))
       unless result
         all_ok = false
         @errors[tag] = @error_text.gsub(/Nothing to do.\n\z/, '').chomp
@@ -545,13 +545,11 @@ class MiniExiftool
   end
 
   def generate_encoding_params
-    params = ''
-    @@encoding_types.each do |enc_type|
+    @@encoding_types.map do |enc_type|
       if enc_val = @opts[MiniExiftool.encoding_opt(enc_type)]
-        params << "-charset #{enc_type}=#{enc_val} "
+        "-charset #{enc_type}=#{enc_val}"
       end
-    end
-    params
+    end.join(' ')
   end
 
   # Backport YAML.unsafe_load
