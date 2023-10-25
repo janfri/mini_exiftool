@@ -147,14 +147,14 @@ class MiniExiftool
     end
     @values.clear
     @changed_values.clear
-    params = ['-j ']
-    params << (@opts[:numerical] ? '-n' : '')
-    params << (@opts[:composite] ? '' : '-e')
-    params << (@opts[:coord_format] ? "-c #{escape(@opts[:coord_format])}" : '')
-    params << (@opts[:fast] ? '-fast' : '')
-    params << (@opts[:fast2] ? '-fast2' : '')
+    params = ['-j']
+    params << ('-n' if @opts[:numerical])
+    params << ('-e' unless @opts[:composite])
+    params << ("-c #{escape(@opts[:coord_format])}" if @opts[:coord_format])
+    params << ('-fast' if @opts[:fast])
+    params << ('-fast2' if @opts[:fast2])
     params << generate_encoding_params
-    if run(cmd_gen(params.join(' '), @filename))
+    if run(cmd_gen(params.compact.join(' '), @filename))
       parse_output
     else
       raise MiniExiftool::Error.new(@error_text)
@@ -232,7 +232,7 @@ class MiniExiftool
       arr_val.each do |v|
         params << %Q(-#{original_tag}=#{escape(v)} )
       end
-      result = run(cmd_gen(params.join(' '), temp_filename))
+      result = run(cmd_gen(params.compact.join(' '), temp_filename))
       unless result
         all_ok = false
         @errors[tag] = @error_text.gsub(/Nothing to do.\n\z/, '').chomp
@@ -549,7 +549,7 @@ class MiniExiftool
       if enc_val = @opts[MiniExiftool.encoding_opt(enc_type)]
         "-charset #{enc_type}=#{enc_val}"
       end
-    end.join(' ')
+    end.compact.join(' ')
   end
 
   # Backport YAML.unsafe_load
