@@ -1,6 +1,3 @@
-2.10.5
-- Fix a problem with frozen string in newer Ruby versions.
-
 2.10.4
 - Maintenance release.
 
