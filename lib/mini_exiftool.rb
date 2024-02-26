@@ -457,7 +457,7 @@ class MiniExiftool
         else
           raise MiniExiftool::Error.new("Value #{@opts[:timestamps]} not allowed for option timestamps.")
         end
-      rescue ArgumentError
+      rescue ArgumentError, RangeError
         value = false
       end
     when /^\+\d+\.\d+$/
