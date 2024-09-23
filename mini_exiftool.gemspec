@@ -24,6 +24,9 @@ Gem::Specification.new do |s|
 
   s.specification_version = 4
 
+  s.add_dependency(%q<ostruct>, [">= 0.6.0"])
+  s.add_dependency(%q<pstore>, [">= 0.1.3"])
+
   s.add_development_dependency(%q<rake>, [">= 0"])
   s.add_development_dependency(%q<rim>, ["~> 2.17"])
   s.add_development_dependency(%q<test-unit>, [">= 0"])
