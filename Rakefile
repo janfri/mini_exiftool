@@ -33,6 +33,8 @@ EXIF-data, IPTC-data and XMP-data.
 +-----------------------------------------------------------------------+
   END
   p.test_warning = false
+  p.dependencies << %w(ostruct >=0.6.0)
+  p.dependencies << %w(pstore >=0.1.3)
   p.development_dependencies << 'test-unit'
   if p.feature_loaded? 'rim/aspell'
     p.aspell_files << 'Tutorial.md'
