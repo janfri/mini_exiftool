@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Exiftool
         run: |
-          curl -L https://cpanmin.us | perl - --sudo Image::ExifTool
+          curl -L --no-progress-meter https://cpanmin.us | perl - --sudo Image::ExifTool
           export PATH=/usr/local/bin:$PATH
           exiftool -ver
       - name: Set up Ruby
