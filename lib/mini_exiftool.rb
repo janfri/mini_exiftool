@@ -3,7 +3,7 @@
 #
 # MiniExiftool
 #
-# This library is wrapper for the ExifTool command-line
+# This library is a wrapper for the ExifTool command-line
 # application (https://exiftool.org/)
 # written by Phil Harvey.
 # Read and write access is done in a clean OO manner.
