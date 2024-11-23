@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   }
 
   s.require_paths = 'lib'
-  s.files = %w[COPYING Changelog Gemfile README.md Tutorial.md] + Dir['examples/**/*'] + Dir['lib/*.rb']
+  s.files = %w[COPYING Changelog README.md Tutorial.md] + Dir['examples/**/*'] + Dir['lib/*.rb']
 
   s.post_install_message = <<~END
     +-----------------------------------------------------------------------+
