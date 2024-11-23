@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/janfri/mini_exiftool'
 
   s.metadata = {
-    'homepage_uri' => s.homepage,
     'source_code_uri' => s.homepage
   }
 
