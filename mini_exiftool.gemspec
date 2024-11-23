@@ -30,13 +30,13 @@ Gem::Specification.new do |s|
     | and it's found in your PATH (Try 'exiftool -ver' on your commandline).|
     | For more details see                                                  |
     | https://exiftool.org/install.html                                     |
-    | You need also Ruby 1.9 or higher.                                     |
-    | If you need support for Ruby < 1.9 or exiftool < 7.65 then install    |
+    | You need also Ruby 2.3 or higher.                                     |
+    | If you need support for Ruby < 2.3 or exiftool < 7.65 then install    |
     | mini_exiftool version < 2.0.0.                                        |
     +-----------------------------------------------------------------------+
   END
 
-  s.required_ruby_version = '>= 1.9'
+  s.required_ruby_version = '>= 2.3'
   s.requirements << 'exiftool, version >= 7,65'
 
   s.add_runtime_dependency('ostruct', '>= 0.6.0')

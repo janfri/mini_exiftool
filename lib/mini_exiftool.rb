@@ -385,7 +385,7 @@ class MiniExiftool
   ############################################################################
 
   def cmd_gen arg_str='', filename
-    [@@cmd, arg_str.encode('UTF-8'), escape(filename.encode(@@fs_enc))].map {|s| s.force_encoding('UTF-8')}.join(' ')
+    [+@@cmd, arg_str.encode('UTF-8'), escape(filename.encode(@@fs_enc))].map {|s| s.force_encoding('UTF-8')}.join(' ')
   end
 
   def run cmd
