@@ -1,3 +1,6 @@
+2.12.1
+- Maintenance release: Optimizing some internals.
+
 2.12.0
 - Make mini_exiftool Ruby 3.5 ready.
 - Minimize gem file size.
