@@ -1,8 +1,8 @@
 ---
 sample: read Bad_PreviewIFD.jpg
 result:
-  ExifToolVersion: 12.26
-  FileSize: 8.4 KiB
+  ExifToolVersion: 13.03
+  FileSize: 8.6 kB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
@@ -187,8 +187,8 @@ result:
 ---
 sample: read Canon.jpg
 result:
-  ExifToolVersion: 12.26
-  FileSize: 2.6 KiB
+  ExifToolVersion: 13.03
+  FileSize: 2.7 kB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
@@ -347,8 +347,8 @@ result:
 ---
 sample: read test.jpg
 result:
-  ExifToolVersion: 12.26
-  FileSize: 46 KiB
+  ExifToolVersion: 13.03
+  FileSize: 48 kB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
@@ -457,8 +457,8 @@ result:
 ---
 sample: read test_coordinates.jpg
 result:
-  ExifToolVersion: 12.26
-  FileSize: 251 KiB
+  ExifToolVersion: 13.03
+  FileSize: 257 kB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
@@ -529,7 +529,7 @@ result:
 ---
 sample: read test_encodings.jpg
 result:
-  ExifToolVersion: 12.26
+  ExifToolVersion: 13.03
   FileSize: 660 bytes
   FileType: JPEG
   FileTypeExtension: jpg
@@ -548,8 +548,8 @@ result:
 ---
 sample: read test_special_dates.jpg
 result:
-  ExifToolVersion: 12.26
-  FileSize: 3.7 KiB
+  ExifToolVersion: 13.03
+  FileSize: 3.8 kB
   FileType: JPEG
   FileTypeExtension: jpg
   MIMEType: image/jpeg
