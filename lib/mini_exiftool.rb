@@ -132,7 +132,10 @@ class MiniExiftool
 
   # Load the tags of filename or io.
   def load filename_or_io
-    if filename_or_io.respond_to? :to_str # String-like
+    if filename_or_io.respond_to? :read # IO-like
+      @io = filename_or_io
+      @filename = '-'
+    else
       unless filename_or_io && File.exist?(filename_or_io)
         raise MiniExiftool::Error.new("File '#{filename_or_io}' does not exist.")
       end
@@ -140,11 +143,6 @@ class MiniExiftool
         raise MiniExiftool::Error.new("'#{filename_or_io}' is a directory.")
       end
       @filename = filename_or_io.to_str
-    elsif filename_or_io.respond_to? :read # IO-like
-      @io = filename_or_io
-      @filename = '-'
-    else
-      raise MiniExiftool::Error.new("Could not open filename_or_io.")
     end
     @values.clear
     @changed_values.clear
