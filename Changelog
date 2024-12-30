@@ -1,3 +1,7 @@
+2.13.0
+- Fix bug when using Pathname instances of filenames.
+  Thanks Ryan Lue for reporting this problem (github issue #50).
+
 2.12.1
 - Maintenance release: Optimizing some internals.
 

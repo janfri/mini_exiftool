@@ -28,7 +28,7 @@ require 'yaml'
 # Simple OO access to the ExifTool command-line application.
 class MiniExiftool
 
-  VERSION = '2.12.1'
+  VERSION = '2.13.0'
 
   # Name of the ExifTool command-line application
   @@cmd = 'exiftool'
