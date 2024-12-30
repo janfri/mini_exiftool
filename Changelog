@@ -1,3 +1,6 @@
+2.13.1
+- Second try to fix bug when using Pathname instances of filenames.
+
 2.13.0
 - Fix bug when using Pathname instances of filenames.
   Thanks Ryan Lue for reporting this problem (github issue #50).
