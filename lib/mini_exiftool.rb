@@ -17,6 +17,7 @@
 require 'fileutils'
 require 'json'
 require 'open3'
+require 'pathname'
 require 'pstore'
 require 'rational'
 require 'rbconfig'
@@ -132,17 +133,19 @@ class MiniExiftool
 
   # Load the tags of filename or io.
   def load filename_or_io
-    if filename_or_io.respond_to? :read # IO-like
-      @io = filename_or_io
-      @filename = '-'
-    else
+    if filename_or_io.respond_to?(:to_str) || filename_or_io.kind_of?(Pathname) # String-like
       unless filename_or_io && File.exist?(filename_or_io)
         raise MiniExiftool::Error.new("File '#{filename_or_io}' does not exist.")
       end
       if File.directory?(filename_or_io)
         raise MiniExiftool::Error.new("'#{filename_or_io}' is a directory.")
       end
-      @filename = filename_or_io.to_str
+      @filename = filename_or_io.to_s
+    elsif filename_or_io.respond_to? :read # IO-like
+      @io = filename_or_io
+      @filename = '-'
+    else
+      raise MiniExiftool::Error.new("Could not open filename_or_io.")
     end
     @values.clear
     @changed_values.clear
