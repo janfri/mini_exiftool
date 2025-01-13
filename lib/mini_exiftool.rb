@@ -362,16 +362,25 @@ class MiniExiftool
     tag.to_s.gsub(/[-_]/,'').downcase
   end
 
-  @@running_on_windows = /mswin|mingw|cygwin/ === RbConfig::CONFIG['host_os']
-
   def self.pstore_dir
-    unless defined? @@pstore_dir
-      # This will hopefully work on *NIX and Windows systems
-      home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
-      subdir = @@running_on_windows ? '_mini_exiftool' : '.mini_exiftool'
-      @@pstore_dir = File.join(home, subdir)
-    end
-    @@pstore_dir
+    @@pstore_dir ||= begin
+                       cache_home = [
+                         ENV['MINI_EXIFTOOL_PSTOREDIR'],
+                         Gem.cache_home,
+                         ENV['USERPROFILE'],                 # Windows fallback
+                         ENV['HOMEDRIVE'] + ENV['HOMEPATH'], # Windows fallback
+                         Dir.tmpdir                          # Least preferred (usu. cleared on reboot)
+                       ].find(&File.method(:writable?))
+
+                       if cache_home.nil?
+                         raise "No writable cache dir found. " +
+                           "Check your home directory's permissions, " +
+                           "or set the MINI_EXIFTOOL_PSTOREDIR env var " +
+                           "and try again."
+                       else
+                         File.join(cache_home, 'mini_exiftool')
+                       end
+                     end
   end
 
   def self.pstore_dir= dir
@@ -534,16 +543,6 @@ class MiniExiftool
       tags |= line.chomp.split
     end
     tags
-  end
-
-  if @@running_on_windows
-    def escape val
-      '"' << val.to_s.gsub(/([\\"`])/, "\\\\\\1") << '"'
-    end
-  else
-    def escape val
-      '"' << val.to_s.gsub(/([\\"$`])/, "\\\\\\1") << '"'
-    end
   end
 
   def generate_encoding_params
