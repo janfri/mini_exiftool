@@ -366,10 +366,17 @@ class MiniExiftool
 
   def self.pstore_dir
     unless defined? @@pstore_dir
-      # This will hopefully work on *NIX and Windows systems
-      home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
-      subdir = @@running_on_windows ? '_mini_exiftool' : '.mini_exiftool'
-      @@pstore_dir = File.join(home, subdir)
+      @@pstore_dir =
+        if env = ENV['MINI_EXIFTOOL_PSTORE_DIR']
+          env
+        elsif defined?(Gem.cache_home) && File.writable?(Gem.cache_home)
+          File.join(Gem.cache_home, 'mini_exiftool')
+        else
+          # This fallback will hopefully work on *NIX and Windows systems
+          home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
+          subdir = @@running_on_windows ? '_mini_exiftool' : '.mini_exiftool'
+          File.join(home, subdir)
+        end
     end
     @@pstore_dir
   end
