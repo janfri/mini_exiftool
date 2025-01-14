@@ -53,8 +53,11 @@ MiniExiftool.command = '/path/to/my/exiftool'
 
 In addition, you can also tell MiniExiftool where to store the PStore files with tags
 which exiftool supports. The PStore files are used for performance issues.
-Per default the PStore files are stored in a sub directory `.mini_exiftool` or
-`_mini_exiftool` under your home directory.
+Per default the PStore files are stored in a sub directory `mini_exiftool` in
+`Gem.cache' or if this is not defined under `USERPROFILE` or `Dir.tmpdir`.
+
+You can change it by setting the environment variable
+`MINI_EXIFTOOL_PSTORE_DIR` or programmatically, as follows.
 
 ```ruby
 MiniExiftool.pstore_dir = '/path/to/pstore/dir'
