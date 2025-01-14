@@ -1,3 +1,11 @@
+2.14.0
+- Change default pstore_dir to subdir in Gem.cache_home or under USERPROFILE
+  or Dir.tmpdir if some not defined. So it's now XDG conform and also Ruby
+  ecosystem conform. Thanks a lot to Ryan Lue again for his effort and
+  support (github issue #51).
+- Add the possibility to change the pstore_dir by setting the environment
+  variable MINI_EXIFTOOL_PSTORE_DIR.
+
 2.13.1
 - Second try to fix bug when using Pathname instances of filenames.
 

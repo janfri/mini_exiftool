@@ -1,4 +1,4 @@
-personal_ws-1.1 en 124 
+personal_ws-1.1 en 129 
 Barushev
 Bugfix
 CaptionAbstract
@@ -53,8 +53,10 @@ SubjectLocation
 SupplementalCategories
 Tempfile
 TestEscapeFilename
+USERPROFILE
 UTF
 Wil
+XDG
 acki
 aiff
 atomar
@@ -99,6 +101,7 @@ photoshop
 png
 popen
 prerelease
+programmatically
 pstore
 ptore
 quicktime
@@ -114,7 +117,9 @@ shioyama
 stderr
 stdout
 str
+subdir
 timestamps
+tmpdir
 uwe
 vorbis
 warings
