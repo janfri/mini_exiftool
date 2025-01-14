@@ -373,9 +373,8 @@ class MiniExiftool
           File.join(Gem.cache_home, 'mini_exiftool')
         else
           # This fallback will hopefully work on *NIX and Windows systems
-          home = ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH'] || ENV['USERPROFILE']
-          subdir = @@running_on_windows ? '_mini_exiftool' : '.mini_exiftool'
-          File.join(home, subdir)
+          cache_dir = ENV['USERPROFILE'] || Dir.tmpdir
+          File.join(cache_dir, 'mini_exiftool')
         end
     end
     @@pstore_dir
